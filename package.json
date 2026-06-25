@@ -10,7 +10,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "wrangler pages deploy ./dist --project-name cgpa-calculator-helper --branch main"
+    "deploy": "wrangler pages deploy ./dist --project-name cgpa-calculator-helper --branch main --commit-dirty=true"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
