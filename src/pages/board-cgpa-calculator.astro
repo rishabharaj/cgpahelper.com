@@ -1,0 +1,734 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = 'CBSE CGPA Calculator — Board CGPA to Percentage for CBSE, ICSE & State Boards';
+const description = 'Calculate your board exam CGPA and convert CGPA to percentage for CBSE, ICSE, State Board, and IGCSE. Official board grading scales with instant CGPA to percentage conversion.';
+
+const faqs = [
+  {
+    question: 'How is CBSE Class 10 CGPA calculated?',
+    answer: 'CBSE CGPA is calculated by taking the average of the Grade Points (GP) earned in the 5 main subjects. Grade Points map to marks out of 100: 91-100 is 10 GP (A1), 81-90 is 9 GP (A2), 71-80 is 8 GP (B1), etc. Formula: CGPA = Sum of GP of 5 subjects ÷ 5.',
+  },
+  {
+    question: 'How do I convert CBSE CGPA to percentage?',
+    answer: 'To convert CBSE CGPA to percentage, multiply your CGPA by 9.5. For example, if your CGPA is 8.8, your equivalent percentage is 8.8 × 9.5 = 83.6%. This formula is officially recommended by CBSE and approved by UGC India.',
+  },
+  {
+    question: 'Does ICSE have an official CGPA system?',
+    answer: 'No, the Council for the Indian School Certificate Examinations (CISCE) does not issue an official CGPA. Results are mark-based with letter grades (A*–F). However, many Indian colleges convert ICSE marks to an unofficial CGPA by dividing the aggregate percentage by 10 (Percentage ÷ 10) for admission purposes.',
+  },
+  {
+    question: 'How is IGCSE GPA calculated?',
+    answer: 'Since IGCSE uses letter grades (A* to G), there is no single official CGPA system. To calculate CGPA, a 10-point scale is commonly used by mapping: A* = 10 GP, A = 9 GP, B = 8 GP, C = 7 GP, D = 6 GP, E = 5 GP, F = 4 GP, G = 3 GP, U = 0 GP. Your CGPA is the average of these points across all subjects.',
+  },
+  {
+    question: 'What is the "Best of 5" rule for board calculations?',
+    answer: 'Many admission boards and schools calculate your overall percentage or CGPA using the "Best of 5" rule: English (which is compulsory) plus the next 4 subjects with the highest scores. You can easily remove lower-scoring subjects using our trash icon to calculate your Best of 5 score.',
+  },
+];
+---
+
+<Layout title={title} description={description} faqs={faqs}>
+  <!-- ── Breadcrumb ── -->
+  <nav aria-label="Breadcrumb" class="container-page pt-6 pb-2">
+    <ol class="flex items-center gap-1.5 text-xs text-neutral-400 dark:text-neutral-500">
+      <li>
+        <a href="/" class="hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors">Home</a>
+      </li>
+      <li aria-hidden="true">
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </li>
+      <li>
+        <span class="text-neutral-700 dark:text-neutral-200 font-medium" aria-current="page">Board CGPA Calculator</span>
+      </li>
+    </ol>
+  </nav>
+
+  <!-- ── Page Header ── -->
+  <header class="container-page pt-6 pb-10 md:pt-8 md:pb-14">
+    <h1 class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.15] mb-4">
+      Board CGPA <span class="bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent">Calculator</span>
+    </h1>
+    <p class="text-neutral-600 dark:text-neutral-400 max-w-2xl leading-relaxed">
+      Convert your school board marks or letter grades into CGPA and percentage. Supports CBSE, ICSE (CISCE), IGCSE, and Indian State Boards.
+    </p>
+  </header>
+
+  <!-- ── Calculator Section ── -->
+  <section class="container-page pb-16">
+    <div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-sm overflow-hidden">
+      <!-- Board Selection -->
+      <div class="px-5 py-4 md:px-6 border-b border-neutral-200 dark:border-neutral-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 bg-neutral-50/50 dark:bg-neutral-900/30">
+        <span class="font-mono text-xs uppercase tracking-wider text-neutral-400 dark:text-neutral-500 shrink-0">Select Board</span>
+        <select
+          id="board-select"
+          aria-label="Select board"
+          class="w-full max-w-full min-w-0 sm:w-auto flex-1 sm:max-w-md bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-lg px-4 py-2 text-sm font-medium text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%239ca3af%22%20stroke-width%3D%222%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20d%3D%22M19%209l-7%207-7-7%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[right_0.75rem_center] bg-[length:1.25rem] pr-10"
+        >
+          <option value="icse" selected>ICSE (CISCE)</option>
+          <option value="cbse">CBSE</option>
+          <option value="state-board">State Board</option>
+          <option value="igcse">IGCSE</option>
+        </select>
+      </div>
+
+      <!-- Board Details Banner -->
+      <div id="board-banner" class="px-5 py-4 md:px-6 bg-indigo-50/40 dark:bg-indigo-950/20 border-b border-neutral-200 dark:border-neutral-800 text-sm text-indigo-900 dark:text-indigo-300 leading-relaxed">
+        <!-- Content will be updated dynamically by JS -->
+      </div>
+
+      <!-- Subjects Table -->
+      <div class="px-5 py-5 md:px-6">
+        <!-- Table header (desktop) -->
+        <div class="hidden sm:grid sm:grid-cols-[1fr_140px_140px_40px] gap-4 mb-3 pb-2 border-b border-neutral-100 dark:border-neutral-800/60">
+          <span class="font-mono text-xs uppercase tracking-wider text-neutral-400 dark:text-neutral-500">Subject</span>
+          <span id="score-header" class="font-mono text-xs uppercase tracking-wider text-neutral-400 dark:text-neutral-500">Marks</span>
+          <span class="font-mono text-xs uppercase tracking-wider text-neutral-400 dark:text-neutral-500">Grade / Points</span>
+          <span class="sr-only">Remove</span>
+        </div>
+
+        <!-- Rows container -->
+        <div id="subject-rows" class="space-y-3" role="list" aria-label="Subject list">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- Add Subject & Action Buttons -->
+        <div class="mt-5 flex flex-wrap items-center justify-between gap-4">
+          <button
+            id="add-subject-btn"
+            type="button"
+            class="inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors cursor-pointer"
+          >
+            <svg class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            Add Subject
+          </button>
+
+          <button
+            id="calculate-btn"
+            type="button"
+            class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white rounded-lg text-sm font-semibold transition-colors cursor-pointer shadow-sm"
+          >
+            Calculate CGPA
+          </button>
+        </div>
+      </div>
+
+      <!-- Result section -->
+      <div id="result-section" class="border-t border-neutral-200 dark:border-neutral-800 px-5 py-8 md:px-6 flex flex-col sm:flex-row items-center gap-6 sm:gap-10" style="display:none;">
+        <!-- Circular Gauge -->
+        <div class="shrink-0 relative">
+          <svg id="gauge-svg" width="100" height="100" viewBox="0 0 100 100" aria-hidden="true" class="transform -rotate-90">
+            <!-- Track ring -->
+            <circle
+              cx="50" cy="50" r="42"
+              fill="none"
+              stroke-width="6.5"
+              class="stroke-neutral-200 dark:stroke-neutral-800"
+            />
+            <!-- Value ring -->
+            <circle
+              id="gauge-ring"
+              cx="50" cy="50" r="42"
+              fill="none"
+              stroke-width="6.5"
+              stroke-linecap="round"
+              stroke="#4f46e5"
+              stroke-dasharray="263.89"
+              stroke-dashoffset="263.89"
+              class="gauge-ring transition-all duration-500 ease-out"
+            />
+          </svg>
+          <div class="absolute inset-0 flex items-center justify-center font-semibold text-xs text-neutral-400 dark:text-neutral-500" id="gauge-percent-text">
+            0%
+          </div>
+        </div>
+
+        <!-- Text result -->
+        <div id="result-content" class="text-center sm:text-left flex-1">
+          <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
+            <span id="result-gpa" class="text-4xl md:text-5xl font-bold tracking-tight text-neutral-900 dark:text-white tabular-nums">0.00</span>
+            <span id="result-scale" class="text-lg text-neutral-400 dark:text-neutral-500 font-medium">CGPA</span>
+          </div>
+          <div class="mt-2 flex flex-wrap items-center justify-center sm:justify-start gap-2">
+            <span id="result-label" class="inline-block text-xs font-semibold px-2.5 py-1 rounded-full"></span>
+            <span id="result-percentage" class="text-sm font-medium text-neutral-500 dark:text-neutral-400"></span>
+          </div>
+          <p id="result-note" class="mt-2 text-xs text-neutral-400 dark:text-neutral-500 italic max-w-lg"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Board Quick Navigation Footer (In-Page Navigation) ── -->
+  <section class="container-page pb-16">
+    <div class="bg-neutral-50 dark:bg-neutral-900/40 border border-neutral-200 dark:border-neutral-800/80 rounded-xl p-6">
+      <h3 class="text-sm font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono mb-4">Board Calculator Quick-Links</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <button
+          type="button"
+          data-board-link="cbse"
+          class="flex flex-col p-4 rounded-lg bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-left hover:border-indigo-500 dark:hover:border-indigo-400 hover:shadow-sm transition-all cursor-pointer group"
+        >
+          <span class="text-sm font-bold text-neutral-800 dark:text-neutral-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">CBSE CGPA</span>
+          <span class="text-xs text-neutral-400 dark:text-neutral-500 mt-1">Multiplies by 9.5 factor</span>
+        </button>
+
+        <button
+          type="button"
+          data-board-link="icse"
+          class="flex flex-col p-4 rounded-lg bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-left hover:border-indigo-500 dark:hover:border-indigo-400 hover:shadow-sm transition-all cursor-pointer group"
+        >
+          <span class="text-sm font-bold text-neutral-800 dark:text-neutral-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">ICSE Board GPA</span>
+          <span class="text-xs text-neutral-400 dark:text-neutral-500 mt-1">Percentage / 10 system</span>
+        </button>
+
+        <button
+          type="button"
+          data-board-link="state-board"
+          class="flex flex-col p-4 rounded-lg bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-left hover:border-indigo-500 dark:hover:border-indigo-400 hover:shadow-sm transition-all cursor-pointer group"
+        >
+          <span class="text-sm font-bold text-neutral-800 dark:text-neutral-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">State Board CGPA</span>
+          <span class="text-xs text-neutral-400 dark:text-neutral-500 mt-1">Aggregate / 10 reference</span>
+        </button>
+
+        <button
+          type="button"
+          data-board-link="igcse"
+          class="flex flex-col p-4 rounded-lg bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-left hover:border-indigo-500 dark:hover:border-indigo-400 hover:shadow-sm transition-all cursor-pointer group"
+        >
+          <span class="text-sm font-bold text-neutral-800 dark:text-neutral-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">IGCSE CGPA</span>
+          <span class="text-xs text-neutral-400 dark:text-neutral-500 mt-1">A* to G Letter Grade mapping</span>
+        </button>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  // ── Types & Structures ──
+  interface BoardConfig {
+    name: string;
+    description: string;
+    scoreType: 'marks' | 'grades';
+    defaultSubjects: Array<{ name: string; value: number | string }>;
+    calculate: (subjects: Array<{ name: string; score: number | string }>) => {
+      cgpa: number;
+      percentage: number;
+      label: string;
+      labelClass: string;
+      note: string;
+    };
+  }
+
+  // ── Board Rules Configuration ──
+  const boardConfigs: Record<string, BoardConfig> = {
+    cbse: {
+      name: 'CBSE Class 10 (CGPA Scale)',
+      description: 'CBSE Class 10 uses Grade Points (GP) for calculation. Your overall CGPA is the average of Grade Points obtained in the 5 main subjects. The percentage can be calculated by multiplying the CGPA by 9.5 (Percentage = CGPA × 9.5).',
+      scoreType: 'marks',
+      defaultSubjects: [
+        { name: 'English', value: 85 },
+        { name: 'Mathematics', value: 90 },
+        { name: 'Science', value: 82 },
+        { name: 'Social Science', value: 78 },
+        { name: 'Second Language', value: 80 }
+      ],
+      calculate: (subjects) => {
+        let totalGP = 0;
+        let count = 0;
+
+        subjects.forEach((sub) => {
+          const marks = Number(sub.score) || 0;
+          let gp = 0;
+          if (marks >= 91) gp = 10;
+          else if (marks >= 81) gp = 9;
+          else if (marks >= 71) gp = 8;
+          else if (marks >= 61) gp = 7;
+          else if (marks >= 51) gp = 6;
+          else if (marks >= 41) gp = 5;
+          else if (marks >= 33) gp = 4;
+          else gp = 0;
+
+          totalGP += gp;
+          count++;
+        });
+
+        const cgpa = count > 0 ? Number((totalGP / count).toFixed(2)) : 0;
+        const percentage = Number((cgpa * 9.5).toFixed(2));
+        
+        let label = 'Average';
+        let labelClass = 'bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-400';
+        if (cgpa >= 9.0) {
+          label = 'Outstanding';
+          labelClass = 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-400';
+        } else if (cgpa >= 8.0) {
+          label = 'Excellent';
+          labelClass = 'bg-blue-100 text-blue-800 dark:bg-blue-950/40 dark:text-blue-400';
+        } else if (cgpa >= 6.0) {
+          label = 'Good';
+          labelClass = 'bg-indigo-100 text-indigo-800 dark:bg-indigo-950/40 dark:text-indigo-400';
+        }
+
+        return {
+          cgpa,
+          percentage,
+          label,
+          labelClass,
+          note: `CBSE conversion rule applied: Percentage = ${cgpa} × 9.5 = ${percentage}%`
+        };
+      }
+    },
+    icse: {
+      name: 'ICSE (CISCE)',
+      description: 'ICSE (CISCE): Results are mark-based with letter grades A*-F. There is no official CGPA system. The unofficial CGPA shown here (percentage / 10) is used by many Indian colleges for reference only.',
+      scoreType: 'marks',
+      defaultSubjects: [
+        { name: 'English Language', value: 85 },
+        { name: 'English Literature', value: 78 },
+        { name: 'Mathematics', value: 90 },
+        { name: 'Science (Physics)', value: 82 },
+        { name: 'Science (Chemistry)', value: 80 },
+        { name: 'History & Geography', value: 75 }
+      ],
+      calculate: (subjects) => {
+        let totalMarks = 0;
+        let count = 0;
+
+        subjects.forEach((sub) => {
+          totalMarks += Number(sub.score) || 0;
+          count++;
+        });
+
+        const percentage = count > 0 ? Number((totalMarks / count).toFixed(2)) : 0;
+        const cgpa = Number((percentage / 10).toFixed(2));
+
+        let label = 'Pass';
+        let labelClass = 'bg-neutral-100 text-neutral-800 dark:bg-neutral-850/40 dark:text-neutral-400';
+        if (percentage >= 90) {
+          label = 'Outstanding (A*)';
+          labelClass = 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-400';
+        } else if (percentage >= 80) {
+          label = 'Excellent (A)';
+          labelClass = 'bg-blue-100 text-blue-800 dark:bg-blue-950/40 dark:text-blue-400';
+        } else if (percentage >= 70) {
+          label = 'Very Good (B)';
+          labelClass = 'bg-indigo-100 text-indigo-800 dark:bg-indigo-950/40 dark:text-indigo-400';
+        } else if (percentage >= 60) {
+          label = 'Good (C)';
+          labelClass = 'bg-sky-100 text-sky-850 dark:bg-sky-950/40 dark:text-sky-400';
+        } else if (percentage >= 40) {
+          label = 'Average (D / E)';
+          labelClass = 'bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-400';
+        } else {
+          label = 'Fail (F)';
+          labelClass = 'bg-red-100 text-red-800 dark:bg-red-950/40 dark:text-red-400';
+        }
+
+        return {
+          cgpa,
+          percentage,
+          label,
+          labelClass,
+          note: `Unofficial CGPA calculation: Average Percentage (${percentage}%) ÷ 10 = ${cgpa}. Used by colleges for reference.`
+        };
+      }
+    },
+    'state-board': {
+      name: 'State Board (Mark-Based)',
+      description: 'State Boards generally issue results based on aggregate marks out of 100 per subject. There is no official CGPA system. The unofficial reference CGPA is calculated as (Average Percentage / 10), which is a common conversion benchmark used by universities.',
+      scoreType: 'marks',
+      defaultSubjects: [
+        { name: 'First Language', value: 85 },
+        { name: 'English', value: 78 },
+        { name: 'Mathematics', value: 90 },
+        { name: 'Science', value: 82 },
+        { name: 'Social Science', value: 80 }
+      ],
+      calculate: (subjects) => {
+        let totalMarks = 0;
+        let count = 0;
+
+        subjects.forEach((sub) => {
+          totalMarks += Number(sub.score) || 0;
+          count++;
+        });
+
+        const percentage = count > 0 ? Number((totalMarks / count).toFixed(2)) : 0;
+        const cgpa = Number((percentage / 10).toFixed(2));
+
+        let label = 'Second Class';
+        let labelClass = 'bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-400';
+        if (percentage >= 75) {
+          label = 'Distinction';
+          labelClass = 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-400';
+        } else if (percentage >= 60) {
+          label = 'First Class';
+          labelClass = 'bg-blue-100 text-blue-800 dark:bg-blue-950/40 dark:text-blue-400';
+        } else if (percentage >= 35) {
+          label = 'Pass';
+          labelClass = 'bg-neutral-100 text-neutral-800 dark:bg-neutral-850/40 dark:text-neutral-400';
+        } else {
+          label = 'Fail';
+          labelClass = 'bg-red-100 text-red-800 dark:bg-red-950/40 dark:text-red-400';
+        }
+
+        return {
+          cgpa,
+          percentage,
+          label,
+          labelClass,
+          note: `Unofficial CGPA calculation: Average Percentage (${percentage}%) ÷ 10 = ${cgpa}.`
+        };
+      }
+    },
+    igcse: {
+      name: 'IGCSE (Cambridge / Pearson)',
+      description: 'IGCSE uses a letter-grading system (A* to G or 9 to 1). There is no official cumulative CGPA. For credit mapping, IGCSE grades are commonly mapped to a standard 10-point scale: A* = 10, A = 9, B = 8, C = 7, D = 6, E = 5, F = 4, G = 3, U = 0.',
+      scoreType: 'grades',
+      defaultSubjects: [
+        { name: 'First Language English', value: 'A' },
+        { name: 'Mathematics', value: 'A*' },
+        { name: 'Physics', value: 'A' },
+        { name: 'Chemistry', value: 'A' },
+        { name: 'Biology', value: 'B' },
+        { name: 'Computer Science', value: 'B' }
+      ],
+      calculate: (subjects) => {
+        const gradeMap: Record<string, number> = {
+          'A*': 10, 'A': 9, 'B': 8, 'C': 7, 'D': 6, 'E': 5, 'F': 4, 'G': 3, 'U': 0
+        };
+
+        let totalGP = 0;
+        let count = 0;
+
+        subjects.forEach((sub) => {
+          const grade = String(sub.score).trim();
+          const gp = gradeMap[grade] !== undefined ? gradeMap[grade] : 0;
+          totalGP += gp;
+          count++;
+        });
+
+        const cgpa = count > 0 ? Number((totalGP / count).toFixed(2)) : 0;
+        // Construct approximate percentage for display
+        const percentage = Number((cgpa * 10).toFixed(1));
+
+        let label = 'Pass';
+        let labelClass = 'bg-neutral-100 text-neutral-800 dark:bg-neutral-850/40 dark:text-neutral-400';
+        if (cgpa >= 9.0) {
+          label = 'Excellent (A / A* Average)';
+          labelClass = 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-400';
+        } else if (cgpa >= 7.5) {
+          label = 'Very Good (B Average)';
+          labelClass = 'bg-blue-100 text-blue-800 dark:bg-blue-950/40 dark:text-blue-400';
+        } else if (cgpa >= 6.0) {
+          label = 'Good (C Average)';
+          labelClass = 'bg-indigo-100 text-indigo-800 dark:bg-indigo-950/40 dark:text-indigo-400';
+        } else if (cgpa >= 4.0) {
+          label = 'Average (D / E Average)';
+          labelClass = 'bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-400';
+        }
+
+        return {
+          cgpa,
+          percentage,
+          label,
+          labelClass,
+          note: `IGCSE Scale used: A*=10, A=9, B=8, C=7, D=6, E=5, F=4, G=3, U=0. Average GPA = ${cgpa} out of 10.`
+        };
+      }
+    }
+  };
+
+  // ── DOM References ──
+  const boardSelect = document.getElementById('board-select') as HTMLSelectElement;
+  const boardBanner = document.getElementById('board-banner')!;
+  const rowsContainer = document.getElementById('subject-rows')!;
+  const addBtn = document.getElementById('add-subject-btn')!;
+  const calculateBtn = document.getElementById('calculate-btn')!;
+  const scoreHeader = document.getElementById('score-header')!;
+  
+  const resultSection = document.getElementById('result-section')!;
+  const resultContent = document.getElementById('result-content')!;
+  const resultGpa = document.getElementById('result-gpa')!;
+  const resultScale = document.getElementById('result-scale')!;
+  const resultLabel = document.getElementById('result-label')!;
+  const resultPercentage = document.getElementById('result-percentage')!;
+  const resultNote = document.getElementById('result-note')!;
+  
+  const gaugeRing = document.getElementById('gauge-ring') as SVGCircleElement;
+  const gaugePercentText = document.getElementById('gauge-percent-text')!;
+  const CIRCUMFERENCE = 263.89; // 2 * pi * r (r=42)
+
+  let subjectCount = 0;
+
+  // ── Helpers ──
+  function getSelectedBoardKey() {
+    return boardSelect.value;
+  }
+
+  function getSelectedBoardConfig() {
+    return boardConfigs[getSelectedBoardKey()];
+  }
+
+  // Get grade string or GPA value from mark input
+  function getGradeOrGPText(boardKey: string, scoreVal: number | string) {
+    if (boardKey === 'igcse') {
+      const gpMap: Record<string, number> = {
+        'A*': 10, 'A': 9, 'B': 8, 'C': 7, 'D': 6, 'E': 5, 'F': 4, 'G': 3, 'U': 0
+      };
+      const grade = String(scoreVal);
+      return `${gpMap[grade] || 0} GP`;
+    }
+
+    const marks = Number(scoreVal) || 0;
+    if (boardKey === 'cbse') {
+      if (marks >= 91) return 'A1 (10 GP)';
+      if (marks >= 81) return 'A2 (9 GP)';
+      if (marks >= 71) return 'B1 (8 GP)';
+      if (marks >= 61) return 'B2 (7 GP)';
+      if (marks >= 51) return 'C1 (6 GP)';
+      if (marks >= 41) return 'C2 (5 GP)';
+      if (marks >= 33) return 'D (4 GP)';
+      return 'E (0 GP)';
+    }
+
+    if (boardKey === 'icse') {
+      if (marks >= 90) return 'A* (Grade 1)';
+      if (marks >= 80) return 'A (Grade 2)';
+      if (marks >= 70) return 'B (Grade 3)';
+      if (marks >= 60) return 'C (Grade 4)';
+      if (marks >= 50) return 'D (Grade 5)';
+      if (marks >= 40) return 'E (Grade 6)';
+      return 'F (Fail)';
+    }
+
+    // State Board
+    if (marks >= 90) return 'A+';
+    if (marks >= 80) return 'A';
+    if (marks >= 70) return 'B';
+    if (marks >= 60) return 'C';
+    if (marks >= 50) return 'D';
+    if (marks >= 35) return 'E';
+    return 'F';
+  }
+
+  // Add a Subject Row
+  function createSubjectRow(name = '', value: number | string = '') {
+    subjectCount++;
+    const rowId = subjectCount;
+    const config = getSelectedBoardConfig();
+
+    const row = document.createElement('div');
+    row.className = 'grid grid-cols-6 sm:grid-cols-[1fr_140px_140px_40px] gap-4 items-end bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800/40 sm:border-0 rounded-lg p-3 sm:p-2 sm:bg-transparent dark:sm:bg-transparent sm:rounded-none animate-fade-up';
+    row.setAttribute('role', 'listitem');
+    row.dataset.rowId = String(rowId);
+
+    // Score Input element
+    let scoreInputHTML = '';
+    if (config.scoreType === 'grades') {
+      const grades = ['A*', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'U'];
+      scoreInputHTML = `
+        <select aria-label="Grade" class="subject-score w-full bg-transparent border-b border-neutral-200 dark:border-neutral-700 focus:border-indigo-500 outline-none text-sm py-1.5 transition-colors cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%239ca3af%22%20stroke-width%3D%222%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20d%3D%22M19%209l-7%207-7-7%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[right_0.2rem_center] bg-[length:1rem] pr-6">
+          ${grades.map(g => `<option value="${g}" ${g === value ? 'selected' : ''}>${g}</option>`).join('')}
+        </select>
+      `;
+    } else {
+      scoreInputHTML = `
+        <input
+          type="number"
+          min="0"
+          max="100"
+          value="${value}"
+          placeholder="Marks (0-100)"
+          aria-label="Marks"
+          class="subject-score w-full bg-transparent border-b border-neutral-200 dark:border-neutral-700 focus:border-indigo-500 outline-none text-sm py-1.5 transition-colors tabular-nums"
+        />
+      `;
+    }
+
+    row.innerHTML = `
+      <div class="col-span-5 sm:col-span-1">
+        <label class="sm:hidden font-mono text-xs uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-1 block">Subject</label>
+        <input
+          type="text"
+          value="${name}"
+          placeholder="e.g. Mathematics"
+          aria-label="Subject name"
+          class="subject-name w-full bg-transparent border-b border-neutral-200 dark:border-neutral-700 focus:border-indigo-500 outline-none text-sm py-1.5 transition-colors"
+        />
+      </div>
+      <div class="col-span-1 flex justify-center sm:hidden">
+        <button
+          type="button"
+          aria-label="Remove subject"
+          class="remove-btn w-8 h-8 flex items-center justify-center text-neutral-400 hover:text-red-500 dark:hover:text-red-400 transition-colors rounded-md hover:bg-red-50 dark:hover:bg-red-950/30 cursor-pointer"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="col-span-3 sm:col-span-1">
+        <label class="sm:hidden font-mono text-xs uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-1 block">${config.scoreType === 'grades' ? 'Grade' : 'Marks'}</label>
+        ${scoreInputHTML}
+      </div>
+      <div class="col-span-3 sm:col-span-1 py-1.5 text-sm font-medium text-neutral-500 dark:text-neutral-400">
+        <label class="sm:hidden font-mono text-xs uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-1 block">Grade / Points</label>
+        <span class="preview-grade-text">${getGradeOrGPText(getSelectedBoardKey(), value)}</span>
+      </div>
+      <div class="hidden sm:flex sm:justify-center">
+        <button
+          type="button"
+          aria-label="Remove subject"
+          class="remove-btn w-8 h-8 flex items-center justify-center text-neutral-400 hover:text-red-500 dark:hover:text-red-400 transition-colors rounded-md hover:bg-red-50 dark:hover:bg-red-950/30 cursor-pointer"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    `;
+
+    // Event listeners
+    const nameInput = row.querySelector('.subject-name') as HTMLInputElement;
+    const scoreInput = row.querySelector('.subject-score') as HTMLInputElement | HTMLSelectElement;
+    const previewSpan = row.querySelector('.preview-grade-text')!;
+    const removeBtns = row.querySelectorAll('.remove-btn');
+
+    const updatePreview = () => {
+      previewSpan.textContent = getGradeOrGPText(getSelectedBoardKey(), scoreInput.value);
+    };
+
+    nameInput.addEventListener('input', calculate);
+    scoreInput.addEventListener('input', () => {
+      updatePreview();
+      calculate();
+    });
+    
+    removeBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        row.remove();
+        if (rowsContainer.children.length === 0) {
+          createSubjectRow();
+        }
+        calculate();
+      });
+    });
+
+    rowsContainer.appendChild(row);
+  }
+
+  // Load configuration for the selected board
+  function initBoard() {
+    const config = getSelectedBoardConfig();
+    const boardKey = getSelectedBoardKey();
+
+    // Update Header column name for desktop
+    scoreHeader.textContent = config.scoreType === 'grades' ? 'Grade' : 'Marks';
+
+    // Update dynamic explanation banner
+    boardBanner.textContent = config.description;
+
+    // Reset rows and add default subjects
+    rowsContainer.innerHTML = '';
+    config.defaultSubjects.forEach((sub) => {
+      createSubjectRow(sub.name, sub.value);
+    });
+
+    calculate();
+  }
+
+  // Calculate results
+  function calculate() {
+    const config = getSelectedBoardConfig();
+    const rows = Array.from(rowsContainer.querySelectorAll('[data-row-id]'));
+    
+    const subjectData = rows.map((row) => {
+      const nameInput = row.querySelector('.subject-name') as HTMLInputElement;
+      const scoreInput = row.querySelector('.subject-score') as HTMLInputElement | HTMLSelectElement;
+      return {
+        name: nameInput.value,
+        score: scoreInput.value
+      };
+    });
+
+    // Make sure we have some input to calculate
+    const hasData = subjectData.some((sub) => sub.score !== '');
+    if (!hasData) {
+      resultSection.style.display = 'none';
+      return;
+    }
+
+    const res = config.calculate(subjectData);
+
+    // Update DOM results
+    resultSection.style.display = 'flex';
+    resultGpa.textContent = res.cgpa.toFixed(2);
+    resultScale.textContent = getSelectedBoardKey() === 'igcse' ? 'GPA' : 'Unofficial CGPA';
+    
+    if (getSelectedBoardKey() === 'cbse') {
+      resultScale.textContent = 'CGPA';
+    }
+
+    resultLabel.textContent = res.label;
+    resultLabel.className = `inline-block text-xs font-semibold px-2.5 py-1 rounded-full ${res.labelClass}`;
+    resultPercentage.textContent = `Percentage: ${res.percentage}%`;
+    resultNote.textContent = res.note;
+
+    // Pulse result
+    resultContent.classList.remove('result-pop');
+    void resultContent.offsetWidth; // Trigger reflow
+    resultContent.classList.add('result-pop');
+
+    // Update Gauge Arc
+    // Calculate display percent: if CBSE/IGCSE/ICSE/State Board, calculate relative to 10.0 scale
+    const cgpaPercent = Math.min(100, Math.max(0, (res.cgpa / 10) * 100));
+    const offset = CIRCUMFERENCE - (cgpaPercent / 100) * CIRCUMFERENCE;
+    gaugeRing.style.strokeDashoffset = String(offset);
+    gaugePercentText.textContent = `${Math.round(res.percentage)}%`;
+  }
+
+  // ── Setup Listeners ──
+  boardSelect.addEventListener('change', initBoard);
+  
+  addBtn.addEventListener('click', () => {
+    const config = getSelectedBoardConfig();
+    const defaultValue = config.scoreType === 'grades' ? 'A' : '';
+    createSubjectRow('', defaultValue);
+  });
+
+  calculateBtn.addEventListener('click', calculate);
+
+  // Quick link navigation links
+  document.querySelectorAll('[data-board-link]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const boardKey = btn.getAttribute('data-board-link')!;
+      boardSelect.value = boardKey;
+      initBoard();
+      // Scroll smoothly to select
+      boardSelect.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  });
+
+  // Handle Query Param or Hash routing
+  function checkUrlParams() {
+    const params = new URLSearchParams(window.location.search);
+    const boardParam = params.get('board');
+    if (boardParam && boardConfigs[boardParam]) {
+      boardSelect.value = boardParam;
+    } else {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && boardConfigs[hash]) {
+        boardSelect.value = hash;
+      }
+    }
+    initBoard();
+  }
+
+  // Run on startup
+  checkUrlParams();
+</script>

@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "node",
+      "args": [
+        "d:/Antigravity/playwright-mcp/cli.js",
+        "--headless"
+      ]
+    },
+    "Astro docs": {
+      "url": "https://mcp.docs.astro.build/mcp"
+    }
+  }
+}

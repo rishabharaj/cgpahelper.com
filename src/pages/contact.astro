@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = 'Contact Us — CGPA Helper';
+const description = 'Get in touch with CGPA Helper. Suggest a university grading scale, report an issue, or send us feedback.';
+---
+
+<Layout title={title} description={description}>
+  <div class="container-page py-16 md:py-24 max-w-2xl">
+    <h1 class="text-4xl font-bold tracking-tight mb-4">Contact Us</h1>
+    <p class="text-neutral-600 dark:text-neutral-400 mb-8 leading-relaxed">
+      Have feedback, spotted a bug, or want us to add a specific university scale? Feel free to reach out. We love hearing from students!
+    </p>
+
+    <div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-6 md:p-8 shadow-sm">
+      <form class="space-y-6" onsubmit="event.preventDefault(); alert('Feedback received! (Demo only)')">
+        <div>
+          <label for="name" class="block text-sm font-medium mb-2">Name</label>
+          <input
+            type="text"
+            id="name"
+            required
+            placeholder="Your name"
+            class="w-full bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 dark:focus:border-indigo-500 transition-all"
+          />
+        </div>
+
+        <div>
+          <label for="email" class="block text-sm font-medium mb-2">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            required
+            placeholder="you@example.com"
+            class="w-full bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 dark:focus:border-indigo-500 transition-all"
+          />
+        </div>
+
+        <div>
+          <label for="message" class="block text-sm font-medium mb-2">Message</label>
+          <textarea
+            id="message"
+            rows="5"
+            required
+            placeholder="Let us know how we can help, or include details about your university's grading scale..."
+            class="w-full bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 dark:focus:border-indigo-500 transition-all"
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white font-medium py-3 rounded-xl transition-colors shadow-lg shadow-indigo-600/10 dark:shadow-indigo-500/10"
+        >
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+</Layout>

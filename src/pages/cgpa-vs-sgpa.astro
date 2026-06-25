@@ -1,0 +1,632 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { gradingSystems } from '../data/grading-systems.js';
+
+const title = 'CGPA vs SGPA — What is CGPA? CGPA Full Form, Meaning & GPA Differences';
+const description = 'What is CGPA? CGPA full form is Cumulative Grade Point Average. Understand CGPA meaning, the difference between CGPA vs GPA and CGPA vs SGPA, step-by-step formulas, and how to convert SGPA to CGPA.';
+
+const faqs = [
+  {
+    question: 'What is the main difference between CGPA and SGPA?',
+    answer: 'The primary difference is the timeframe: SGPA (Semester Grade Point Average) measures academic performance for a single semester, whereas CGPA (Cumulative Grade Point Average) represents overall academic performance across all completed semesters.'
+  },
+  {
+    question: 'How is CGPA calculated from SGPAs?',
+    answer: 'CGPA is the credit-weighted average of all semester SGPAs. The formula is: CGPA = Σ(Semester SGPA × Semester Credits) ÷ Σ(Semester Credits). You multiply each semester\'s SGPA by its credit hours, add these values together, and divide by the total number of credits across all semesters.'
+  },
+  {
+    question: 'Can my CGPA be higher than my SGPA?',
+    answer: 'Yes, if your SGPA in the current semester is lower than your previous cumulative average, your overall CGPA will be higher than your current SGPA (though the new SGPA will pull your CGPA down). Conversely, if you perform exceptionally well in a semester, your SGPA will be higher than your CGPA, pulling your cumulative average up.'
+  },
+  {
+    question: 'Why are credit hours important in CGPA calculation?',
+    answer: 'Credit hours act as weights. A semester with 24 credit hours carries twice as much weight in your final CGPA as a semester with only 12 credit hours. This ensures that semesters with a heavier workload have a larger impact on your final cumulative standing.'
+  },
+  {
+    question: 'Is CGPA or SGPA more important for job recruitment or higher studies?',
+    answer: 'CGPA is far more important. Employers, universities, and visa authorities look at your CGPA because it reflects your consistent performance over your entire degree program. However, maintaining a high SGPA is crucial since it is the building block of your final CGPA.'
+  }
+];
+
+const systemEntries = Object.entries(gradingSystems);
+---
+
+<Layout title={title} description={description} canonicalPath="/cgpa-vs-sgpa" faqs={faqs}>
+  <div class="container-page py-10 md:py-16">
+
+    <!-- ── Breadcrumb ── -->
+    <nav aria-label="Breadcrumb" class="mb-8">
+      <ol class="flex items-center gap-1.5 text-sm text-neutral-500 dark:text-neutral-400">
+        <li>
+          <a href="/" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Home</a>
+        </li>
+        <li aria-hidden="true">
+          <svg class="w-3.5 h-3.5 text-neutral-300 dark:text-neutral-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </li>
+        <li>
+          <span class="text-neutral-900 dark:text-neutral-100 font-medium">CGPA vs SGPA Guide</span>
+        </li>
+      </ol>
+    </nav>
+
+    <!-- ── Page Header ── -->
+    <header class="mb-12">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-300 border border-indigo-100/50 dark:border-indigo-900/30 mb-4">
+        🔑 Academic Guide
+      </span>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight mb-4 leading-tight">
+        CGPA vs SGPA: <span class="bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent">Complete Explanation</span>
+      </h1>
+      <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-3xl text-base md:text-lg">
+        Unlock the differences between Cumulative Grade Point Average (CGPA) and Semester Grade Point Average (SGPA). Learn how they are calculated, how they relate, and play with our interactive simulation compounding tool to see the math in action.
+      </p>
+    </header>
+
+    <!-- ── Comparison Highlights (Quick Cards) ── -->
+    <section class="grid sm:grid-cols-2 gap-6 mb-16">
+      <!-- SGPA Card -->
+      <div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-6 shadow-sm relative overflow-hidden group">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-500/5 dark:bg-indigo-400/5 rounded-bl-full pointer-events-none transition-transform group-hover:scale-110"></div>
+        <div class="w-10 h-10 rounded-lg bg-indigo-50 dark:bg-indigo-950/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-4 font-mono font-bold text-sm">
+          SGPA
+        </div>
+        <h2 class="text-lg font-semibold mb-2 text-neutral-900 dark:text-neutral-100">Semester Grade Point Average</h2>
+        <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
+          SGPA measures your performance in a <strong>single semester</strong> or term. It is calculated by dividing the total credit-weighted grade points earned in that semester by the total credits registered.
+        </p>
+        <div class="mt-4 pt-4 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between text-xs text-neutral-400 dark:text-neutral-500 font-mono">
+          <span>Scope: 1 Semester</span>
+          <span>Updated: Term-end</span>
+        </div>
+      </div>
+
+      <!-- CGPA Card -->
+      <div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-6 shadow-sm relative overflow-hidden group">
+        <div class="absolute top-0 right-0 w-24 h-24 bg-violet-500/5 dark:bg-violet-400/5 rounded-bl-full pointer-events-none transition-transform group-hover:scale-110"></div>
+        <div class="w-10 h-10 rounded-lg bg-violet-50 dark:bg-violet-950/50 flex items-center justify-center text-violet-600 dark:text-violet-400 mb-4 font-mono font-bold text-sm">
+          CGPA
+        </div>
+        <h2 class="text-lg font-semibold mb-2 text-neutral-900 dark:text-neutral-100">Cumulative Grade Point Average</h2>
+        <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
+          CGPA measures your overall performance across <strong>all completed semesters</strong>. It is a credit-weighted average of all your SGPAs, representing your academic standing over your entire degree course.
+        </p>
+        <div class="mt-4 pt-4 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between text-xs text-neutral-400 dark:text-neutral-500 font-mono">
+          <span>Scope: All Semesters</span>
+          <span>Updated: Graduation Metric</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Interactive Simulator Section ── -->
+    <section class="mb-16">
+      <div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-sm">
+        <div class="p-6 sm:p-8 border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-950/20">
+          <h2 class="text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">Interactive CGPA Compounding Simulator</h2>
+          <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-1 leading-relaxed">
+            See how individual Semester GPAs (SGPAs) combine into your Cumulative GPA (CGPA) over time. Adjust SGPAs and credit weights to watch how different semesters affect your overall standing.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-12">
+          <!-- Left side: Inputs (7 cols) -->
+          <div class="lg:col-span-7 p-6 sm:p-8 border-b lg:border-b-0 lg:border-r border-neutral-200 dark:border-neutral-800">
+            <!-- Scale Selector -->
+            <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-neutral-50 dark:bg-neutral-950/40 p-4 rounded-xl border border-neutral-100 dark:border-neutral-800/40">
+              <label for="sim-grading-system" class="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono">
+                Grading Scale
+              </label>
+              <div class="relative">
+                <select
+                  id="sim-grading-system"
+                  class="w-full sm:w-64 appearance-none bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg px-4 py-2 text-sm font-medium text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors cursor-pointer pr-10 truncate"
+                >
+                  {systemEntries.map(([key, sys]) => (
+                    <option value={key}>{sys.shortName || sys.name} ({sys.maxGPA.toFixed(1)} Scale)</option>
+                  ))}
+                </select>
+                <svg class="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Semesters List -->
+            <div>
+              <div class="hidden sm:grid sm:grid-cols-[1.5fr_1fr_1fr_40px] gap-4 px-2 mb-2 text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono">
+                <span>Semester Name</span>
+                <span>SGPA</span>
+                <span>Credits</span>
+                <span></span>
+              </div>
+
+              <div id="sim-semesters-container" class="space-y-3">
+                <!-- Dynamically populated rows -->
+              </div>
+
+              <button
+                id="sim-add-sem-btn"
+                type="button"
+                class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors py-2 px-4 rounded-xl border border-indigo-100 dark:border-indigo-900/40 bg-indigo-50/50 dark:bg-indigo-950/20"
+              >
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" d="M12 4.5v15m7.5-7.5h-15"/>
+                </svg>
+                Add Semester
+              </button>
+            </div>
+          </div>
+
+          <!-- Right side: Live calculations (5 cols) -->
+          <div class="lg:col-span-5 p-6 sm:p-8 bg-neutral-50/30 dark:bg-neutral-950/10 flex flex-col justify-between">
+            <div class="flex-1 flex flex-col justify-center">
+              <h3 class="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono mb-6 text-center sm:text-left">
+                Live Cumulative GPA
+              </h3>
+
+              <div class="flex flex-col items-center justify-center py-4">
+                <!-- Radial Gauge -->
+                <div class="relative shrink-0 mb-6">
+                  <svg width="150" height="150" viewBox="0 0 140 140" class="transform -rotate-90">
+                    <circle cx="70" cy="70" r="60" fill="none" stroke-width="10" class="stroke-neutral-200 dark:stroke-neutral-800"/>
+                    <circle id="sim-gauge-ring" cx="70" cy="70" r="60" fill="none" stroke-width="10" stroke-linecap="round"
+                      stroke-dasharray="376.99" stroke-dashoffset="376.99" class="gauge-ring transition-all duration-500 stroke-indigo-600 dark:stroke-indigo-400"/>
+                  </svg>
+                  <div class="absolute inset-0 flex flex-col items-center justify-center">
+                    <span id="sim-gauge-value" class="text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">0.00</span>
+                    <span id="sim-gauge-max" class="text-[10px] text-neutral-400 dark:text-neutral-500 font-medium">/ 10.0</span>
+                  </div>
+                </div>
+
+                <div class="text-center">
+                  <span id="sim-classification" class="inline-block text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full mb-3 bg-neutral-100 dark:bg-neutral-800 text-neutral-500">
+                    Excellent
+                  </span>
+                  <div class="flex flex-wrap justify-center gap-x-5 gap-y-1.5 text-xs text-neutral-500 dark:text-neutral-400 mt-1 font-mono">
+                    <span>Total Credits: <strong id="sim-total-credits" class="text-neutral-800 dark:text-neutral-200 font-semibold">0</strong></span>
+                    <span>Total Points: <strong id="sim-total-points" class="text-neutral-800 dark:text-neutral-200 font-semibold">0.00</strong></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Formula Math Details -->
+            <div class="mt-6 pt-6 border-t border-neutral-200 dark:border-neutral-800">
+              <h4 class="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono mb-2">
+                Calculation Breakdown
+              </h4>
+              <div id="sim-math-step" class="text-xs font-mono bg-neutral-100 dark:bg-neutral-950 p-4 rounded-xl text-neutral-600 dark:text-neutral-400 border border-neutral-200/50 dark:border-neutral-800/50 leading-relaxed overflow-x-auto whitespace-pre">
+                Enter values to display calculation.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Key Differences Table ── -->
+    <section class="mb-16">
+      <div class="mb-6">
+        <h2 class="text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 mb-1">Key Differences at a Glance</h2>
+        <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          A side-by-side comparison of how CGPA and SGPA function in an academic curriculum.
+        </p>
+      </div>
+
+      <div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-sm">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse text-left">
+            <thead>
+              <tr class="border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-950/20 font-mono text-xs text-neutral-400 dark:text-neutral-500 uppercase tracking-wider">
+                <th class="px-6 py-4 font-semibold">Feature</th>
+                <th class="px-6 py-4 font-semibold">SGPA (Semester GPA)</th>
+                <th class="px-6 py-4 font-semibold">CGPA (Cumulative GPA)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800 text-neutral-600 dark:text-neutral-400">
+              <tr>
+                <td class="px-6 py-4 font-semibold text-neutral-900 dark:text-neutral-100">Definition</td>
+                <td class="px-6 py-4">Semester Grade Point Average: Measures performance during a single semester.</td>
+                <td class="px-6 py-4">Cumulative Grade Point Average: Measures performance across all semesters combined.</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 font-semibold text-neutral-900 dark:text-neutral-100">Timeframe</td>
+                <td class="px-6 py-4">Usually 4–6 months (one academic term).</td>
+                <td class="px-6 py-4">Entire program duration (2 to 4+ years).</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 font-semibold text-neutral-900 dark:text-neutral-100">Calculation Basis</td>
+                <td class="px-6 py-4">Calculated from individual course grades and course credits inside a single semester.</td>
+                <td class="px-6 py-4">Calculated from SGPAs and semester credit hours across all semesters.</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 font-semibold text-neutral-900 dark:text-neutral-100">Sensitivity</td>
+                <td class="px-6 py-4"><strong>Highly volatile</strong>. A single bad grade dramatically drops a semester's SGPA.</td>
+                <td class="px-6 py-4"><strong>Buffered</strong>. As credits accumulate, final CGPA becomes more stable.</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 font-semibold text-neutral-900 dark:text-neutral-100">Primary Utility</td>
+                <td class="px-6 py-4">Semester performance tracking, identifying short-term study issues, scholarship eligibility.</td>
+                <td class="px-6 py-4">Job placements, graduate admissions, transcript evaluations, final degree classification.</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 font-semibold text-neutral-900 dark:text-neutral-100">Formula</td>
+                <td class="px-6 py-4 font-mono text-xs text-indigo-600 dark:text-indigo-400">Σ(Grade Points × Course Credits) ÷ Σ(Course Credits)</td>
+                <td class="px-6 py-4 font-mono text-xs text-indigo-600 dark:text-indigo-400">Σ(SGPA × Semester Credits) ÷ Σ(Total Credits)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Detailed Explanation Sections ── -->
+    <div class="grid md:grid-cols-12 gap-8 mb-16">
+      
+      <!-- SGPA Deep Dive (6 cols) -->
+      <div class="md:col-span-6 space-y-4">
+        <div class="p-6 rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
+          <h2 class="text-xl font-semibold mb-3 text-neutral-900 dark:text-neutral-100 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-indigo-500"></span> What is SGPA?
+          </h2>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+            SGPA stands for <strong>Semester Grade Point Average</strong>. It represents your average grade point for courses taken in one particular semester. 
+          </p>
+          
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono mb-2">SGPA Formula</h3>
+          <div class="bg-neutral-50 dark:bg-neutral-950 p-4 rounded-xl border border-neutral-100 dark:border-neutral-800/60 font-mono text-xs leading-relaxed text-neutral-800 dark:text-neutral-200 mb-4 select-all text-center">
+            SGPA = Σ(C<sub>i</sub> × GP<sub>i</sub>) ÷ ΣC<sub>i</sub>
+          </div>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400 mb-6 leading-relaxed">
+            Where <strong>C<sub>i</sub></strong> represents the credit hours for course <em>i</em>, and <strong>GP<sub>i</sub></strong> represents the grade points earned in course <em>i</em>.
+          </p>
+
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono mb-2">Calculation Example</h3>
+          <div class="bg-neutral-50 dark:bg-neutral-950 p-4 rounded-xl border border-neutral-100 dark:border-neutral-800/60 text-xs font-mono space-y-1.5 text-neutral-600 dark:text-neutral-400">
+            <div class="font-semibold text-neutral-800 dark:text-neutral-200 border-b border-neutral-200 dark:border-neutral-800 pb-1.5 mb-1.5">Single Semester:</div>
+            <div>• Math (4 credits): Grade A (8 points)</div>
+            <div>• Physics (3 credits): Grade O (10 points)</div>
+            <div>• CS Lab (2 credits): Grade B+ (7 points)</div>
+            <div class="border-t border-neutral-200 dark:border-neutral-800/60 pt-2 text-neutral-800 dark:text-neutral-200">
+              Σ(Credits × GP) = (4×8) + (3×10) + (2×7) = 76
+            </div>
+            <div>Σ(Credits) = 4 + 3 + 2 = 9</div>
+            <div class="font-bold text-indigo-600 dark:text-indigo-400 pt-1.5">
+              SGPA = 76 ÷ 9 = 8.44
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CGPA Deep Dive (6 cols) -->
+      <div class="md:col-span-6 space-y-4">
+        <div class="p-6 rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
+          <h2 class="text-xl font-semibold mb-3 text-neutral-900 dark:text-neutral-100 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-violet-500"></span> What is CGPA?
+          </h2>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+            CGPA stands for <strong>Cumulative Grade Point Average</strong>. It represents the overall average grade point for all courses taken across all semesters up to the current date.
+          </p>
+          
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono mb-2">CGPA Formula</h3>
+          <div class="bg-neutral-50 dark:bg-neutral-950 p-4 rounded-xl border border-neutral-100 dark:border-neutral-800/60 font-mono text-xs leading-relaxed text-neutral-800 dark:text-neutral-200 mb-4 select-all text-center">
+            CGPA = Σ(SGPA<sub>j</sub> × SC<sub>j</sub>) ÷ ΣSC<sub>j</sub>
+          </div>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400 mb-6 leading-relaxed">
+            Where <strong>SGPA<sub>j</sub></strong> is the SGPA of semester <em>j</em>, and <strong>SC<sub>j</sub></strong> is the total credits completed during semester <em>j</em>.
+          </p>
+
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono mb-2">Calculation Example</h3>
+          <div class="bg-neutral-50 dark:bg-neutral-950 p-4 rounded-xl border border-neutral-100 dark:border-neutral-800/60 text-xs font-mono space-y-1.5 text-neutral-600 dark:text-neutral-400">
+            <div class="font-semibold text-neutral-800 dark:text-neutral-200 border-b border-neutral-200 dark:border-neutral-800 pb-1.5 mb-1.5">All Semesters:</div>
+            <div>• Semester 1: 8.50 SGPA (20 credits)</div>
+            <div>• Semester 2: 7.80 SGPA (22 credits)</div>
+            <div>• Semester 3: 9.10 SGPA (18 credits)</div>
+            <div class="border-t border-neutral-200 dark:border-neutral-800/60 pt-2 text-neutral-800 dark:text-neutral-200">
+              Σ(SGPA × Credits) = (8.5×20) + (7.8×22) + (9.1×18) = 505.4
+            </div>
+            <div>Σ(Total Credits) = 20 + 22 + 18 = 60</div>
+            <div class="font-bold text-violet-600 dark:text-violet-400 pt-1.5">
+              CGPA = 505.4 ÷ 60 = 8.42
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Relation & How to Convert ── -->
+    <section class="mb-16 bg-neutral-900 text-white rounded-2xl p-6 sm:p-8 relative overflow-hidden">
+      <!-- Background mesh elements -->
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.15),transparent_50%)]"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(168,85,247,0.15),transparent_50%)]"></div>
+
+      <div class="relative z-10 max-w-3xl">
+        <h2 class="text-xl sm:text-2xl font-semibold mb-3">How does SGPA relate to CGPA?</h2>
+        <p class="text-sm sm:text-base text-neutral-300 leading-relaxed mb-6">
+          Your CGPA is a direct reflection of your SGPAs over time. Think of SGPA as the building block, and CGPA as the final tower. Each time you complete a new semester, its SGPA is incorporated into the cumulative total. Because semesters are weighted by credits, semesters with higher credit loads will pull the CGPA harder in their direction.
+        </p>
+
+        <div class="grid sm:grid-cols-2 gap-6 bg-neutral-950/60 p-5 rounded-xl border border-neutral-800/50">
+          <div>
+            <h3 class="text-xs font-semibold uppercase tracking-wider text-indigo-400 font-mono mb-2">Can you calculate CGPA from SGPA?</h3>
+            <p class="text-xs text-neutral-400 leading-relaxed">
+              Yes, if you have the SGPA and credit hours for <strong>every single semester</strong>. Summing the SGPAs directly without accounting for differing semester credits will lead to mathematical errors.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xs font-semibold uppercase tracking-wider text-indigo-400 font-mono mb-2">Can you calculate SGPA from CGPA?</h3>
+            <p class="text-xs text-neutral-400 leading-relaxed">
+              No. Once SGPAs are compounded into a cumulative CGPA, you cannot isolate the SGPA of a single term unless you know the SGPAs and credit loads of all other terms.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Academic Tips to Improve CGPA ── -->
+    <section class="mb-16">
+      <div class="mb-6">
+        <h2 class="text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 mb-1">Strategies to Boost Your CGPA</h2>
+        <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          Understanding the math allows you to strategically plan your academic performance.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-6">
+        <div class="p-5 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900">
+          <span class="text-2xl block mb-3">🎯</span>
+          <h3 class="font-semibold text-neutral-900 dark:text-neutral-100 mb-2">Prioritize High-Credit Courses</h3>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+            In SGPA calculation, courses with 4 credits have double the weight of 2-credit courses. Focus your study efforts on scoring higher grades in heavy weightage classes to boost your semester score.
+          </p>
+        </div>
+        <div class="p-5 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900">
+          <span class="text-2xl block mb-3">📈</span>
+          <h3 class="font-semibold text-neutral-900 dark:text-neutral-100 mb-2">Build a Strong Early Foundation</h3>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+            During your early semesters (1 and 2), you have few total credits. A high SGPA early on builds a massive CGPA cushion. In later semesters, changing your CGPA requires much higher grades because the denominator (total credits) is huge.
+          </p>
+        </div>
+        <div class="p-5 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900">
+          <span class="text-2xl block mb-3">🛠️</span>
+          <h3 class="font-semibold text-neutral-900 dark:text-neutral-100 mb-2">Recover from F Grades Immediately</h3>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+            Failing a class assigns 0 grade points but adds the credits to your denominator, crashing your SGPA. Clear backlogs/fails as soon as possible, as replacing a failing grade is the fastest way to surge your CGPA.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FAQ Section ── -->
+    <section>
+      <div class="text-center mb-10">
+        <span class="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono mb-2 block">FAQ</span>
+        <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="max-w-2xl mx-auto space-y-3">
+        {faqs.map((faq) => (
+          <details class="group bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-hidden">
+            <summary class="flex items-center justify-between cursor-pointer p-5 text-sm font-medium select-none text-neutral-900 dark:text-neutral-100">
+              {faq.question}
+              <svg class="w-5 h-5 text-neutral-400 transition-transform duration-200 group-open:rotate-180 shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-5 pb-5 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed -mt-1">
+              {faq.answer}
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+  </div>
+</Layout>
+
+<script>
+  import { gradingSystems, getGradeClassification } from '../data/grading-systems.js';
+
+  // ── DOM References ──
+  const systemSelect = document.getElementById('sim-grading-system') as HTMLSelectElement;
+  const semestersContainer = document.getElementById('sim-semesters-container')!;
+  const addSemBtn = document.getElementById('sim-add-sem-btn')!;
+  const gaugeRing = document.getElementById('sim-gauge-ring') as SVGCircleElement;
+  const gaugeValue = document.getElementById('sim-gauge-value')!;
+  const gaugeMax = document.getElementById('sim-gauge-max')!;
+  const classificationEl = document.getElementById('sim-classification')!;
+  const totalCreditsEl = document.getElementById('sim-total-credits')!;
+  const totalPointsEl = document.getElementById('sim-total-points')!;
+  const mathStepEl = document.getElementById('sim-math-step')!;
+
+  const GAUGE_CIRCUMFERENCE = 2 * Math.PI * 60; // 376.99
+  let rowIdCounter = 0;
+
+  function getCurrentSystem() {
+    return gradingSystems[systemSelect.value] || gradingSystems['cbse-ugc-india'];
+  }
+
+  function updateValidationRanges() {
+    const system = getCurrentSystem();
+    const maxGPA = system.maxGPA;
+    const inputs = semestersContainer.querySelectorAll('.sem-sgpa-input') as NodeListOf<HTMLInputElement>;
+    inputs.forEach(input => {
+      input.max = String(maxGPA);
+      const val = parseFloat(input.value);
+      if (val > maxGPA) {
+        input.value = maxGPA.toFixed(2);
+      }
+    });
+  }
+
+  function calculateCGPA() {
+    const system = getCurrentSystem();
+    const maxGPA = system.maxGPA;
+    const rows = semestersContainer.querySelectorAll('.sem-row') as NodeListOf<HTMLElement>;
+    
+    let totalWeightedPoints = 0;
+    let totalCredits = 0;
+    let stepParts: string[] = [];
+    let mathSummary = '';
+
+    rows.forEach((row, index) => {
+      const nameInput = row.querySelector('.sem-name-input') as HTMLInputElement;
+      const sgpaInput = row.querySelector('.sem-sgpa-input') as HTMLInputElement;
+      const creditsInput = row.querySelector('.sem-credits-input') as HTMLInputElement;
+
+      const semName = nameInput.value || `Semester ${index + 1}`;
+      const sgpa = parseFloat(sgpaInput.value) || 0;
+      const credits = parseFloat(creditsInput.value) || 0;
+
+      if (credits > 0) {
+        totalWeightedPoints += sgpa * credits;
+        totalCredits += credits;
+        stepParts.push(`(${sgpa.toFixed(2)} × ${credits})`);
+      }
+    });
+
+    if (totalCredits > 0) {
+      const cgpa = totalWeightedPoints / totalCredits;
+      const roundedCGPA = Math.min(cgpa, maxGPA);
+      
+      // Update gauge value
+      gaugeValue.textContent = roundedCGPA.toFixed(2);
+      gaugeMax.textContent = `/ ${maxGPA.toFixed(1)}`;
+
+      // Update gauge stroke-dashoffset
+      const percent = roundedCGPA / maxGPA;
+      const offset = GAUGE_CIRCUMFERENCE * (1 - percent);
+      gaugeRing.style.strokeDashoffset = String(offset);
+
+      // Update classification
+      const classification = getGradeClassification(roundedCGPA, maxGPA);
+      classificationEl.textContent = classification.label;
+      
+      // Update class list for color
+      classificationEl.className = `inline-block text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full mb-2 ${classification.bg} ${classification.color}`;
+      gaugeRing.style.stroke = classification.ring;
+
+      // Update summaries
+      totalCreditsEl.textContent = String(totalCredits);
+      totalPointsEl.textContent = totalWeightedPoints.toFixed(2);
+
+      // Update step formula details
+      if (stepParts.length > 0) {
+        const numerator = stepParts.join(' + ');
+        mathSummary = `CGPA = [${numerator}] ÷ ${totalCredits}\n     = ${totalWeightedPoints.toFixed(2)} ÷ ${totalCredits}\n     = ${roundedCGPA.toFixed(2)}`;
+      } else {
+        mathSummary = 'CGPA = 0.00';
+      }
+    } else {
+      gaugeValue.textContent = '0.00';
+      gaugeMax.textContent = `/ ${maxGPA.toFixed(1)}`;
+      gaugeRing.style.strokeDashoffset = String(GAUGE_CIRCUMFERENCE);
+      classificationEl.textContent = '—';
+      classificationEl.className = 'inline-block text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full mb-2 bg-neutral-100 dark:bg-neutral-800 text-neutral-500';
+      gaugeRing.style.stroke = '';
+      totalCreditsEl.textContent = '0';
+      totalPointsEl.textContent = '0.00';
+      mathSummary = 'Add credits to calculate CGPA.';
+    }
+
+    // Set math text
+    mathStepEl.innerHTML = mathSummary;
+  }
+
+  function createRow(name: string, sgpa: number, credits: number) {
+    rowIdCounter++;
+    const id = rowIdCounter;
+    const system = getCurrentSystem();
+    const maxGPA = system.maxGPA;
+
+    const row = document.createElement('div');
+    row.className = 'sem-row grid grid-cols-12 gap-3 items-center bg-neutral-50 dark:bg-neutral-950 p-4 sm:p-2 sm:bg-transparent dark:sm:bg-transparent border border-neutral-200 dark:border-neutral-800/40 sm:border-0 rounded-xl';
+    row.dataset.rowId = String(id);
+
+    row.innerHTML = `
+      <!-- Name -->
+      <div class="col-span-12 sm:col-span-5">
+        <label class="sm:hidden font-mono text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-1 block">Semester Name</label>
+        <input
+          type="text"
+          value="${name}"
+          class="sem-name-input w-full bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all font-medium text-neutral-800 dark:text-neutral-200"
+          placeholder="e.g. Semester 1"
+        />
+      </div>
+
+      <!-- SGPA -->
+      <div class="col-span-6 sm:col-span-3">
+        <label class="sm:hidden font-mono text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-1 block">SGPA</label>
+        <input
+          type="number"
+          step="0.01"
+          min="0"
+          max="${maxGPA}"
+          value="${sgpa.toFixed(2)}"
+          class="sem-sgpa-input w-full bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all font-medium text-neutral-800 dark:text-neutral-200 tabular-nums"
+          placeholder="SGPA"
+        />
+      </div>
+
+      <!-- Credits -->
+      <div class="col-span-4 sm:col-span-3">
+        <label class="sm:hidden font-mono text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-1 block">Credits</label>
+        <input
+          type="number"
+          min="1"
+          max="50"
+          value="${credits}"
+          class="sem-credits-input w-full bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all font-medium text-neutral-800 dark:text-neutral-200 tabular-nums"
+          placeholder="Credits"
+        />
+      </div>
+
+      <!-- Remove -->
+      <div class="col-span-2 sm:col-span-1 flex justify-end">
+        <button
+          type="button"
+          class="sem-remove-btn p-2 text-neutral-400 hover:text-red-500 dark:hover:text-red-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors rounded-lg cursor-pointer animate-fade-up"
+          aria-label="Remove Semester"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    `;
+
+    // Attach listeners
+    row.querySelector('.sem-sgpa-input')!.addEventListener('input', calculateCGPA);
+    row.querySelector('.sem-credits-input')!.addEventListener('input', calculateCGPA);
+    row.querySelector('.sem-name-input')!.addEventListener('input', calculateCGPA);
+    row.querySelector('.sem-remove-btn')!.addEventListener('click', () => {
+      row.remove();
+      calculateCGPA();
+    });
+
+    semestersContainer.appendChild(row);
+  }
+
+  // Event listener for scale change
+  systemSelect.addEventListener('change', () => {
+    updateValidationRanges();
+    calculateCGPA();
+  });
+
+  // Event listener for add button
+  addSemBtn.addEventListener('click', () => {
+    const nextNum = semestersContainer.querySelectorAll('.sem-row').length + 1;
+    createRow(`Semester ${nextNum}`, 8.0, 20);
+    calculateCGPA();
+  });
+
+  // Pre-populate with default semesters
+  createRow('Semester 1', 8.5, 20);
+  createRow('Semester 2', 7.8, 22);
+
+  // Initial calculation
+  calculateCGPA();
+</script>

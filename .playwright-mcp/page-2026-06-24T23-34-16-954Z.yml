@@ -1,0 +1,213 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation "Main navigation" [ref=e3]:
+      - link "CGPA Helper" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e5]: CGPA
+        - generic [ref=e6]: Helper
+      - generic [ref=e7]:
+        - link "CGPA Calculator" [ref=e8] [cursor=pointer]:
+          - /url: /cgpa-calculator
+        - link "SGPA Calculator" [ref=e9] [cursor=pointer]:
+          - /url: /sgpa-calculator
+        - link "CGPA to %" [ref=e10] [cursor=pointer]:
+          - /url: /cgpa-to-percentage
+        - link "% to CGPA" [ref=e11] [cursor=pointer]:
+          - /url: /percentage-to-cgpa
+      - button "Toggle dark mode" [ref=e13]:
+        - img [ref=e14]
+  - main [ref=e16]:
+    - navigation "Breadcrumb" [ref=e17]:
+      - list [ref=e18]:
+        - listitem [ref=e19]:
+          - link "Home" [ref=e20] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e21]:
+          - img [ref=e22]
+        - listitem [ref=e24]: Percentage to CGPA
+    - generic [ref=e26]:
+      - heading "Percentage toCGPAConverter" [level=1] [ref=e27]
+      - paragraph [ref=e28]: Convert your percentage score to CGPA using official university formulas. Select your grading system and enter your percentage for instant results.
+    - generic [ref=e31]:
+      - generic [ref=e32]:
+        - generic [ref=e33]:
+          - generic [ref=e34]: University / Grading System
+          - generic [ref=e35]:
+            - combobox "University / Grading System" [ref=e36] [cursor=pointer]:
+              - option "CBSE / UGC India" [selected]
+              - option "Standard 10-Point Scale (VIT, SRM, KTU, AKTU, Anna Univ, JNTU, SPPU, GGSIPU)"
+              - option "Mumbai University"
+              - option "Standard 4.0 Scale (US, HEC Pakistan, UGC BD, BRACU, NSU, COMSATS, etc.)"
+              - option "Standard 5.0 Scale"
+              - option "RGPV MP"
+              - option "IET DAVV Indore"
+            - img
+        - generic [ref=e37]:
+          - generic [ref=e38]: Percentage (%)
+          - generic [ref=e39]:
+            - spinbutton "Percentage (%)" [ref=e40]
+            - generic [ref=e41]: "%"
+        - generic [ref=e42]:
+          - generic [ref=e43]: Quick picks
+          - generic [ref=e44]:
+            - button "90%" [ref=e45] [cursor=pointer]
+            - button "80%" [ref=e46] [cursor=pointer]
+            - button "75%" [ref=e47] [cursor=pointer]
+            - button "60%" [ref=e48] [cursor=pointer]
+            - button "50%" [ref=e49] [cursor=pointer]
+      - generic [ref=e51]:
+        - img [ref=e53]
+        - paragraph [ref=e55]: Enter a percentage to see the equivalent CGPA.
+    - generic [ref=e56]:
+      - generic [ref=e57]:
+        - generic [ref=e58]: Reference
+        - heading "Common Percentage to CGPA Values" [level=2] [ref=e59]
+        - paragraph [ref=e60]: Values shown for the selected grading system. Change the system above to update.
+      - table [ref=e63]:
+        - rowgroup [ref=e64]:
+          - row "Percentage CGPA Classification" [ref=e65]:
+            - columnheader "Percentage" [ref=e66]
+            - columnheader "CGPA" [ref=e67]
+            - columnheader "Classification" [ref=e68]
+        - rowgroup [ref=e69]:
+          - row "95% 10.00 Outstanding" [ref=e70]:
+            - cell "95%" [ref=e71]
+            - cell "10.00" [ref=e72]
+            - cell "Outstanding" [ref=e73]:
+              - generic [ref=e74]: Outstanding
+          - row "90% 9.47 Outstanding" [ref=e75]:
+            - cell "90%" [ref=e76]
+            - cell "9.47" [ref=e77]
+            - cell "Outstanding" [ref=e78]:
+              - generic [ref=e79]: Outstanding
+          - row "85% 8.95 Excellent" [ref=e80]:
+            - cell "85%" [ref=e81]
+            - cell "8.95" [ref=e82]
+            - cell "Excellent" [ref=e83]:
+              - generic [ref=e84]: Excellent
+          - row "80% 8.42 Excellent" [ref=e85]:
+            - cell "80%" [ref=e86]
+            - cell "8.42" [ref=e87]
+            - cell "Excellent" [ref=e88]:
+              - generic [ref=e89]: Excellent
+          - row "75% 7.89 Very Good" [ref=e90]:
+            - cell "75%" [ref=e91]
+            - cell "7.89" [ref=e92]
+            - cell "Very Good" [ref=e93]:
+              - generic [ref=e94]: Very Good
+          - row "70% 7.37 Very Good" [ref=e95]:
+            - cell "70%" [ref=e96]
+            - cell "7.37" [ref=e97]
+            - cell "Very Good" [ref=e98]:
+              - generic [ref=e99]: Very Good
+          - row "65% 6.84 Good" [ref=e100]:
+            - cell "65%" [ref=e101]
+            - cell "6.84" [ref=e102]
+            - cell "Good" [ref=e103]:
+              - generic [ref=e104]: Good
+          - row "60% 6.32 Good" [ref=e105]:
+            - cell "60%" [ref=e106]
+            - cell "6.32" [ref=e107]
+            - cell "Good" [ref=e108]:
+              - generic [ref=e109]: Good
+          - row "55% 5.79 Average" [ref=e110]:
+            - cell "55%" [ref=e111]
+            - cell "5.79" [ref=e112]
+            - cell "Average" [ref=e113]:
+              - generic [ref=e114]: Average
+          - row "50% 5.26 Average" [ref=e115]:
+            - cell "50%" [ref=e116]
+            - cell "5.26" [ref=e117]
+            - cell "Average" [ref=e118]:
+              - generic [ref=e119]: Average
+          - row "45% 4.74 Below Average" [ref=e120]:
+            - cell "45%" [ref=e121]
+            - cell "4.74" [ref=e122]
+            - cell "Below Average" [ref=e123]:
+              - generic [ref=e124]: Below Average
+          - row "40% 4.21 Below Average" [ref=e125]:
+            - cell "40%" [ref=e126]
+            - cell "4.21" [ref=e127]
+            - cell "Below Average" [ref=e128]:
+              - generic [ref=e129]: Below Average
+    - generic [ref=e131]:
+      - generic [ref=e132]:
+        - generic [ref=e133]: FAQ
+        - heading "Frequently Asked Questions" [level=2] [ref=e134]
+      - generic [ref=e135]:
+        - group [ref=e136]:
+          - generic "How do I convert percentage to CGPA?" [ref=e137] [cursor=pointer]:
+            - text: How do I convert percentage to CGPA?
+            - img [ref=e138]
+        - group [ref=e140]:
+          - generic "Is the percentage to CGPA conversion accurate?" [ref=e141] [cursor=pointer]:
+            - text: Is the percentage to CGPA conversion accurate?
+            - img [ref=e142]
+        - group [ref=e144]:
+          - generic "What is the CGPA for 75% in CBSE?" [ref=e145] [cursor=pointer]:
+            - text: What is the CGPA for 75% in CBSE?
+            - img [ref=e146]
+        - group [ref=e148]:
+          - generic "Can I convert percentage to CGPA on a 4.0 scale?" [ref=e149] [cursor=pointer]:
+            - text: Can I convert percentage to CGPA on a 4.0 scale?
+            - img [ref=e150]
+        - group [ref=e152]:
+          - generic "Which universities are supported?" [ref=e153] [cursor=pointer]:
+            - text: Which universities are supported?
+            - img [ref=e154]
+        - group [ref=e156]:
+          - generic "Why does Mumbai University use a different formula?" [ref=e157] [cursor=pointer]:
+            - text: Why does Mumbai University use a different formula?
+            - img [ref=e158]
+    - generic [ref=e160]:
+      - heading "Need the reverse conversion?" [level=2] [ref=e161]
+      - paragraph [ref=e162]: Convert your CGPA back to percentage using the same official university formulas.
+      - link "CGPA to Percentage" [ref=e163] [cursor=pointer]:
+        - /url: /cgpa-to-percentage
+        - text: CGPA to Percentage
+        - img [ref=e164]
+  - contentinfo [ref=e166]:
+    - generic [ref=e167]:
+      - generic [ref=e168]:
+        - generic [ref=e169]:
+          - link "CGPA Helper" [ref=e170] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e171]: CGPA
+            - generic [ref=e172]: Helper
+          - paragraph [ref=e173]: Free, fast, and accurate CGPA & SGPA calculators for college students worldwide.
+        - generic [ref=e174]:
+          - heading "Calculators" [level=4] [ref=e175]
+          - list [ref=e176]:
+            - listitem [ref=e177]:
+              - link "CGPA Calculator" [ref=e178] [cursor=pointer]:
+                - /url: /cgpa-calculator
+            - listitem [ref=e179]:
+              - link "SGPA Calculator" [ref=e180] [cursor=pointer]:
+                - /url: /sgpa-calculator
+            - listitem [ref=e181]:
+              - link "CGPA to Percentage" [ref=e182] [cursor=pointer]:
+                - /url: /cgpa-to-percentage
+            - listitem [ref=e183]:
+              - link "Percentage to CGPA" [ref=e184] [cursor=pointer]:
+                - /url: /percentage-to-cgpa
+        - generic [ref=e185]:
+          - heading "Resources" [level=4] [ref=e186]
+          - list [ref=e187]:
+            - listitem [ref=e188]:
+              - link "How It Works" [ref=e189] [cursor=pointer]:
+                - /url: /#how-it-works
+            - listitem [ref=e190]:
+              - link "FAQ" [ref=e191] [cursor=pointer]:
+                - /url: /#faq
+        - generic [ref=e192]:
+          - heading "Legal" [level=4] [ref=e193]
+          - list [ref=e194]:
+            - listitem [ref=e195]:
+              - link "Privacy Policy" [ref=e196] [cursor=pointer]:
+                - /url: /privacy
+            - listitem [ref=e197]:
+              - link "Terms of Service" [ref=e198] [cursor=pointer]:
+                - /url: /terms
+      - generic [ref=e199]:
+        - paragraph [ref=e200]: © 2026 CGPA Helper. Free for all students.
+        - generic [ref=e202]: All calculations run locally

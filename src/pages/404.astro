@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = 'Page Not Found — CGPA Helper';
+const description = 'Oops! The page you are looking for does not exist or has been moved.';
+---
+
+<Layout title={title} description={description}>
+  <div class="container-page min-h-[60vh] flex flex-col items-center justify-center text-center py-16 md:py-24">
+    <!-- Big Stylized 404 Badge -->
+    <div class="relative mb-6">
+      <h1 class="text-9xl font-extrabold tracking-widest text-neutral-200 dark:text-neutral-800 select-none">
+        404
+      </h1>
+      <span class="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-indigo-500 text-white shadow-lg shadow-indigo-500/20">
+        Page Not Found
+      </span>
+    </div>
+
+    <!-- Title and Description -->
+    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-4 text-neutral-900 dark:text-white">
+      Lost in Translation?
+    </h2>
+    <p class="text-neutral-600 dark:text-neutral-400 max-w-md mx-auto mb-8 leading-relaxed">
+      The page you are looking for might have been removed, had its name changed, or is temporarily unavailable. Let's get you back on track!
+    </p>
+
+    <!-- Navigation Options -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-100 px-6 py-3 rounded-full text-sm font-medium transition-colors shadow-lg shadow-neutral-900/10 dark:shadow-white/10 w-full sm:w-auto justify-center"
+      >
+        Go Home
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+        </svg>
+      </a>
+      <a
+        href="/cgpa-calculator"
+        class="inline-flex items-center gap-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 px-6 py-3 rounded-full border border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors w-full sm:w-auto justify-center"
+      >
+        Calculate CGPA
+      </a>
+    </div>
+  </div>
+</Layout>

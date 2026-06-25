@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = 'About Us — CGPA Helper';
+const description = 'Learn more about CGPA Helper, our mission, and how we build privacy-first calculators for students worldwide.';
+---
+
+<Layout title={title} description={description}>
+  <div class="container-page py-16 md:py-24 max-w-3xl">
+    <h1 class="text-4xl font-bold tracking-tight mb-6">About Us</h1>
+    <p class="text-lg text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed">
+      CGPA Helper is a dedicated academic utility built to solve a common problem faced by students worldwide: the confusion of grade calculations and university conversions.
+    </p>
+    <p class="text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed">
+      We believe that checking your academic standing shouldn't require complex spreadsheets, paid subscriptions, or giving away your personal details. That's why we created a suite of completely free tools that require no signups and display no intrusive ads.
+    </p>
+
+    <h2 class="text-2xl font-bold mt-10 mb-4">Our Mission</h2>
+    <div class="grid gap-6 mt-6">
+      <div class="p-5 rounded-xl border border-neutral-200 dark:border-neutral-800">
+        <h3 class="font-semibold text-lg mb-2">🔒 Privacy First</h3>
+        <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
+          Your grades are your business. Unlike other calculators that store records on their servers, all computations on CGPA Helper run directly inside your web browser. No data is ever collected or shared.
+        </p>
+      </div>
+      <div class="p-5 rounded-xl border border-neutral-200 dark:border-neutral-800">
+        <h3 class="font-semibold text-lg mb-2">⚡ Simple &amp; Fast</h3>
+        <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
+          No "Calculate" buttons or long waiting times. Calculations update instantly in real-time as you enter your grades and credits.
+        </p>
+      </div>
+      <div class="p-5 rounded-xl border border-neutral-200 dark:border-neutral-800">
+        <h3 class="font-semibold text-lg mb-2">🌍 Globally Compatible</h3>
+        <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
+          From 10-point scales in India to 4.0 scales in the US and Pakistan, we pre-configure specific university grading rules to provide accurate conversions instantly.
+        </p>
+      </div>
+    </div>
+  </div>
+</Layout>

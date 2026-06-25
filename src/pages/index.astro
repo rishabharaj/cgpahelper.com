@@ -1,11 +1,581 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const title = 'CGPA Helper';
+const description = 'Free CGPA calculator and CGPA to percentage converter for students. Calculate your Cumulative Grade Point Average on 4.0 scale and 10-point scale. Supports SGPA to CGPA conversion, percentage to CGPA, and how to calculate CGPA for all universities.';
+const keywords = 'cgpa, cgpa calculator, cgpa to percentage, cgpa meaning, what is cgpa, cgpa full form, how to calculate cgpa, cgpa to percentage conversion formula, cgpa to gpa, percentage to cgpa, cgpa to percentage converter, sgpa to cgpa calculator, how to convert cgpa into percentage, cgpa calculator 4.0 scale, cgpa vs gpa';
+
+const tools = [
+  {
+    href: '/cgpa-calculator',
+    icon: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z" /></svg>`,
+    title: 'CGPA Calculator',
+    desc: 'Calculate your Cumulative GPA across all semesters with credit-weighted precision.',
+    badge: 'Most Popular',
+  },
+  {
+    href: '/sgpa-calculator',
+    icon: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" /></svg>`,
+    title: 'SGPA Calculator',
+    desc: 'Calculate your Semester GPA by entering course grades and credit hours.',
+    badge: null,
+  },
+  {
+    href: '/board-cgpa-calculator',
+    icon: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>`,
+    title: 'Board CGPA Calculator',
+    desc: 'Calculate CGPA and percentage for school boards like CBSE, ICSE, and State Boards.',
+    badge: 'New',
+  },
+  {
+    href: '/cgpa-to-percentage',
+    icon: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" /></svg>`,
+    title: 'CGPA to Percentage',
+    desc: 'Convert your CGPA to percentage using official university formulas.',
+    badge: null,
+  },
+  {
+    href: '/percentage-to-cgpa',
+    icon: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3" /></svg>`,
+    title: 'Percentage to CGPA',
+    desc: 'Convert your percentage score back to CGPA for any grading system.',
+    badge: null,
+  },
+  {
+    href: '/cgpa-vs-sgpa',
+    icon: `<svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>`,
+    title: 'CGPA vs SGPA Guide',
+    desc: 'Understand the core differences, formulas, calculations, and compound semester weights.',
+    badge: 'Guide',
+    cta: 'Read Guide',
+  },
+];
+
+const steps = [
+  { num: '01', title: 'Choose your grading system', desc: 'Select your university scale or standard scale from our options.' },
+  { num: '02', title: 'Enter your grades', desc: 'Add your courses, credit hours, and grades — or semesters and GPA for CGPA.' },
+  { num: '03', title: 'Get instant results', desc: 'Your GPA, CGPA, or percentage is calculated in real time with grade classification.' },
+];
+
+const features = [
+  { icon: '⚡', title: 'Instant Results', desc: 'Real-time calculation as you type. No waiting, no "Calculate" button.' },
+  { icon: '🔒', title: 'Privacy First', desc: 'All calculations run locally in your browser. No data sent to servers.' },
+  { icon: '🌍', title: 'Unified Scales', desc: 'Covers VIT, SRM, KTU, AKTU, HEC Pakistan, BRACU, NSU, US 4.0, and 5.0 scales.' },
+  { icon: '📱', title: 'Works Everywhere', desc: 'Responsive design works perfectly on phones, tablets, and desktops.' },
+  { icon: '🌙', title: 'Dark Mode', desc: 'Easy on the eyes with automatic dark mode support.' },
+  { icon: '🎯', title: 'Grade Classification', desc: 'See your grade band: Outstanding, Excellent, Very Good, Good, or Average.' },
+];
+
+const faqs = [
+  {
+    question: "What is CGPA?",
+    answer: "CGPA (Cumulative Grade Point Average) is a grading system used by schools and universities to measure a student's overall academic performance over the entire duration of a course."
+  },
+  {
+    question: "What is a CGPA?",
+    answer: "A CGPA is the credit-weighted average of the grade points earned by a student across all semesters and courses taken during their academic program."
+  },
+  {
+    question: "What does CGPA mean?",
+    answer: "CGPA means Cumulative Grade Point Average, representing a student's cumulative academic achievement over the entire duration of their degree or course."
+  },
+  {
+    question: "What does CGPA stand for?",
+    answer: "CGPA stands for Cumulative Grade Point Average."
+  },
+  {
+    question: "What is CGPA in college?",
+    answer: "In college, CGPA is the final cumulative average of your course grade points. It indicates your overall academic performance and is widely used for job placements, grad school applications, and graduation honors."
+  },
+  {
+    question: "What is CGPA score?",
+    answer: "A CGPA score is the final combined numerical GPA representing all your completed courses (typically on a 10.0 scale, 4.0 scale, or 5.0 scale)."
+  },
+  {
+    question: "What is SGPA and CGPA?",
+    answer: "SGPA (Semester Grade Point Average) measures your performance in a single semester. CGPA (Cumulative Grade Point Average) is the overall average of all semesters combined."
+  },
+  {
+    question: "How do you calculate CGPA?",
+    answer: "CGPA is calculated using the formula: CGPA = Σ(Semester SGPA × Semester Credits) ÷ Σ(Total Credits). Divide the sum of all weighted semester GPAs by the total credit hours earned."
+  },
+  {
+    question: "How is CGPA calculated?",
+    answer: "CGPA is calculated by multiplying each course grade point by its credits, adding them together, and dividing the sum by the total credits completed across all semesters."
+  },
+  {
+    question: "What is the CGPA formula?",
+    answer: "The CGPA formula is: CGPA = Σ(Course Grade Points × Course Credits) / Σ(Total Course Credits). For semester-wise calculation, it is: CGPA = Σ(SGPA × Semester Credits) / Σ(Total Credits)."
+  },
+  {
+    question: "How do you find your CGPA?",
+    answer: "You can find your CGPA by checking your latest academic transcript, looking up your academic records in your university's student portal, or by calculating it yourself using a free online CGPA calculator."
+  },
+  {
+    question: "How do you calculate CGPA from SGPA?",
+    answer: "Multiply each semester's SGPA by its credit hours to get the quality points. Sum these points and divide by the total number of credits across all semesters: CGPA = Σ(SGPA × Credits) / Σ(Total Credits)."
+  },
+  {
+    question: "How do you calculate CGPA from percentage?",
+    answer: "To convert a percentage to CGPA under CBSE guidelines, divide the percentage by 9.5: CGPA = Percentage ÷ 9.5. For standard 4.0 scales, divide the percentage by 25: CGPA = Percentage ÷ 25."
+  },
+  {
+    question: "How do you calculate CGPA from marks?",
+    answer: "First, convert your raw marks into grade points based on your university's grading scale. Then, use the credit-weighted average formula: CGPA = Σ(Grade Points × Credits) / Σ(Total Credits)."
+  },
+  {
+    question: "How do you convert CGPA to percentage?",
+    answer: "For CBSE and UGC India, multiply your CGPA by 9.5: Percentage = CGPA × 9.5. For standard 4.0 scales, multiply your GPA by 25: Percentage = GPA × 25."
+  },
+  {
+    question: "How do you calculate percentage from CGPA?",
+    answer: "Multiply your CGPA by your board's conversion factor. For standard CBSE 10-point scales, multiply your CGPA by 9.5 (e.g., 8.0 CGPA × 9.5 = 76%)."
+  },
+  {
+    question: "How do you convert percentage to CGPA?",
+    answer: "Divide the percentage by the conversion factor. For CBSE/UGC India, divide by 9.5 (e.g., 76% ÷ 9.5 = 8.0 CGPA). For standard 4.0 scales, divide by 25."
+  },
+  {
+    question: "How do you convert CGPA to GPA?",
+    answer: "To convert a 10-point CGPA to a 4.0 GPA scale, the general formula is: GPA = (CGPA / 10) × 4. For instance, a 9.0 CGPA on a 10-point scale converts to a 3.60 GPA on a 4.0 scale."
+  },
+  {
+    question: "How do you convert CGPA into total marks?",
+    answer: "Convert your CGPA to a percentage first (e.g., CGPA × 9.5), then multiply that percentage by the total maximum marks and divide by 100: Total Marks = (Percentage ÷ 100) × Maximum Marks."
+  },
+  {
+    question: "How do you convert CGPA into marks?",
+    answer: "Multiply the CGPA by your board's factor (e.g., 9.5) to get the percentage, then apply this percentage to the maximum marks of the course: Obtained Marks = (CGPA × 9.5 × Maximum Marks) / 100."
+  },
+  {
+    question: "Can I use a CGPA calculator to calculate my CGPA?",
+    answer: "Yes, you can use our free, privacy-first online CGPA calculator. Simply input your semester GPAs and credit hours, or individual course grades, to get your CGPA calculated automatically."
+  },
+  {
+    question: "Is this CGPA calculator accurate?",
+    answer: "Yes, this calculator is highly accurate. It follows official university formulas and guidelines (including CBSE, UGC India, HEC, and standard 4.0/5.0 scales) to calculate weighted CGPAs."
+  },
+  {
+    question: "Can this calculator convert CGPA to percentage?",
+    answer: "Yes, our tool has a built-in CGPA to percentage converter that automatically calculates your percentage using official board formulas."
+  },
+  {
+    question: "Can this calculator convert SGPA to CGPA?",
+    answer: "Yes, you can enter your SGPA and credit hours for each semester to compute your overall Cumulative Grade Point Average (CGPA) instantly."
+  },
+  {
+    question: "Can this calculator convert CGPA to GPA?",
+    answer: "Yes, our calculator can convert your 10-point scale CGPA to a standard US 4.0 or 5.0 GPA scale."
+  },
+  {
+    question: "Can this calculator convert percentage to CGPA?",
+    answer: "Yes, we support converting percentages back to CGPA on standard 10-point, 4.0, and 5.0 scales."
+  },
+  {
+    question: "How do you calculate CGPA in a university?",
+    answer: "In a university, CGPA is calculated by dividing total quality points (grade point × course credits) earned across all terms by the total credits attempted."
+  },
+  {
+    question: "How do you calculate CGPA in Excel?",
+    answer: "In Excel, calculate CGPA using: =SUMPRODUCT(GP_Range, Credits_Range) / SUM(Credits_Range), where GP_Range is your grades or SGPAs and Credits_Range is the credit hours."
+  },
+  {
+    question: "What is the meaning of CPGA?",
+    answer: "In academics, 'CPGA' is usually a common typographical error for CGPA (Cumulative Grade Point Average). In golf, CPGA stands for the Canadian Professional Golfers' Association."
+  },
+  {
+    question: "What are the requirements to join the CPGA?",
+    answer: "If referring to the Canadian Professional Golfers' Association (CPGA), requirements include passing a Player Ability Test (PAT), completing professional training, and working under a Class 'A' PGA professional. If you meant academic CGPA, there are no requirements as it is a mathematical grade metric."
+  },
+  {
+    question: "How do I calculate CGPA?",
+    answer: "Calculate CGPA by dividing total quality points (Grade Points × Credits) by the total number of credits completed across all semesters."
+  },
+  {
+    question: "What is a 3.0 GPA in CGPA?",
+    answer: "On a 10-point scale, a 3.0 GPA (out of 4.0) is equivalent to approximately 7.5 CGPA (using the formula: CGPA = GPA × 2.5)."
+  },
+  {
+    question: "What is 75% as CGPA?",
+    answer: "Under CBSE guidelines, 75% is equal to 7.89 CGPA (75 ÷ 9.5). On a standard 4.0 scale, 75% is equal to a 3.0 GPA (75 ÷ 25)."
+  },
+  {
+    question: "What is 70% of CGPA?",
+    answer: "Under CBSE guidelines, 70% is equal to 7.37 CGPA (70 ÷ 9.5). On a standard 4.0 scale, 70% is equal to a 2.8 GPA (70 ÷ 25)."
+  }
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout title={title} description={description} keywords={keywords} faqs={faqs}>
+  <!-- ── Hero ── -->
+  <section class="relative overflow-hidden">
+    <!-- Subtle gradient backdrop -->
+    <div class="absolute inset-0 bg-gradient-to-b from-indigo-50/50 via-transparent to-transparent dark:from-indigo-950/20 dark:via-transparent pointer-events-none" aria-hidden="true"></div>
+
+    <div class="container-page relative pt-16 pb-20 md:pt-24 md:pb-28">
+      <!-- Badge -->
+      <div class="flex justify-center mb-6">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-900">
+          <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span>
+          Free — No signup required
+        </span>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="text-center text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight leading-[1.1] mb-5 max-w-3xl mx-auto">
+        Calculate your <span class="bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent">CGPA</span> instantly.
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="text-center text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto mb-8 leading-relaxed">
+        Free CGPA, SGPA, and percentage calculators for students across India, USA, and Canada. Supporting standard 10-point, 4.0, and 5.0 scales.
+      </p>
+
+      <!-- CTA Row -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="/cgpa-calculator" class="inline-flex items-center gap-2 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-100 px-6 py-3 rounded-full text-sm font-medium transition-colors shadow-lg shadow-neutral-900/10 dark:shadow-white/10">
+          Start Calculating
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </a>
+        <a href="#tools" class="inline-flex items-center gap-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 px-6 py-3 rounded-full border border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors">
+          Explore Tools
+        </a>
+      </div>
+
+      <!-- Trust indicators -->
+      <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-10 text-xs text-neutral-400 dark:text-neutral-500">
+        <span class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" d="M5 13l4 4L19 7" /></svg>
+          100% Free
+        </span>
+        <span class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" d="M5 13l4 4L19 7" /></svg>
+          No Signup
+        </span>
+        <span class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" d="M5 13l4 4L19 7" /></svg>
+          Instant Results
+        </span>
+        <span class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" d="M5 13l4 4L19 7" /></svg>
+          Privacy First
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Tools Grid ── -->
+  <section id="tools" class="container-page pb-20">
+    <div class="text-center mb-10">
+      <span class="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono mb-2 block">Tools</span>
+      <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Everything you need.</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4">
+      {tools.map((tool) => (
+        <a
+          href={tool.href}
+          class="group relative flex flex-col bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl p-6 transition-all hover:shadow-lg hover:shadow-neutral-200/50 dark:hover:shadow-neutral-900/50 hover:border-neutral-300 dark:hover:border-neutral-700 hover:-translate-y-0.5"
+        >
+          {tool.badge && (
+            <span class="absolute top-4 right-4 text-[10px] font-semibold uppercase tracking-wider bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 px-2 py-0.5 rounded-full">
+              {tool.badge}
+            </span>
+          )}
+          <div class="w-10 h-10 rounded-lg bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-neutral-600 dark:text-neutral-300 mb-4" set:html={tool.icon} />
+          <h3 class="text-lg font-semibold tracking-tight mb-1.5 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+            {tool.title}
+          </h3>
+          <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed flex-1">
+            {tool.desc}
+          </p>
+          <div class="mt-4 flex items-center gap-1 text-sm font-medium text-indigo-600 dark:text-indigo-400">
+            {tool.cta || 'Use calculator'}
+            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- ── How It Works ── -->
+  <section id="how-it-works" class="bg-white dark:bg-neutral-900 border-y border-neutral-200 dark:border-neutral-800">
+    <div class="container-page py-20">
+      <div class="text-center mb-12">
+        <span class="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono mb-2 block">How It Works</span>
+        <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Three simple steps.</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        {steps.map((step) => (
+          <div class="text-center">
+            <span class="inline-block text-3xl font-semibold text-neutral-200 dark:text-neutral-800 font-mono mb-4">{step.num}</span>
+            <h3 class="text-base font-semibold mb-2">{step.title}</h3>
+            <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Features ── -->
+  <section class="container-page py-20">
+    <div class="text-center mb-12">
+      <span class="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono mb-2 block">Features</span>
+      <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Built for students.</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {features.map((f) => (
+        <div class="flex gap-4 p-5 rounded-xl border border-neutral-100 dark:border-neutral-800/50">
+          <span class="text-2xl shrink-0">{f.icon}</span>
+          <div>
+            <h3 class="text-sm font-semibold mb-1">{f.title}</h3>
+            <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">{f.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ── Latest Blog Posts ── -->
+  <section class="border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/30">
+    <div class="container-page py-20">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono mb-2 block">Resources</span>
+          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Academic Guides &amp; Blog</h2>
+        </div>
+        <a href="/blog" class="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 mt-4 sm:mt-0 group">
+          View all posts
+          <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- SGPA vs CGPA (Main) -->
+        <article class="group flex flex-col bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-700">
+          <div class="h-48 overflow-hidden bg-neutral-100 dark:bg-neutral-800 relative">
+            <img
+              src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=600&auto=format&fit=crop"
+              alt="CGPA vs SGPA"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+            <span class="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider bg-indigo-600 text-white px-2 py-0.5 rounded shadow">
+              Core Guide
+            </span>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2 text-[10px] font-semibold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider mb-2">
+                <span>June 25, 2026</span>
+                <span>•</span>
+                <span>6 min read</span>
+              </div>
+              <h3 class="text-base font-semibold tracking-tight text-neutral-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-2">
+                <a href="/cgpa-vs-sgpa">
+                  CGPA vs SGPA: Difference, Formulas &amp; Compounding Explained
+                </a>
+              </h3>
+              <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed mb-4 line-clamp-3">
+                Confused about CGPA and SGPA? Understand the core differences, formulas, and how individual semesters affect your overall cumulative grade point average.
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-4 border-t border-neutral-100 dark:border-neutral-800 mt-auto">
+              <span class="text-xs text-neutral-400 dark:text-neutral-500">By Dr. Vivek Sharma</span>
+              <a href="/cgpa-vs-sgpa" class="inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300">
+                Read Guide
+                <svg class="w-3 h-3 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- CGPA to Percentage -->
+        <article class="group flex flex-col bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-700">
+          <div class="h-48 overflow-hidden bg-neutral-100 dark:bg-neutral-800 relative">
+            <img
+              src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=600&auto=format&fit=crop"
+              alt="CGPA to Percentage"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+            <span class="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider bg-white/90 dark:bg-neutral-950/95 text-neutral-800 dark:text-neutral-200 px-2 py-0.5 rounded border border-neutral-200/50 dark:border-neutral-800/50 backdrop-blur-sm">
+              Conversions
+            </span>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2 text-[10px] font-semibold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider mb-2">
+                <span>June 18, 2026</span>
+                <span>•</span>
+                <span>4 min read</span>
+              </div>
+              <h3 class="text-base font-semibold tracking-tight text-neutral-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-2">
+                <a href="/cgpa-to-percentage">
+                  How to Convert CGPA to Percentage: Official Formulas
+                </a>
+              </h3>
+              <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed mb-4 line-clamp-3">
+                Learn how to convert CGPA to percentage using standard rules for CBSE, UGC India, and top universities with concrete calculations.
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-4 border-t border-neutral-100 dark:border-neutral-800 mt-auto">
+              <span class="text-xs text-neutral-400 dark:text-neutral-500">By Sarah Jenkins</span>
+              <a href="/cgpa-to-percentage" class="inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300">
+                Read Article
+                <svg class="w-3 h-3 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- SGPA Calculation -->
+        <article class="group flex flex-col bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-700">
+          <div class="h-48 overflow-hidden bg-neutral-100 dark:bg-neutral-800 relative">
+            <img
+              src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=600&auto=format&fit=crop"
+              alt="GPA Calculation"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+            <span class="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider bg-white/90 dark:bg-neutral-950/95 text-neutral-800 dark:text-neutral-200 px-2 py-0.5 rounded border border-neutral-200/50 dark:border-neutral-800/50 backdrop-blur-sm">
+              Tutorials
+            </span>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2 text-[10px] font-semibold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider mb-2">
+                <span>June 12, 2026</span>
+                <span>•</span>
+                <span>5 min read</span>
+              </div>
+              <h3 class="text-base font-semibold tracking-tight text-neutral-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-2">
+                <a href="/sgpa-calculator">
+                  Understanding SGPA: How to Calculate Semester GPA
+                </a>
+              </h3>
+              <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed mb-4 line-clamp-3">
+                A simple guide showing how to calculate your semester GPA using course grade points and credits with detailed formulas.
+              </p>
+            </div>
+            <div class="flex items-center justify-between pt-4 border-t border-neutral-100 dark:border-neutral-800 mt-auto">
+              <span class="text-xs text-neutral-400 dark:text-neutral-500">By Prof. Alok Gupta</span>
+              <a href="/sgpa-calculator" class="inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300">
+                Read Article
+                <svg class="w-3 h-3 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section id="faq" class="bg-white dark:bg-neutral-900 border-y border-neutral-200 dark:border-neutral-800">
+    <div class="container-page py-20">
+      <div class="text-center mb-10">
+        <span class="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono mb-2 block">FAQ</span>
+        <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="max-w-2xl mx-auto space-y-3">
+        {faqs.map((faq) => (
+          <details class="group bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-hidden">
+            <summary class="flex items-center justify-between cursor-pointer p-5 text-sm font-medium select-none">
+              {faq.question}
+              <svg class="w-5 h-5 text-neutral-400 transition-transform duration-200 group-open:rotate-180 shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-5 pb-5 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed -mt-1">
+              {faq.answer}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SEO Content: What is CGPA ── -->
+  <section class="border-t border-neutral-200 dark:border-neutral-800">
+    <div class="container-page py-16 md:py-20">
+      <div class="max-w-3xl mx-auto prose dark:prose-invert text-neutral-700 dark:text-neutral-300">
+        <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-neutral-900 dark:text-white mb-6">
+          What is CGPA? Understanding the CGPA Full Form, Meaning & How to Calculate It
+        </h2>
+
+        <p>
+          <strong>CGPA</strong> stands for <strong>Cumulative Grade Point Average</strong> — that is the <strong>CGPA full form</strong>. It is the standard academic metric used by schools, colleges, and universities worldwide to evaluate a student's overall performance across all completed semesters or academic terms. If you have ever wondered <strong>"what is CGPA?"</strong>, it is simply the weighted average of the grade points you earn in every course throughout your entire degree program, where each course's grade point is multiplied by its credit hours before averaging.
+        </p>
+
+        <h3 class="text-xl font-semibold text-neutral-900 dark:text-white mt-8 mb-3">
+          CGPA Meaning in Academic Context
+        </h3>
+        <p>
+          The <strong>CGPA meaning</strong> goes beyond just a number on your transcript. It serves as a universal benchmark that employers, graduate schools, and scholarship committees use to compare applicants from different institutions. A high CGPA signals consistent academic excellence, strong work ethic, and mastery of your field of study. Whether you are on a <strong>CGPA calculator 4.0 scale</strong> commonly used in the United States, Canada, and Pakistan, or on the 10-point scale prevalent across Indian universities like VIT, SRM, Anna University, and AKTU, understanding your CGPA is critical for career advancement and higher education admissions.
+        </p>
+
+        <h3 class="text-xl font-semibold text-neutral-900 dark:text-white mt-8 mb-3">
+          How to Calculate CGPA — The Step-by-Step Formula
+        </h3>
+        <p>
+          Learning <strong>how to calculate CGPA</strong> is straightforward once you understand credit weighting. The formula is:
+        </p>
+        <div class="p-5 my-4 bg-indigo-50/50 dark:bg-indigo-950/20 rounded-xl border border-indigo-100 dark:border-indigo-900/30 text-center font-mono text-base text-indigo-700 dark:text-indigo-400">
+          CGPA = Σ (Semester SGPA × Semester Credits) ÷ Σ (Total Credits)
+        </div>
+        <p>
+          You multiply each semester's SGPA by the number of credit hours completed in that semester, sum all these weighted values across every semester, and then divide by the total credits earned. Our free <a href="/cgpa-calculator" class="text-indigo-600 dark:text-indigo-400 font-medium">CGPA calculator</a> automates this entire process — simply enter your semester GPAs and credit hours to get instant, accurate results. The tool supports multiple grading systems including the <strong>4.0 scale</strong>, <strong>10-point scale</strong>, and <strong>5.0 scale</strong>, making it a versatile <strong>CGPA calculator</strong> for students at any university globally.
+        </p>
+
+        <h3 class="text-xl font-semibold text-neutral-900 dark:text-white mt-8 mb-3">
+          CGPA to Percentage Conversion Formula
+        </h3>
+        <p>
+          One of the most frequently searched questions by students is <strong>"how to convert CGPA into percentage"</strong>. The <strong>CGPA to percentage conversion formula</strong> depends on the grading system your institution follows. Under <strong>CBSE and UGC India</strong> guidelines, the official formula is <code class="text-sm bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">Percentage = CGPA × 9.5</code>. For the international <strong>4.0 GPA scale</strong>, the conversion is <code class="text-sm bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">Percentage = GPA × 25</code>. Mumbai University uses a unique linear formula: <code class="text-sm bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">Percentage = (7.1 × CGPA) + 11</code>. Our <a href="/cgpa-to-percentage" class="text-indigo-600 dark:text-indigo-400 font-medium">CGPA to percentage converter</a> automatically applies the correct formula based on the grading system you select, giving you instant and accurate results. Similarly, if you need the reverse operation, our <a href="/percentage-to-cgpa" class="text-indigo-600 dark:text-indigo-400 font-medium">percentage to CGPA converter</a> handles that conversion seamlessly.
+        </p>
+
+        <h3 class="text-xl font-semibold text-neutral-900 dark:text-white mt-8 mb-3">
+          CGPA vs GPA — Understanding the Key Differences
+        </h3>
+        <p>
+          Students often confuse <strong>CGPA vs GPA</strong>. While the terms are sometimes used interchangeably, there is a technical distinction. GPA (Grade Point Average) can refer to either a single semester's average (called SGPA — Semester Grade Point Average) or a cumulative average. CGPA specifically refers to the <em>cumulative</em> average across all semesters. In American universities, "GPA" typically means the cumulative figure, while in Indian, Bangladeshi, and Pakistani institutions, the distinction between SGPA and CGPA is strictly maintained. Understanding this difference is essential when filling out applications that ask for either metric. You can also use our <a href="/sgpa-calculator" class="text-indigo-600 dark:text-indigo-400 font-medium">SGPA to CGPA calculator</a> to convert individual semester grades into your overall cumulative standing, or read our detailed <a href="/cgpa-vs-sgpa" class="text-indigo-600 dark:text-indigo-400 font-medium">CGPA vs SGPA guide</a> for a comprehensive comparison with interactive simulations.
+        </p>
+
+        <h3 class="text-xl font-semibold text-neutral-900 dark:text-white mt-8 mb-3">
+          CGPA to GPA Conversion
+        </h3>
+        <p>
+          Converting <strong>CGPA to GPA</strong> is necessary when applying to international universities. If your institution uses a 10-point scale and you need a 4.0-scale equivalent, the standard approach is: <code class="text-sm bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">GPA (4.0) = CGPA (10) ÷ 10 × 4</code>. For example, a CGPA of 8.5 on a 10-point scale translates to approximately 3.40 on the 4.0 scale. However, some universities have their own specific conversion tables, so always verify with your target institution. All our calculators run entirely in your browser with zero data collection — your grades stay private, your results are instant, and the service is completely free.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Bottom CTA ── -->
+  <section class="container-page py-20 text-center">
+    <h2 class="text-2xl md:text-3xl font-semibold tracking-tight mb-4">Ready to calculate?</h2>
+    <p class="text-neutral-500 dark:text-neutral-400 mb-6 max-w-lg mx-auto">Pick a calculator and get your results in seconds. No signup, no data collection — just accurate calculations.</p>
+    <a href="/cgpa-calculator" class="inline-flex items-center gap-2 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-100 px-6 py-3 rounded-full text-sm font-medium transition-colors shadow-lg shadow-neutral-900/10 dark:shadow-white/10">
+      Start Now
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+      </svg>
+    </a>
+  </section>
 </Layout>

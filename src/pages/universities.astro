@@ -1,0 +1,211 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { universities } from '../data/universities.js';
+
+const title = 'Browse Universities — CGPA & GPA Calculators';
+const description = 'Find your university-specific GPA and CGPA calculator pre-loaded with the official grading system for colleges in India, Bangladesh, Pakistan, and worldwide.';
+---
+
+<Layout title={title} description={description}>
+  <div class="container-page py-12 md:py-16">
+    <!-- Header -->
+    <header class="text-center max-w-2xl mx-auto mb-12">
+      <span class="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono mb-2 block">
+        Directory
+      </span>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight mb-4">
+        University <span class="bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent">Calculators</span>
+      </h1>
+      <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+        Select your college or university to open a calculator pre-configured with your institution's official grading scale and formulas.
+      </p>
+    </header>
+
+    <!-- Filters and Search -->
+    <div class="max-w-4xl mx-auto mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
+      <!-- Search Input -->
+      <div class="relative w-full md:max-w-sm">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search by name, abbreviation or country..."
+          class="w-full bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 py-2.5 pl-10 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 dark:focus:border-indigo-500 transition-all placeholder:text-neutral-400 dark:placeholder:text-neutral-600"
+        />
+        <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </div>
+
+      <!-- Country Filters -->
+      <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+        {['All', 'India', 'United States', 'United Kingdom', 'Canada', 'Bangladesh', 'Pakistan'].map((filter, index) => (
+          <button
+            type="button"
+            data-filter={filter}
+            class={`px-4 py-2 rounded-lg text-xs font-semibold tracking-wide border transition-all cursor-pointer select-none
+              ${index === 0
+                ? 'bg-indigo-600 dark:bg-indigo-500 border-indigo-600 dark:border-indigo-500 text-white shadow-sm shadow-indigo-600/10'
+                : 'bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200'}`}
+          >
+            {filter}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Directory Grid -->
+    <div
+      id="universities-grid"
+      class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
+    >
+      {universities.map((uni) => (
+        <div
+          data-uni-name={uni.name.toLowerCase()}
+          data-uni-abbr={uni.abbreviation.toLowerCase()}
+          data-uni-country={uni.country}
+          class="uni-card bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-6 transition-all hover:shadow-lg hover:shadow-neutral-200/50 dark:hover:shadow-neutral-900/40 hover:border-neutral-300 dark:hover:border-neutral-700 flex flex-col group"
+        >
+          <!-- Card Top Bar -->
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <span class="inline-flex items-center justify-center font-mono text-xl font-bold bg-neutral-100 dark:bg-neutral-800 text-indigo-600 dark:text-indigo-400 w-16 h-10 rounded-lg shrink-0">
+              {uni.abbreviation}
+            </span>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 border border-indigo-100/50 dark:border-indigo-900/30">
+              {uni.country}
+            </span>
+          </div>
+
+          <!-- University Name -->
+          <h3 class="text-lg font-bold mb-1 tracking-tight text-neutral-900 dark:text-white leading-tight">
+            {uni.name}
+          </h3>
+          <p class="text-xs text-neutral-400 dark:text-neutral-500 mb-3 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            {uni.location}
+          </p>
+
+          <!-- Description -->
+          <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed mb-6 flex-1">
+            {uni.description}
+          </p>
+
+          <!-- Card Footer -->
+          <div class="pt-4 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between gap-4 mt-auto">
+            <div class="flex items-center gap-2">
+              <span class="text-xs text-neutral-400 dark:text-neutral-500">
+                Est. {uni.est}
+              </span>
+              {uni.website && (
+                <>
+                  <span class="w-1 h-1 rounded-full bg-neutral-300 dark:bg-neutral-700" />
+                  <a
+                    href={uni.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-0.5 text-xs text-neutral-500 hover:text-indigo-600 dark:text-neutral-400 dark:hover:text-indigo-400 transition-colors"
+                  >
+                    Website
+                    <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </>
+              )}
+            </div>
+            <a
+              href={uni.isBoard ? `/board-cgpa-calculator?board=${uni.slug.includes('cbse') ? 'cbse' : uni.slug.includes('icse') ? 'icse' : uni.slug.includes('state-board') ? 'state-board' : 'igcse'}` : `/university/${uni.slug}`}
+              class="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors group-hover:translate-x-0.5"
+            >
+              Open Calculator
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Empty State -->
+    <div
+      id="empty-state"
+      class="hidden max-w-md mx-auto text-center py-16"
+    >
+      <div class="w-16 h-16 bg-neutral-100 dark:bg-neutral-800 rounded-2xl flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-neutral-300 dark:text-neutral-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+      </div>
+      <h3 class="text-lg font-bold mb-1">No universities found</h3>
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">
+        Try adjusting your keywords or changing the country filter.
+      </p>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const searchInput = document.getElementById('search-input') as HTMLInputElement;
+  const filterBtns = document.querySelectorAll('[data-filter]');
+  const cards = document.querySelectorAll('.uni-card') as NodeListOf<HTMLElement>;
+  const emptyState = document.getElementById('empty-state')!;
+
+  let currentSearch = '';
+  let currentFilter = 'All';
+
+  function updateList() {
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const name = card.dataset.uniName || '';
+      const abbr = card.dataset.uniAbbr || '';
+      const country = card.dataset.uniCountry || '';
+
+      const matchSearch = name.includes(currentSearch) || abbr.includes(currentSearch) || country.toLowerCase().includes(currentSearch);
+      
+      let matchFilter = false;
+      if (currentFilter === 'All') {
+        matchFilter = true;
+      } else {
+        matchFilter = (country === currentFilter);
+      }
+
+      if (matchSearch && matchFilter) {
+        card.style.display = '';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    if (visibleCount === 0) {
+      emptyState.classList.remove('hidden');
+    } else {
+      emptyState.classList.add('hidden');
+    }
+  }
+
+  // Search input listener
+  searchInput?.addEventListener('input', (e) => {
+    currentSearch = (e.target as HTMLInputElement).value.toLowerCase().trim();
+    updateList();
+  });
+
+  // Filter button listeners
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      // Toggle active states
+      filterBtns.forEach((b) => {
+        b.className = 'px-4 py-2 rounded-lg text-xs font-semibold tracking-wide border bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 cursor-pointer select-none';
+      });
+
+      btn.className = 'px-4 py-2 rounded-lg text-xs font-semibold tracking-wide border bg-indigo-600 dark:bg-indigo-500 border-indigo-600 dark:border-indigo-500 text-white shadow-sm shadow-indigo-600/10 cursor-pointer select-none';
+      
+      currentFilter = btn.getAttribute('data-filter') || 'All';
+      updateList();
+    });
+  });
+</script>

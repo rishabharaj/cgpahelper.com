@@ -1,0 +1,504 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { conversionRules } from '../data/grading-systems.js';
+
+const title = 'Percentage to CGPA Converter — How to Convert Percentage to CGPA';
+const description = 'Free percentage to CGPA converter. Learn how to convert percentage into CGPA for CBSE, UGC, Mumbai University, and 4.0 GPA scale. Reverse conversion formulas for all Indian and international universities.';
+
+const faqs = [
+  {
+    question: 'How do I convert percentage to CGPA?',
+    answer: 'The conversion formula depends on your university. For CBSE/UGC India, divide your percentage by 9.5. For most 4.0-scale systems (HEC Pakistan, UGC Bangladesh, US), divide by 25. For Mumbai University, use CGPA = (Percentage − 11) ÷ 7.1. Select your grading system above for the exact formula.',
+  },
+  {
+    question: 'Is the percentage to CGPA conversion accurate?',
+    answer: 'Yes. We use the exact official conversion formulas specified by each university or governing body. Results are calculated to two decimal places. However, always cross-check with your university\'s official records for final academic decisions.',
+  },
+  {
+    question: 'What is the CGPA for 75% in CBSE?',
+    answer: 'Using the CBSE/UGC India formula (CGPA = Percentage ÷ 9.5), a 75% translates to approximately 7.89 CGPA on a 10-point scale.',
+  },
+  {
+    question: 'Can I convert percentage to CGPA on a 4.0 scale?',
+    answer: 'Yes! Select any 4.0-scale system such as HEC Pakistan, UGC Bangladesh, COMSATS, or the US 4.0 Scale. The formula is typically CGPA = Percentage ÷ 25. For example, 80% equals 3.20 on a 4.0 scale.',
+  },
+  {
+    question: 'Which universities are supported?',
+    answer: 'Our converter supports all standard grading scales, including the standard 10-point scale (common for VIT, SRM, KTU Kerala, AKTU UP, Anna University, JNTU, SPPU), CBSE/UGC India 10-point, Mumbai University, Standard 4.0 scale (common for US, Canada, HEC Pakistan, UGC Bangladesh, BRACU, NSU, COMSATS), and the Standard 5.0 scale.',
+  },
+  {
+    question: 'Why does Mumbai University use a different formula?',
+    answer: 'Mumbai University uses a linear formula (CGPA = (Percentage − 11) ÷ 7.1) rather than a simple division. This is the officially prescribed conversion method that accounts for the university\'s specific grading distribution.',
+  },
+];
+
+/* Build reference table data at build time for the default system */
+const defaultSystem = 'cbse-ugc-india';
+const defaultRule = conversionRules[defaultSystem];
+
+const referencePercentages = [95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40];
+---
+
+<Layout title={title} description={description} faqs={faqs}>
+  <!-- ── Breadcrumb ── -->
+  <nav class="container-page pt-6 pb-2" aria-label="Breadcrumb">
+    <ol class="flex items-center gap-1.5 text-xs text-neutral-400 dark:text-neutral-500">
+      <li>
+        <a href="/" class="hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors">Home</a>
+      </li>
+      <li aria-hidden="true">
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </li>
+      <li>
+        <span class="text-neutral-600 dark:text-neutral-300 font-medium" aria-current="page">Percentage to CGPA</span>
+      </li>
+    </ol>
+  </nav>
+
+  <!-- ── Page Header ── -->
+  <header class="container-page pt-6 pb-10 md:pt-8 md:pb-14">
+    <div class="max-w-2xl">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.1] mb-4">
+        Percentage to <span class="bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent">CGPA</span> Converter
+      </h1>
+      <p class="text-base md:text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed">
+        Convert your percentage score to CGPA using official university formulas. Select your grading system and enter your percentage for instant results.
+      </p>
+    </div>
+  </header>
+
+  <!-- ── Converter Card ── -->
+  <section class="container-page pb-16">
+    <div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl shadow-sm overflow-hidden">
+      <div class="grid md:grid-cols-2">
+        <!-- Left Column: Input -->
+        <div class="p-6 md:p-8 border-b md:border-b-0 md:border-r border-neutral-200 dark:border-neutral-800">
+          <!-- System Selector -->
+          <div class="mb-6">
+            <label for="grading-system" class="block text-sm font-medium mb-2">University / Grading System</label>
+            <div class="relative">
+              <select
+                id="grading-system"
+                class="w-full max-w-full min-w-0 appearance-none bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 py-3 pr-10 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-shadow cursor-pointer truncate"
+              >
+                {Object.entries(conversionRules).map(([key, rule]) => (
+                  <option value={key} selected={key === defaultSystem}>{rule.shortName || rule.name}</option>
+                ))}
+              </select>
+              <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Percentage Input -->
+          <div class="mb-6">
+            <label for="percentage-input" class="block text-sm font-medium mb-2">Percentage (%)</label>
+            <div class="relative">
+              <input
+                type="number"
+                id="percentage-input"
+                placeholder="e.g. 78.5"
+                step="0.01"
+                min="0"
+                max="100"
+                class="w-full bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 py-3 pr-12 text-lg font-semibold font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-shadow [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              />
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-medium text-neutral-400">%</span>
+            </div>
+            <p id="validation-msg" class="mt-1.5 text-xs text-red-500 dark:text-red-400 hidden">Please enter a percentage between 0 and 100.</p>
+          </div>
+
+          <!-- Quick Picks -->
+          <div>
+            <span class="block text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wider mb-2">Quick picks</span>
+            <div class="flex flex-wrap gap-2">
+              {[90, 80, 75, 60, 50].map((val) => (
+                <button
+                  type="button"
+                  data-quick={val}
+                  class="px-3 py-1.5 text-xs font-medium rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950 hover:border-indigo-300 dark:hover:border-indigo-700 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors cursor-pointer"
+                >
+                  {val}%
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Result -->
+        <div class="p-6 md:p-8 flex flex-col items-center justify-center" id="result-panel">
+          <!-- Empty state -->
+          <div id="empty-state" class="text-center py-8">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center">
+              <svg class="w-8 h-8 text-neutral-300 dark:text-neutral-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3" />
+              </svg>
+            </div>
+            <p class="text-sm text-neutral-400 dark:text-neutral-500">Enter a percentage to see the equivalent CGPA.</p>
+          </div>
+
+          <!-- Result state (hidden initially) -->
+          <div id="result-state" class="hidden w-full text-center animate-fade-up">
+            <!-- SVG Gauge -->
+            <div class="relative w-28 h-28 mx-auto mb-4">
+              <svg viewBox="0 0 100 100" class="w-full h-full -rotate-90">
+                <!-- Track -->
+                <circle cx="50" cy="50" r="40" fill="none" stroke-width="6"
+                  class="stroke-neutral-200 dark:stroke-neutral-800" />
+                <!-- Fill -->
+                <circle id="gauge-circle" cx="50" cy="50" r="40" fill="none" stroke-width="6"
+                  stroke-linecap="round"
+                  stroke-dasharray="251.33"
+                  stroke-dashoffset="251.33"
+                  class="gauge-ring transition-all duration-700" />
+              </svg>
+              <!-- Center label -->
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span id="gauge-label" class="text-lg font-bold font-mono text-neutral-900 dark:text-neutral-100">—</span>
+              </div>
+            </div>
+
+            <!-- Large CGPA -->
+            <div class="mb-1" id="cgpa-display">
+              <span id="cgpa-value" class="text-4xl md:text-5xl font-bold font-mono tracking-tight text-neutral-900 dark:text-neutral-100">0.00</span>
+              <span id="cgpa-scale" class="text-lg font-medium text-neutral-400 dark:text-neutral-500 ml-1">/ 10.00</span>
+            </div>
+
+            <!-- Grade Badge -->
+            <div class="mb-5">
+              <span id="grade-badge" class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold">
+                —
+              </span>
+            </div>
+
+            <!-- Formula Box -->
+            <div class="w-full bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl p-4 mb-4 text-left">
+              <div class="flex items-center gap-2 mb-2">
+                <svg class="w-4 h-4 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.745 3A23.933 23.933 0 003 12c0 3.183.62 6.22 1.745 9M19.5 3c.967 2.78 1.5 5.817 1.5 9s-.533 6.22-1.5 9M8.25 8.885l1.444-.89a.75.75 0 011.105.402l2.402 7.206a.75.75 0 001.104.401l1.445-.889" />
+                </svg>
+                <span class="text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">Formula</span>
+              </div>
+              <p id="formula-text" class="text-sm font-mono font-medium text-neutral-700 dark:text-neutral-300">
+                CGPA = Percentage ÷ 9.5
+              </p>
+            </div>
+
+            <!-- Calculation Steps -->
+            <div class="w-full bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl p-4 text-left">
+              <div class="flex items-center gap-2 mb-2">
+                <svg class="w-4 h-4 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
+                </svg>
+                <span class="text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">Calculation Steps</span>
+              </div>
+              <ol id="calc-steps" class="space-y-1 text-sm text-neutral-600 dark:text-neutral-400 list-decimal list-inside">
+                <li>Start with percentage value</li>
+                <li>Apply the reverse formula</li>
+                <li>Round to 2 decimal places</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Reference Table ── -->
+  <section class="container-page pb-16">
+    <div class="text-center mb-8">
+      <span class="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono mb-2 block">Reference</span>
+      <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Common Percentage to CGPA Values</h2>
+      <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-2">Values shown for the selected grading system. Change the system above to update.</p>
+    </div>
+
+    <div class="max-w-3xl mx-auto bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm" id="ref-table">
+          <thead>
+            <tr class="border-b border-neutral-200 dark:border-neutral-800">
+              <th class="text-left px-6 py-3.5 font-semibold text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400">Percentage</th>
+              <th class="text-left px-6 py-3.5 font-semibold text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400">CGPA</th>
+              <th class="text-left px-6 py-3.5 font-semibold text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400">Classification</th>
+            </tr>
+          </thead>
+          <tbody id="ref-table-body">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Detailed Academic Guide ── -->
+  <section class="container-page pb-16">
+    <div class="max-w-3xl mx-auto prose dark:prose-invert text-neutral-700 dark:text-neutral-300 space-y-6">
+      <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white mb-4">How to Convert Percentage to CGPA: Reverse Formulas Explained</h2>
+      <p>
+        During university admission filings and job applications, you might be required to convert your high school or college marks percentage back into a Cumulative Grade Point Average (CGPA) or Grade Point Average (GPA). To do this, you must apply the official **reverse formula** specified by your board or university.
+      </p>
+
+      <h3 class="text-xl font-semibold text-neutral-900 dark:text-white mt-8 mb-2">1. CBSE & UGC India Reverse Conversion (10-Point Scale)</h3>
+      <p>
+        To convert your percentage score back to CGPA on a standard 10-point scale under UGC or CBSE guidelines, you divide your percentage by the official <strong>9.5 multiplier</strong>:
+      </p>
+      <div class="p-5 my-4 bg-indigo-50/50 dark:bg-indigo-950/20 rounded-xl border border-indigo-100 dark:border-indigo-900/30 text-center font-mono text-base sm:text-lg text-indigo-700 dark:text-indigo-400">
+        CGPA = Percentage (%) ÷ 9.5
+      </div>
+      <p>
+        <strong>Step-by-step example:</strong> If a student has an aggregate percentage of <strong>76.0%</strong>, their 10-point CGPA is calculated as follows:
+        <br />
+        <span class="font-mono text-neutral-900 dark:text-white bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded">
+          76.0 ÷ 9.5 = 8.00 CGPA
+        </span>
+      </p>
+
+      <h3 class="text-xl font-semibold text-neutral-900 dark:text-white mt-8 mb-2">2. Standard US & HEC Pakistan Reverse Conversion (4.0 Scale)</h3>
+      <p>
+        For institutions using the international <strong>4.0 GPA scale</strong>, you convert your percentage score by dividing it by <strong>25</strong>:
+      </p>
+      <div class="p-5 my-4 bg-indigo-50/50 dark:bg-indigo-950/20 rounded-xl border border-indigo-100 dark:border-indigo-900/30 text-center font-mono text-base sm:text-lg text-indigo-700 dark:text-indigo-400">
+        GPA = Percentage (%) ÷ 25
+      </div>
+      <p>
+        <strong>Step-by-step example:</strong> A student with an aggregate percentage of <strong>85.0%</strong> has a GPA of:
+        <br />
+        <span class="font-mono text-neutral-900 dark:text-white bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded">
+          85.0 ÷ 25 = 3.40 GPA
+        </span>
+      </p>
+
+      <h3 class="text-xl font-semibold text-neutral-900 dark:text-white mt-8 mb-2">3. Mumbai University CBCS Reverse Conversion</h3>
+      <p>
+        To get your CGPA from a percentage under Mumbai University CBCS rules, you reverse the linear equation:
+      </p>
+      <div class="p-5 my-4 bg-indigo-50/50 dark:bg-indigo-950/20 rounded-xl border border-indigo-100 dark:border-indigo-900/30 text-center font-mono text-base sm:text-lg text-indigo-700 dark:text-indigo-400">
+        CGPA = (Percentage (%) - 11) ÷ 7.1
+      </div>
+      <p>
+        <strong>Step-by-step example:</strong> If a student has an aggregate score of <strong>60.7%</strong>:
+        <br />
+        <span class="font-mono text-neutral-900 dark:text-white bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded">
+          (60.7 - 11) ÷ 7.1 = 49.7 ÷ 7.1 = 7.00 CGPA
+        </span>
+      </p>
+
+      <div class="p-5 my-4 bg-amber-50/50 dark:bg-amber-950/20 rounded-xl border border-amber-100 dark:border-amber-900/30">
+        <h4 class="text-sm font-semibold text-amber-800 dark:text-amber-400 mb-1">⚠️ Important Warning on Admission Filings</h4>
+        <p class="text-xs text-neutral-600 dark:text-neutral-400">
+          Some universities do not allow you to convert percentage to CGPA manually if your official transcript already displays your final CGPA. Always input the CGPA exactly as printed on your official transcript unless conversion is explicitly requested.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section id="faq" class="bg-white dark:bg-neutral-900 border-y border-neutral-200 dark:border-neutral-800">
+    <div class="container-page py-20">
+      <div class="text-center mb-10">
+        <span class="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono mb-2 block">FAQ</span>
+        <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="max-w-2xl mx-auto space-y-3">
+        {faqs.map((faq) => (
+          <details class="group bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-hidden">
+            <summary class="flex items-center justify-between cursor-pointer p-5 text-sm font-medium select-none">
+              {faq.question}
+              <svg class="w-5 h-5 text-neutral-400 transition-transform duration-200 group-open:rotate-180 shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-5 pb-5 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed -mt-1">
+              {faq.answer}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Bottom CTA ── -->
+  <section class="container-page py-20 text-center">
+    <h2 class="text-2xl md:text-3xl font-semibold tracking-tight mb-4">Need the reverse conversion?</h2>
+    <p class="text-neutral-500 dark:text-neutral-400 mb-6 max-w-lg mx-auto">Convert your CGPA back to percentage using the same official university formulas.</p>
+    <a href="/cgpa-to-percentage" class="inline-flex items-center gap-2 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-100 px-6 py-3 rounded-full text-sm font-medium transition-colors shadow-lg shadow-neutral-900/10 dark:shadow-white/10">
+      CGPA to Percentage
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+      </svg>
+    </a>
+  </section>
+</Layout>
+
+<script>
+  import { conversionRules, percentageToCGPA, getGradeClassification } from '../data/grading-systems.js';
+
+  const systemSelect = document.getElementById('grading-system') as HTMLSelectElement;
+  const percentageInput = document.getElementById('percentage-input') as HTMLInputElement;
+  const validationMsg = document.getElementById('validation-msg')!;
+  const emptyState = document.getElementById('empty-state')!;
+  const resultState = document.getElementById('result-state')!;
+  const gaugeCircle = document.getElementById('gauge-circle') as SVGCircleElement;
+  const gaugeLabel = document.getElementById('gauge-label')!;
+  const cgpaValue = document.getElementById('cgpa-value')!;
+  const cgpaScale = document.getElementById('cgpa-scale')!;
+  const cgpaDisplay = document.getElementById('cgpa-display')!;
+  const gradeBadge = document.getElementById('grade-badge')!;
+  const formulaText = document.getElementById('formula-text')!;
+  const calcSteps = document.getElementById('calc-steps')!;
+  const refTableBody = document.getElementById('ref-table-body')!;
+
+  const CIRCUMFERENCE = 251.33;
+  const RADIUS = 40;
+  const REF_PERCENTAGES = [95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40];
+
+  function getCurrentRule() {
+    const ruleId = systemSelect.value;
+    return { ruleId, rule: conversionRules[ruleId] };
+  }
+
+  function getGaugeColor(classification: string): string {
+    const colorMap: Record<string, string> = {
+      'Outstanding': '#059669',
+      'Excellent': '#059669',
+      'Very Good': '#0284c7',
+      'Good': '#0284c7',
+      'Average': '#d97706',
+      'Below Average': '#dc2626',
+      'Fail': '#dc2626',
+    };
+    return colorMap[classification] || '#6b7280';
+  }
+
+  function buildCalcSteps(percentage: number, cgpa: number, rule: typeof conversionRules[string]): string {
+    if (rule.type === 'linear') {
+      const bValue = (rule as any).b;
+      const sign = bValue >= 0 ? '−' : '+';
+      const absB = Math.abs(bValue);
+      return `
+        <li>Start with percentage: <span class="font-mono font-semibold">${percentage}%</span></li>
+        <li>Apply formula: CGPA = (${percentage} ${sign} ${absB}) ÷ ${(rule as any).a}</li>
+        <li>Calculate: (${percentage} ${sign} ${absB}) = ${(percentage - bValue).toFixed(2)}</li>
+        <li>Divide: ${(percentage - bValue).toFixed(2)} ÷ ${(rule as any).a} = <span class="font-mono font-semibold">${cgpa.toFixed(2)}</span></li>
+      `;
+    }
+    return `
+      <li>Start with percentage: <span class="font-mono font-semibold">${percentage}%</span></li>
+      <li>Apply formula: CGPA = ${percentage} ÷ ${rule.factor}</li>
+      <li>Result: <span class="font-mono font-semibold">${cgpa.toFixed(2)}</span></li>
+    `;
+  }
+
+  function updateResult() {
+    const { ruleId, rule } = getCurrentRule();
+    const raw = percentageInput.value.trim();
+
+    // Hide validation initially
+    validationMsg.classList.add('hidden');
+    percentageInput.classList.remove('border-red-400', 'dark:border-red-600');
+
+    if (!raw) {
+      emptyState.classList.remove('hidden');
+      resultState.classList.add('hidden');
+      return;
+    }
+
+    const percentage = parseFloat(raw);
+
+    if (isNaN(percentage) || percentage < 0 || percentage > 100) {
+      validationMsg.classList.remove('hidden');
+      percentageInput.classList.add('border-red-400', 'dark:border-red-600');
+      emptyState.classList.remove('hidden');
+      resultState.classList.add('hidden');
+      return;
+    }
+
+    const cgpa = percentageToCGPA(ruleId, percentage);
+    if (cgpa === null) return;
+
+    const clampedCGPA = Math.max(0, Math.min(cgpa, rule.maxGPA));
+    const ratio = clampedCGPA / rule.maxGPA;
+    const classification = getGradeClassification(clampedCGPA, rule.maxGPA);
+
+    // Show result
+    emptyState.classList.add('hidden');
+    resultState.classList.remove('hidden');
+
+    // Update gauge
+    const offset = CIRCUMFERENCE - (ratio * CIRCUMFERENCE);
+    gaugeCircle.style.strokeDashoffset = String(offset);
+    gaugeCircle.style.stroke = getGaugeColor(classification.label);
+    gaugeLabel.textContent = clampedCGPA.toFixed(2);
+
+    // Update CGPA display
+    cgpaValue.textContent = clampedCGPA.toFixed(2);
+    cgpaScale.textContent = `/ ${rule.maxGPA.toFixed(2)}`;
+
+    // Pop animation
+    cgpaDisplay.classList.remove('result-pop');
+    void cgpaDisplay.offsetWidth;
+    cgpaDisplay.classList.add('result-pop');
+
+    // Grade badge
+    gradeBadge.textContent = classification.label;
+    gradeBadge.className = `inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${classification.bg} ${classification.color}`;
+
+    // Formula
+    formulaText.textContent = rule.reverseFormula;
+
+    // Calculation steps
+    calcSteps.innerHTML = buildCalcSteps(percentage, clampedCGPA, rule);
+  }
+
+  function updateReferenceTable() {
+    const { ruleId, rule } = getCurrentRule();
+
+    const rows = REF_PERCENTAGES.map((pct) => {
+      const cgpa = percentageToCGPA(ruleId, pct);
+      if (cgpa === null) return '';
+      const clamped = Math.max(0, Math.min(cgpa, rule.maxGPA));
+      const classification = getGradeClassification(clamped, rule.maxGPA);
+
+      return `
+        <tr class="border-b border-neutral-100 dark:border-neutral-800/50 last:border-0 hover:bg-neutral-50 dark:hover:bg-neutral-800/30 transition-colors">
+          <td class="px-6 py-3 font-mono font-medium">${pct}%</td>
+          <td class="px-6 py-3 font-mono font-semibold">${clamped.toFixed(2)}</td>
+          <td class="px-6 py-3">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${classification.bg} ${classification.color}">
+              ${classification.label}
+            </span>
+          </td>
+        </tr>
+      `;
+    }).join('');
+
+    refTableBody.innerHTML = rows;
+  }
+
+  function onSystemChange() {
+    const { rule } = getCurrentRule();
+    formulaText.textContent = rule.reverseFormula;
+    updateResult();
+    updateReferenceTable();
+  }
+
+  // Event listeners
+  systemSelect.addEventListener('change', onSystemChange);
+  percentageInput.addEventListener('input', updateResult);
+
+  // Quick pick buttons
+  document.querySelectorAll<HTMLButtonElement>('[data-quick]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const val = btn.dataset.quick!;
+      percentageInput.value = val;
+      percentageInput.dispatchEvent(new Event('input'));
+    });
+  });
+
+  // Init
+  updateReferenceTable();
+</script>

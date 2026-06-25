@@ -1,0 +1,214 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation "Main navigation" [ref=e3]:
+      - link "CGPA Helper" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e5]: CGPA
+        - generic [ref=e6]: Helper
+      - generic [ref=e7]:
+        - link "CGPA Calculator" [ref=e8] [cursor=pointer]:
+          - /url: /cgpa-calculator
+        - link "SGPA Calculator" [ref=e9] [cursor=pointer]:
+          - /url: /sgpa-calculator
+        - link "CGPA to %" [ref=e10] [cursor=pointer]:
+          - /url: /cgpa-to-percentage
+        - link "% to CGPA" [ref=e11] [cursor=pointer]:
+          - /url: /percentage-to-cgpa
+      - button "Toggle dark mode" [ref=e13]:
+        - img [ref=e14]
+  - main [ref=e16]:
+    - generic [ref=e18]:
+      - generic [ref=e20]: Free — No signup required
+      - heading "Calculate yourCGPAinstantly." [level=1] [ref=e22]
+      - paragraph [ref=e23]: Free CGPA, SGPA, and percentage calculators for students across India, Bangladesh, and Pakistan. Supporting standard 10-point, 4.0, and 5.0 scales.
+      - generic [ref=e24]:
+        - link "Start Calculating" [ref=e25] [cursor=pointer]:
+          - /url: /cgpa-calculator
+          - text: Start Calculating
+          - img [ref=e26]
+        - link "Explore Tools" [ref=e28] [cursor=pointer]:
+          - /url: "#tools"
+      - generic [ref=e29]:
+        - generic [ref=e30]:
+          - img [ref=e31]
+          - text: 100% Free
+        - generic [ref=e33]:
+          - img [ref=e34]
+          - text: No Signup
+        - generic [ref=e36]:
+          - img [ref=e37]
+          - text: Instant Results
+        - generic [ref=e39]:
+          - img [ref=e40]
+          - text: Privacy First
+    - generic [ref=e42]:
+      - generic [ref=e43]:
+        - generic [ref=e44]: Tools
+        - heading "Everything you need." [level=2] [ref=e45]
+      - generic [ref=e46]:
+        - link "Most Popular CGPA Calculator Calculate your Cumulative GPA across all semesters with credit-weighted precision. Use calculator" [ref=e47] [cursor=pointer]:
+          - /url: /cgpa-calculator
+          - generic [ref=e48]: Most Popular
+          - img [ref=e50]
+          - heading "CGPA Calculator" [level=3] [ref=e52]
+          - paragraph [ref=e53]: Calculate your Cumulative GPA across all semesters with credit-weighted precision.
+          - generic [ref=e54]:
+            - text: Use calculator
+            - img [ref=e55]
+        - link "SGPA Calculator Calculate your Semester GPA by entering course grades and credit hours. Use calculator" [ref=e57] [cursor=pointer]:
+          - /url: /sgpa-calculator
+          - img [ref=e59]
+          - heading "SGPA Calculator" [level=3] [ref=e61]
+          - paragraph [ref=e62]: Calculate your Semester GPA by entering course grades and credit hours.
+          - generic [ref=e63]:
+            - text: Use calculator
+            - img [ref=e64]
+        - link "CGPA to Percentage Convert your CGPA to percentage using official university formulas. Use calculator" [ref=e66] [cursor=pointer]:
+          - /url: /cgpa-to-percentage
+          - img [ref=e68]
+          - heading "CGPA to Percentage" [level=3] [ref=e70]
+          - paragraph [ref=e71]: Convert your CGPA to percentage using official university formulas.
+          - generic [ref=e72]:
+            - text: Use calculator
+            - img [ref=e73]
+        - link "Percentage to CGPA Convert your percentage score back to CGPA for any grading system. Use calculator" [ref=e75] [cursor=pointer]:
+          - /url: /percentage-to-cgpa
+          - img [ref=e77]
+          - heading "Percentage to CGPA" [level=3] [ref=e79]
+          - paragraph [ref=e80]: Convert your percentage score back to CGPA for any grading system.
+          - generic [ref=e81]:
+            - text: Use calculator
+            - img [ref=e82]
+    - generic [ref=e85]:
+      - generic [ref=e86]:
+        - generic [ref=e87]: How It Works
+        - heading "Three simple steps." [level=2] [ref=e88]
+      - generic [ref=e89]:
+        - generic [ref=e90]:
+          - generic [ref=e91]: "01"
+          - heading "Choose your grading system" [level=3] [ref=e92]
+          - paragraph [ref=e93]: Select your university scale or standard scale from our options.
+        - generic [ref=e94]:
+          - generic [ref=e95]: "02"
+          - heading "Enter your grades" [level=3] [ref=e96]
+          - paragraph [ref=e97]: Add your courses, credit hours, and grades — or semesters and GPA for CGPA.
+        - generic [ref=e98]:
+          - generic [ref=e99]: "03"
+          - heading "Get instant results" [level=3] [ref=e100]
+          - paragraph [ref=e101]: Your GPA, CGPA, or percentage is calculated in real time with grade classification.
+    - generic [ref=e102]:
+      - generic [ref=e103]:
+        - generic [ref=e104]: Features
+        - heading "Built for students." [level=2] [ref=e105]
+      - generic [ref=e106]:
+        - generic [ref=e107]:
+          - generic [ref=e108]: ⚡
+          - generic [ref=e109]:
+            - heading "Instant Results" [level=3] [ref=e110]
+            - paragraph [ref=e111]: Real-time calculation as you type. No waiting, no "Calculate" button.
+        - generic [ref=e112]:
+          - generic [ref=e113]: 🔒
+          - generic [ref=e114]:
+            - heading "Privacy First" [level=3] [ref=e115]
+            - paragraph [ref=e116]: All calculations run locally in your browser. No data sent to servers.
+        - generic [ref=e117]:
+          - generic [ref=e118]: 🌍
+          - generic [ref=e119]:
+            - heading "Unified Scales" [level=3] [ref=e120]
+            - paragraph [ref=e121]: Covers VIT, SRM, KTU, AKTU, HEC Pakistan, BRACU, NSU, US 4.0, and 5.0 scales.
+        - generic [ref=e122]:
+          - generic [ref=e123]: 📱
+          - generic [ref=e124]:
+            - heading "Works Everywhere" [level=3] [ref=e125]
+            - paragraph [ref=e126]: Responsive design works perfectly on phones, tablets, and desktops.
+        - generic [ref=e127]:
+          - generic [ref=e128]: 🌙
+          - generic [ref=e129]:
+            - heading "Dark Mode" [level=3] [ref=e130]
+            - paragraph [ref=e131]: Easy on the eyes with automatic dark mode support.
+        - generic [ref=e132]:
+          - generic [ref=e133]: 🎯
+          - generic [ref=e134]:
+            - heading "Grade Classification" [level=3] [ref=e135]
+            - paragraph [ref=e136]: "See your grade band: Outstanding, Excellent, Very Good, Good, or Average."
+    - generic [ref=e138]:
+      - generic [ref=e139]:
+        - generic [ref=e140]: FAQ
+        - heading "Frequently Asked Questions" [level=2] [ref=e141]
+      - generic [ref=e142]:
+        - group [ref=e143]:
+          - generic "What is CGPA?" [ref=e144] [cursor=pointer]:
+            - text: What is CGPA?
+            - img [ref=e145]
+        - group [ref=e147]:
+          - generic "What is SGPA?" [ref=e148] [cursor=pointer]:
+            - text: What is SGPA?
+            - img [ref=e149]
+        - group [ref=e151]:
+          - generic "How do I convert CGPA to Percentage?" [ref=e152] [cursor=pointer]:
+            - text: How do I convert CGPA to Percentage?
+            - img [ref=e153]
+        - group [ref=e155]:
+          - generic "Is this calculator free?" [ref=e156] [cursor=pointer]:
+            - text: Is this calculator free?
+            - img [ref=e157]
+        - group [ref=e159]:
+          - generic "Which universities are supported?" [ref=e160] [cursor=pointer]:
+            - text: Which universities are supported?
+            - img [ref=e161]
+        - group [ref=e163]:
+          - generic "How accurate is this calculator?" [ref=e164] [cursor=pointer]:
+            - text: How accurate is this calculator?
+            - img [ref=e165]
+    - generic [ref=e167]:
+      - heading "Ready to calculate?" [level=2] [ref=e168]
+      - paragraph [ref=e169]: Pick a calculator and get your results in seconds. No signup, no data collection — just accurate calculations.
+      - link "Start Now" [ref=e170] [cursor=pointer]:
+        - /url: /cgpa-calculator
+        - text: Start Now
+        - img [ref=e171]
+  - contentinfo [ref=e173]:
+    - generic [ref=e174]:
+      - generic [ref=e175]:
+        - generic [ref=e176]:
+          - link "CGPA Helper" [ref=e177] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e178]: CGPA
+            - generic [ref=e179]: Helper
+          - paragraph [ref=e180]: Free, fast, and accurate CGPA & SGPA calculators for college students worldwide.
+        - generic [ref=e181]:
+          - heading "Calculators" [level=4] [ref=e182]
+          - list [ref=e183]:
+            - listitem [ref=e184]:
+              - link "CGPA Calculator" [ref=e185] [cursor=pointer]:
+                - /url: /cgpa-calculator
+            - listitem [ref=e186]:
+              - link "SGPA Calculator" [ref=e187] [cursor=pointer]:
+                - /url: /sgpa-calculator
+            - listitem [ref=e188]:
+              - link "CGPA to Percentage" [ref=e189] [cursor=pointer]:
+                - /url: /cgpa-to-percentage
+            - listitem [ref=e190]:
+              - link "Percentage to CGPA" [ref=e191] [cursor=pointer]:
+                - /url: /percentage-to-cgpa
+        - generic [ref=e192]:
+          - heading "Resources" [level=4] [ref=e193]
+          - list [ref=e194]:
+            - listitem [ref=e195]:
+              - link "How It Works" [ref=e196] [cursor=pointer]:
+                - /url: /#how-it-works
+            - listitem [ref=e197]:
+              - link "FAQ" [ref=e198] [cursor=pointer]:
+                - /url: /#faq
+        - generic [ref=e199]:
+          - heading "Legal" [level=4] [ref=e200]
+          - list [ref=e201]:
+            - listitem [ref=e202]:
+              - link "Privacy Policy" [ref=e203] [cursor=pointer]:
+                - /url: /privacy
+            - listitem [ref=e204]:
+              - link "Terms of Service" [ref=e205] [cursor=pointer]:
+                - /url: /terms
+      - generic [ref=e206]:
+        - paragraph [ref=e207]: © 2026 CGPA Helper. Free for all students.
+        - generic [ref=e209]: All calculations run locally

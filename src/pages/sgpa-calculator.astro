@@ -1,0 +1,518 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { gradingSystems } from '../data/grading-systems.js';
+
+const title = 'SGPA Calculator — Calculate Semester GPA & Convert SGPA to CGPA';
+const description = 'Free SGPA calculator to compute your Semester Grade Point Average. Use our SGPA to CGPA calculator to convert semester grades into cumulative GPA across all grading scales.';
+
+const faqs = [
+  { question: 'What is SGPA and how is it different from CGPA?', answer: 'SGPA (Semester Grade Point Average) measures your academic performance for a single semester. CGPA (Cumulative Grade Point Average) is the weighted average across all semesters. SGPA focuses on one semester\'s courses, while CGPA combines all semesters.' },
+  { question: 'How is SGPA calculated?', answer: 'SGPA is calculated using the formula: SGPA = Σ(Grade Point × Credit Hours) ÷ Σ(Credit Hours). Multiply each course\'s grade point by its credit hours, sum all these products, then divide by the total credit hours for the semester.' },
+  { question: 'What are credit hours?', answer: 'Credit hours represent the weightage or workload of a course. Typically, lecture courses carry 3-4 credits, lab courses carry 1-2 credits, and project/thesis courses may carry 4-6 credits. More credits mean the course has a greater impact on your SGPA.' },
+  { question: 'Can I calculate SGPA for different universities?', answer: 'Yes! Our calculator supports all standard grading scales, including the standard 10-point scale (common for VIT, SRM, KTU Kerala, AKTU UP, Anna University, JNTU, SPPU), CBSE/UGC India 10-point, Mumbai University, Standard 4.0 scale (common for US, Canada, HEC Pakistan, UGC Bangladesh, BRACU, NSU, COMSATS), and the Standard 5.0 scale.' },
+  { question: 'Does a failing grade affect my SGPA?', answer: 'Yes, a failing grade (F) carries 0 grade points but the credit hours still count in the total. This significantly lowers your SGPA. For example, failing a 4-credit course adds 0 to grade points but adds 4 to total credits, pulling your average down.' },
+  { question: 'How can I improve my SGPA?', answer: 'Focus on high-credit courses as they have more impact on your SGPA. Aim for higher grades in these courses. Also, avoid failing any course since F grades drastically reduce your SGPA. Consistent study and regular attendance help maintain a good SGPA.' },
+];
+
+const systemEntries = Object.entries(gradingSystems);
+---
+
+<Layout title={title} description={description} faqs={faqs}>
+  <div class="container-page py-10 md:py-16">
+
+    <!-- ── Breadcrumb ── -->
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-1.5 text-sm text-neutral-500 dark:text-neutral-400">
+        <li>
+          <a href="/" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Home</a>
+        </li>
+        <li aria-hidden="true">
+          <svg class="w-3.5 h-3.5 text-neutral-300 dark:text-neutral-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M9 5l7 7-7 7"/></svg>
+        </li>
+        <li>
+          <span class="text-neutral-900 dark:text-neutral-100 font-medium">SGPA Calculator</span>
+        </li>
+      </ol>
+    </nav>
+
+    <!-- ── Page Header ── -->
+    <header class="mb-10">
+      <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight mb-3">
+        SGPA <span class="bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent">Calculator</span>
+      </h1>
+      <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-2xl">
+        Calculate your Semester GPA by entering course names, credit hours, and selecting grades. Supports standard 10-point, 4.0, and 5.0 grading scales from universities across India, USA, Canada, and international scales.
+      </p>
+    </header>
+
+    <!-- ── Calculator Card ── -->
+    <div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl p-5 sm:p-8 mb-8">
+
+      <!-- Grading System Select -->
+      <div class="mb-6">
+        <label for="grading-system" class="block text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono mb-2">
+          Grading System
+        </label>
+        <select
+          id="grading-system"
+          class="w-full max-w-full min-w-0 sm:max-w-md bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-lg px-4 py-2 text-sm font-medium text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors cursor-pointer appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%239ca3af%22%20stroke-width%3D%222%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20d%3D%22M19%209l-7%207-7-7%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[right_0.75rem_center] bg-[length:1.25rem] pr-10 truncate"
+        >
+          {systemEntries.map(([key, sys]) => (
+            <option value={key}>{sys.shortName || sys.name} ({sys.maxGPA % 1 === 0 ? sys.maxGPA + '.0' : sys.maxGPA} Scale)</option>
+          ))}
+        </select>
+      </div>
+
+      <!-- Course Table -->
+      <div class="mb-6">
+        <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono mb-3">
+          Courses
+        </label>
+
+        <!-- Desktop Table Header -->
+        <div class="hidden sm:grid sm:grid-cols-[1fr_120px_180px_40px] gap-3 mb-2 px-1">
+          <span class="text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wider">Course Name</span>
+          <span class="text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wider">Credits</span>
+          <span class="text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wider">Grade</span>
+          <span></span>
+        </div>
+
+        <div id="courses-container" class="space-y-3">
+          <!-- Course rows injected by JS -->
+        </div>
+
+        <button
+          id="add-course-btn"
+          type="button"
+          class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors px-1 py-1"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+          Add Course
+        </button>
+      </div>
+
+      <!-- Result Section -->
+      <div id="result-section" class="hidden border-t border-neutral-100 dark:border-neutral-800 pt-6">
+        <div class="flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
+          <!-- SVG Gauge -->
+          <div class="relative shrink-0">
+            <svg id="gauge-svg" width="140" height="140" viewBox="0 0 140 140" class="transform -rotate-90">
+              <circle cx="70" cy="70" r="60" fill="none" stroke-width="10" class="stroke-neutral-200 dark:stroke-neutral-800"/>
+              <circle id="gauge-ring" cx="70" cy="70" r="60" fill="none" stroke-width="10" stroke-linecap="round"
+                stroke-dasharray="376.99" stroke-dashoffset="376.99" class="gauge-ring transition-all duration-700"/>
+            </svg>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span id="gauge-value" class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 rotate-0">0.00</span>
+            </div>
+          </div>
+
+          <!-- Result Details -->
+          <div class="text-center sm:text-left space-y-2 flex-1">
+            <p class="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono">Your Semester GPA</p>
+            <p id="result-gpa" class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">0.00</p>
+            <p id="result-scale" class="text-sm text-neutral-500 dark:text-neutral-400"></p>
+            <span id="result-classification" class="inline-block mt-1 text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full"></span>
+            <div class="flex flex-wrap gap-4 mt-3 text-sm text-neutral-500 dark:text-neutral-400">
+              <span>Total Credits: <strong id="result-credits" class="text-neutral-900 dark:text-neutral-100">0</strong></span>
+              <span>Grade Points: <strong id="result-points" class="text-neutral-900 dark:text-neutral-100">0.00</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Grading Table (Collapsible) ── -->
+    <details class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-hidden mb-8 group">
+      <summary class="flex items-center justify-between cursor-pointer p-5 sm:px-8 select-none">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono block mb-1">Reference</span>
+          <span id="grading-table-title" class="text-sm font-semibold text-neutral-900 dark:text-neutral-100">Grading Scale</span>
+        </div>
+        <svg class="w-5 h-5 text-neutral-400 transition-transform duration-200 group-open:rotate-180 shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg>
+      </summary>
+      <div class="px-5 sm:px-8 pb-6">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-neutral-200 dark:border-neutral-800">
+                <th class="text-left py-2.5 pr-4 text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono">Grade</th>
+                <th class="text-left py-2.5 pr-4 text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono">Points</th>
+                <th class="text-left py-2.5 text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono">Percentage</th>
+              </tr>
+            </thead>
+            <tbody id="grading-table-body">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </details>
+
+    <!-- ── Detailed Academic Guide ── -->
+    <section class="mb-16 border-t border-neutral-200 dark:border-neutral-800 pt-12">
+      <div class="max-w-3xl mx-auto prose dark:prose-invert text-neutral-700 dark:text-neutral-300 space-y-6">
+        <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white mb-4">How is SGPA (Semester GPA) Calculated?</h2>
+        <p>
+          Semester Grade Point Average (SGPA) is the official metric used by colleges and universities to measure your academic performance over a single term (semester or quarter). Unlike a simple grade average, SGPA is a <strong>credit-weighted average</strong>. This means that a course with higher credit hours has a larger mathematical impact on your final average.
+        </p>
+
+        <h3 class="text-xl font-semibold text-neutral-900 dark:text-white mt-8 mb-2">The SGPA Formula</h3>
+        <p>
+          To calculate your SGPA, you use the following formula:
+        </p>
+        <div class="p-6 bg-indigo-50/50 dark:bg-indigo-950/20 rounded-xl border border-indigo-100 dark:border-indigo-900/30 text-center font-mono text-base sm:text-lg text-indigo-700 dark:text-indigo-400">
+          SGPA = Sum of (Grade Points × Course Credits) ÷ Total Credits
+        </div>
+
+        <h3 class="text-xl font-semibold text-neutral-900 dark:text-white mt-8 mb-2">Step-by-Step Calculation Example</h3>
+        <p>
+          Let's calculate the SGPA for a student who took 4 courses during their first semester on a standard 10-point Indian university scale (where an 'A' grade is worth 9 points and an 'O' outstanding grade is worth 10 points):
+        </p>
+
+        <div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-hidden shadow-sm my-6">
+          <table class="w-full text-sm border-collapse text-left">
+            <thead>
+              <tr class="border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-950/20 font-mono text-xs uppercase text-neutral-400">
+                <th class="px-6 py-3 font-semibold">Course</th>
+                <th class="px-6 py-3 font-semibold">Credit Hours</th>
+                <th class="px-6 py-3 font-semibold">Grade (Points)</th>
+                <th class="px-6 py-3 font-semibold">Weighted Points</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800 text-neutral-600 dark:text-neutral-400 font-mono">
+              <tr>
+                <td class="px-6 py-3 font-semibold text-neutral-800 dark:text-neutral-200">Mathematics</td>
+                <td class="px-6 py-3">4.0</td>
+                <td class="px-6 py-3">A (9.0)</td>
+                <td class="px-6 py-3">4.0 × 9.0 = 36.0</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3 font-semibold text-neutral-800 dark:text-neutral-200">Physics Lab</td>
+                <td class="px-6 py-3">1.5</td>
+                <td class="px-6 py-3">O (10.0)</td>
+                <td class="px-6 py-3">1.5 × 10.0 = 15.0</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3 font-semibold text-neutral-800 dark:text-neutral-200">Computer Science</td>
+                <td class="px-6 py-3">3.0</td>
+                <td class="px-6 py-3">B (8.0)</td>
+                <td class="px-6 py-3">3.0 × 8.0 = 24.0</td>
+              </tr>
+              <tr>
+                <td class="px-6 py-3 font-semibold text-neutral-800 dark:text-neutral-200">Technical English</td>
+                <td class="px-6 py-3">2.0</td>
+                <td class="px-6 py-3">C (7.0)</td>
+                <td class="px-6 py-3">2.0 × 7.0 = 14.0</td>
+              </tr>
+              <tr class="bg-neutral-50/50 dark:bg-neutral-950/20 font-bold text-neutral-900 dark:text-white">
+                <td class="px-6 py-3">Total</td>
+                <td class="px-6 py-3">10.5</td>
+                <td class="px-6 py-3">—</td>
+                <td class="px-6 py-3">89.0 Points</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4 class="text-base font-semibold text-neutral-900 dark:text-white mt-4 mb-2">Doing the Division:</h4>
+        <ul class="list-decimal pl-5 space-y-2">
+          <li><strong>Sum of Weighted Points:</strong> 36.0 + 15.0 + 24.0 + 14.0 = <strong>89.0</strong></li>
+          <li><strong>Total Credits Registered:</strong> 4.0 + 1.5 + 3.0 + 2.0 = <strong>10.5</strong></li>
+          <li><strong>SGPA Calculation:</strong> 89.0 ÷ 10.5 = <strong>8.48</strong></li>
+        </ul>
+        <p>
+          Thus, the student's Semester GPA is <strong>8.48</strong> on a 10.0 scale.
+        </p>
+
+        <div class="p-5 my-4 bg-amber-50/50 dark:bg-amber-950/20 rounded-xl border border-amber-100 dark:border-amber-900/30">
+          <h4 class="text-sm font-semibold text-amber-800 dark:text-amber-400 mb-1">⚠️ Crucial Warning: The Fail Grade Trap</h4>
+          <p class="text-xs text-neutral-600 dark:text-neutral-400">
+            If you fail a course (receiving 0.0 grade points), the credit hours of that course <strong>are still added</strong> to the Total Credits divider. This causes a major mathematical penalty that pulls your final SGPA down significantly, even if you performed well in your other courses.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FAQ Section ── -->
+    <section>
+      <div class="text-center mb-8">
+        <span class="text-xs font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 font-mono mb-2 block">FAQ</span>
+        <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="max-w-2xl mx-auto space-y-3">
+        {faqs.map((faq) => (
+          <details class="group bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-hidden">
+            <summary class="flex items-center justify-between cursor-pointer p-5 text-sm font-medium select-none">
+              {faq.question}
+              <svg class="w-5 h-5 text-neutral-400 transition-transform duration-200 group-open:rotate-180 shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <div class="px-5 pb-5 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed -mt-1">
+              {faq.answer}
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+  </div>
+</Layout>
+
+<script>
+  import { gradingSystems, getGradeClassification } from '../data/grading-systems.js';
+
+  /* ── DOM refs ── */
+  const systemSelect = document.getElementById('grading-system') as HTMLSelectElement;
+  const coursesContainer = document.getElementById('courses-container')!;
+  const addCourseBtn = document.getElementById('add-course-btn')!;
+  const resultSection = document.getElementById('result-section')!;
+  const gaugeRing = document.getElementById('gauge-ring') as SVGCircleElement;
+  const gaugeValue = document.getElementById('gauge-value')!;
+  const resultGPA = document.getElementById('result-gpa')!;
+  const resultScale = document.getElementById('result-scale')!;
+  const resultClassification = document.getElementById('result-classification')!;
+  const resultCredits = document.getElementById('result-credits')!;
+  const resultPoints = document.getElementById('result-points')!;
+  const gradingTableTitle = document.getElementById('grading-table-title')!;
+  const gradingTableBody = document.getElementById('grading-table-body')!;
+
+  let courseCounter = 0;
+  const GAUGE_CIRCUMFERENCE = 2 * Math.PI * 60; // r=60
+
+  /* ── Helpers ── */
+  function getCurrentSystem() {
+    return gradingSystems[systemSelect.value];
+  }
+
+  function buildGradeOptions(): string {
+    const system = getCurrentSystem();
+    if (!system) return '<option value="">—</option>';
+    return system.grades
+      .map((g: { letter: string; point: number }) =>
+        `<option value="${g.point}">${g.letter} (${g.point.toFixed(2)})</option>`
+      )
+      .join('');
+  }
+
+  /* ── Course Row ── */
+  function createCourseRow(name: string): HTMLDivElement {
+    courseCounter++;
+    const row = document.createElement('div');
+    row.className = 'course-row grid grid-cols-6 sm:grid-cols-[1fr_120px_180px_40px] gap-3 items-end bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800/40 sm:border-0 rounded-lg p-3 sm:p-2 sm:bg-transparent sm:dark:bg-transparent sm:rounded-none sm:border-b sm:border-neutral-100 sm:dark:border-neutral-800/50';
+    row.dataset.id = String(courseCounter);
+
+    const gradeOptions = buildGradeOptions();
+
+    row.innerHTML = `
+      <div class="col-span-5 sm:col-span-1">
+        <label class="sm:hidden text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wider mb-1 block">Course Name</label>
+        <input type="text" value="${name}" placeholder="Course name"
+          class="course-name w-full bg-white dark:bg-neutral-900 sm:bg-neutral-50 sm:dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors" />
+      </div>
+      <div class="col-span-1 flex justify-center sm:hidden">
+        <button type="button" class="remove-btn w-8 h-8 flex items-center justify-center rounded-lg text-neutral-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950 transition-colors" title="Remove course" aria-label="Remove course">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="col-span-3 sm:col-span-1">
+        <label class="sm:hidden text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wider mb-1 block">Credits</label>
+        <input type="number" value="3" min="1" max="6" step="1"
+          class="course-credits w-full bg-white dark:bg-neutral-900 sm:bg-neutral-50 sm:dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors" />
+      </div>
+      <div class="col-span-3 sm:col-span-1">
+        <label class="sm:hidden text-xs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-wider mb-1 block">Grade</label>
+        <select class="course-grade w-full bg-white dark:bg-neutral-900 sm:bg-neutral-50 sm:dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-lg px-3 py-2 text-sm text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors cursor-pointer">
+          ${gradeOptions}
+        </select>
+      </div>
+      <div class="hidden sm:flex items-center justify-center">
+        <button type="button" class="remove-btn w-8 h-8 flex items-center justify-center rounded-lg text-neutral-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950 transition-colors" title="Remove course" aria-label="Remove course">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+    `;
+
+    /* Remove handlers */
+    const removeBtns = row.querySelectorAll('.remove-btn');
+    removeBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        row.remove();
+        calculate();
+      });
+    });
+
+    /* Live calculation on change */
+    row.querySelectorAll('input, select').forEach((el) => {
+      el.addEventListener('input', calculate);
+      el.addEventListener('change', calculate);
+    });
+
+    return row;
+  }
+
+  /* ── Rebuild all grade dropdowns ── */
+  function rebuildGradeDropdowns() {
+    const gradeOptions = buildGradeOptions();
+    coursesContainer.querySelectorAll('.course-grade').forEach((sel) => {
+      const current = (sel as HTMLSelectElement).value;
+      (sel as HTMLSelectElement).innerHTML = gradeOptions;
+      /* Try to restore previously selected value */
+      const option = (sel as HTMLSelectElement).querySelector(`option[value="${current}"]`);
+      if (option) {
+        (sel as HTMLSelectElement).value = current;
+      }
+    });
+  }
+
+  /* ── Grading Table ── */
+  function updateGradingTable() {
+    const system = getCurrentSystem();
+    if (!system) return;
+    gradingTableTitle.textContent = `${system.name} — Grading Scale`;
+    gradingTableBody.innerHTML = system.grades
+      .map((g: { letter: string; point: number; range: string }) => `
+        <tr class="border-b border-neutral-100 dark:border-neutral-800/50">
+          <td class="py-2.5 pr-4 font-medium text-neutral-900 dark:text-neutral-100">${g.letter}</td>
+          <td class="py-2.5 pr-4 font-mono text-neutral-600 dark:text-neutral-400">${g.point.toFixed(2)}</td>
+          <td class="py-2.5 text-neutral-600 dark:text-neutral-400">${g.range}%</td>
+        </tr>
+      `)
+      .join('');
+  }
+
+  // ── LocalStorage ──
+  function saveToLocalStorage() {
+    const rows = coursesContainer.querySelectorAll('.course-row');
+    const coursesData = Array.from(rows).map((row) => {
+      const nameVal = (row.querySelector('.course-name') as HTMLInputElement).value;
+      const creditsVal = (row.querySelector('.course-credits') as HTMLInputElement).value;
+      const gradeVal = (row.querySelector('.course-grade') as HTMLSelectElement).value;
+      return { name: nameVal, credits: creditsVal, grade: gradeVal };
+    });
+    localStorage.setItem('cgpa-helper-calculator-courses', JSON.stringify({
+      system: systemSelect.value,
+      courses: coursesData
+    }));
+  }
+
+  function loadFromLocalStorage() {
+    try {
+      const stored = localStorage.getItem('cgpa-helper-calculator-courses');
+      if (stored) {
+        const { system, courses } = JSON.parse(stored);
+        if (system && gradingSystems[system]) {
+          systemSelect.value = system;
+          // Rebuild grade dropdown base for the correct system
+          rebuildGradeDropdowns();
+        }
+        if (Array.isArray(courses) && courses.length > 0) {
+          coursesContainer.innerHTML = '';
+          courses.forEach((c) => {
+            const row = createCourseRow(c.name);
+            coursesContainer.appendChild(row);
+            const creditsInput = row.querySelector('.course-credits') as HTMLInputElement;
+            const gradeSelect = row.querySelector('.course-grade') as HTMLSelectElement;
+            creditsInput.value = c.credits || '';
+            gradeSelect.value = c.grade || '';
+          });
+          return true;
+        }
+      }
+    } catch (e) {
+      console.error('Error loading from localStorage:', e);
+    }
+    return false;
+  }
+
+  /* ── Calculate SGPA ── */
+  function calculate() {
+    const rows = coursesContainer.querySelectorAll('.course-row');
+    const system = getCurrentSystem();
+    if (!system || rows.length === 0) {
+      resultSection.classList.add('hidden');
+      return;
+    }
+
+    let totalCredits = 0;
+    let totalGradePoints = 0;
+    let hasValidRow = false;
+
+    rows.forEach((row) => {
+      const credits = parseFloat((row.querySelector('.course-credits') as HTMLInputElement).value) || 0;
+      const grade = parseFloat((row.querySelector('.course-grade') as HTMLSelectElement).value);
+
+      if (credits > 0 && !isNaN(grade)) {
+        totalCredits += credits;
+        totalGradePoints += credits * grade;
+        hasValidRow = true;
+      }
+    });
+
+    saveToLocalStorage();
+
+    if (!hasValidRow || totalCredits === 0) {
+      resultSection.classList.add('hidden');
+      return;
+    }
+
+    const sgpa = totalGradePoints / totalCredits;
+    const maxGPA = system.maxGPA;
+    const classification = getGradeClassification(sgpa, maxGPA);
+
+    /* Update text */
+    const sgpaStr = sgpa.toFixed(2);
+    resultGPA.textContent = sgpaStr;
+    gaugeValue.textContent = sgpaStr;
+    resultScale.textContent = `out of ${maxGPA.toFixed(1)}`;
+    resultCredits.textContent = String(totalCredits);
+    resultPoints.textContent = totalGradePoints.toFixed(2);
+
+    /* Classification badge */
+    resultClassification.textContent = classification.label;
+    resultClassification.className = `inline-block mt-1 text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full ${classification.bg} ${classification.color}`;
+
+    /* SVG Gauge */
+    const ratio = Math.min(sgpa / maxGPA, 1);
+    const offset = GAUGE_CIRCUMFERENCE * (1 - ratio);
+    gaugeRing.style.strokeDasharray = String(GAUGE_CIRCUMFERENCE);
+    gaugeRing.style.strokeDashoffset = String(offset);
+    gaugeRing.style.stroke = classification.ring;
+
+    /* Show result */
+    resultSection.classList.remove('hidden');
+    resultSection.querySelector('.result-pop')?.classList.remove('result-pop');
+    void (resultGPA as HTMLElement).offsetWidth; // force reflow
+    resultGPA.classList.add('result-pop');
+  }
+
+  /* ── Event: Grading system change ── */
+  systemSelect.addEventListener('change', () => {
+    rebuildGradeDropdowns();
+    updateGradingTable();
+    calculate();
+  });
+
+  /* ── Event: Add course ── */
+  addCourseBtn.addEventListener('click', () => {
+    const count = coursesContainer.querySelectorAll('.course-row').length + 1;
+    const row = createCourseRow(`Course ${count}`);
+    coursesContainer.appendChild(row);
+    row.querySelector<HTMLInputElement>('.course-name')?.focus();
+    calculate();
+  });
+
+  /* ── Init ── */
+  function init() {
+    const loaded = loadFromLocalStorage();
+    if (!loaded) {
+      /* Seed 3 starter rows */
+      for (let i = 1; i <= 3; i++) {
+        coursesContainer.appendChild(createCourseRow(`Course ${i}`));
+      }
+    }
+    updateGradingTable();
+    calculate();
+  }
+
+  init();
+</script>

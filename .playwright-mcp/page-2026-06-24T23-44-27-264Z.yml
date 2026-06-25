@@ -1,0 +1,188 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation "Main navigation" [ref=e3]:
+      - link "CGPA Helper" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e5]: CGPA
+        - generic [ref=e6]: Helper
+      - generic [ref=e7]:
+        - button "Toggle dark mode" [ref=e8]:
+          - img [ref=e9]
+        - button "Toggle mobile menu" [ref=e11]:
+          - img [ref=e12]
+  - main [ref=e14]:
+    - navigation "Breadcrumb" [ref=e15]:
+      - list [ref=e16]:
+        - listitem [ref=e17]:
+          - link "Home" [ref=e18] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e19]:
+          - img [ref=e20]
+        - listitem [ref=e22]: CGPA Calculator
+    - generic [ref=e23]:
+      - heading "CGPA Calculator" [level=1] [ref=e24]
+      - paragraph [ref=e25]: Enter your semester GPAs and credit hours to calculate your cumulative GPA. Supports standard 10-point, 4.0, and 5.0 grading scales — results update in real time.
+    - generic [ref=e26]:
+      - generic [ref=e27]:
+        - paragraph [ref=e28]: "This is a simple CGPA calculator that calculates your CGPA based on your grades and credits:"
+        - generic [ref=e30]:
+          - generic [ref=e31]: CGPA =
+          - generic [ref=e32]:
+            - generic [ref=e33]:
+              - text: ∑
+              - subscript [ref=e34]: i=1
+              - superscript [ref=e35]: "n"
+              - text: (grade
+              - subscript [ref=e36]: i
+              - text: × credit
+              - subscript [ref=e37]: i
+              - text: )
+            - generic [ref=e38]:
+              - text: ∑
+              - subscript [ref=e39]: i=1
+              - superscript [ref=e40]: "n"
+              - text: credit
+              - subscript [ref=e41]: i
+      - generic [ref=e42]:
+        - generic [ref=e43]:
+          - generic [ref=e44]: Grading System
+          - combobox "Select grading system" [ref=e45] [cursor=pointer]:
+            - option "CBSE / UGC India (10-point Scale) (10.0 Scale)" [selected]
+            - option "Standard 10-Point Scale (Common for VIT, SRM, KTU, AKTU, Anna Univ, JNTU, SPPU, GGSIPU) (10.0 Scale)"
+            - option "University of Mumbai (10-point Scale) (10.0 Scale)"
+            - option "Standard 4.0 Scale (Common for US, HEC Pakistan, UGC Bangladesh, BRACU, NSU, COMSATS) (4.0 Scale)"
+            - option "Standard 5.0 GPA Scale (5.0 Scale)"
+            - option "Rajiv Gandhi Proudyogiki Vishwavidyalaya (RGPV MP) (10.0 Scale)"
+            - option "IET DAVV Indore (Devi Ahilya Vishwavidyalaya) (10.0 Scale)"
+            - option "Standard 7.0 GPA Scale (Common for Australia) (7.0 Scale)"
+            - option "Standard 4.33 GPA Scale (Common for Canada & SFU) (4.33 Scale)"
+            - option "Standard 4.5 GPA Scale (Common for South Korea, Taiwan & East Asia) (4.5 Scale)"
+        - generic [ref=e46]:
+          - list "Semester entries" [ref=e47]:
+            - listitem [ref=e48]:
+              - generic [ref=e49]:
+                - generic [ref=e50]: Semester
+                - textbox "Semester name" [ref=e51]: Semester 1
+              - button "Remove semester" [ref=e53] [cursor=pointer]:
+                - img [ref=e54]
+              - generic [ref=e56]:
+                - generic [ref=e57]: GPA
+                - spinbutton "GPA value" [ref=e58]: "8.5"
+              - generic [ref=e59]:
+                - generic [ref=e60]: Credits
+                - spinbutton "Credit hours" [ref=e61]: "20"
+            - listitem [ref=e62]:
+              - generic [ref=e63]:
+                - generic [ref=e64]: Semester
+                - textbox "Semester name" [ref=e65]: Semester 2
+              - button "Remove semester" [ref=e67] [cursor=pointer]:
+                - img [ref=e68]
+              - generic [ref=e70]:
+                - generic [ref=e71]: GPA
+                - spinbutton "GPA value" [ref=e72]
+              - generic [ref=e73]:
+                - generic [ref=e74]: Credits
+                - spinbutton "Credit hours" [ref=e75]
+          - button "Add Semester" [ref=e76] [cursor=pointer]:
+            - img [ref=e77]
+            - text: Add Semester
+        - generic [ref=e79]:
+          - img [ref=e81]
+          - generic [ref=e84]:
+            - generic [ref=e85]:
+              - generic [ref=e86]: "8.50"
+              - generic [ref=e87]: / 10
+            - generic [ref=e88]:
+              - generic [ref=e89]: Excellent
+              - generic [ref=e90]: 20 credits total
+    - group [ref=e92]:
+      - generic "ReferenceGrade Table for CBSE / UGC India" [ref=e93] [cursor=pointer]:
+        - generic [ref=e94]: ReferenceGrade Table for CBSE / UGC India
+        - img [ref=e95]
+    - generic [ref=e98]:
+      - generic [ref=e99]:
+        - generic [ref=e100]: FAQ
+        - heading "Frequently Asked Questions" [level=2] [ref=e101]
+      - generic [ref=e102]:
+        - group [ref=e103]:
+          - generic "What is CGPA and how is it calculated?" [ref=e104] [cursor=pointer]:
+            - text: What is CGPA and how is it calculated?
+            - img [ref=e105]
+        - group [ref=e107]:
+          - generic "What is the difference between SGPA and CGPA?" [ref=e108] [cursor=pointer]:
+            - text: What is the difference between SGPA and CGPA?
+            - img [ref=e109]
+        - group [ref=e111]:
+          - generic "Why do I need to enter credit hours?" [ref=e112] [cursor=pointer]:
+            - text: Why do I need to enter credit hours?
+            - img [ref=e113]
+        - group [ref=e115]:
+          - generic "Can I use this calculator for any university?" [ref=e116] [cursor=pointer]:
+            - text: Can I use this calculator for any university?
+            - img [ref=e117]
+        - group [ref=e119]:
+          - generic "How accurate is this CGPA calculator?" [ref=e120] [cursor=pointer]:
+            - text: How accurate is this CGPA calculator?
+            - img [ref=e121]
+        - group [ref=e123]:
+          - generic "Is my data safe?" [ref=e124] [cursor=pointer]:
+            - text: Is my data safe?
+            - img [ref=e125]
+  - contentinfo [ref=e127]:
+    - generic [ref=e128]:
+      - generic [ref=e129]:
+        - generic [ref=e130]:
+          - link "CGPA Helper" [ref=e131] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e132]: CGPA
+            - generic [ref=e133]: Helper
+          - paragraph [ref=e134]: Free, fast, and accurate CGPA & SGPA calculators for college students worldwide.
+        - generic [ref=e135]:
+          - heading "Calculators" [level=4] [ref=e136]
+          - list [ref=e137]:
+            - listitem [ref=e138]:
+              - link "CGPA Calculator" [ref=e139] [cursor=pointer]:
+                - /url: /cgpa-calculator
+            - listitem [ref=e140]:
+              - link "SGPA Calculator" [ref=e141] [cursor=pointer]:
+                - /url: /sgpa-calculator
+            - listitem [ref=e142]:
+              - link "CGPA to Percentage" [ref=e143] [cursor=pointer]:
+                - /url: /cgpa-to-percentage
+            - listitem [ref=e144]:
+              - link "Percentage to CGPA" [ref=e145] [cursor=pointer]:
+                - /url: /percentage-to-cgpa
+        - generic [ref=e146]:
+          - heading "Resources" [level=4] [ref=e147]
+          - list [ref=e148]:
+            - listitem [ref=e149]:
+              - link "How It Works" [ref=e150] [cursor=pointer]:
+                - /url: /#how-it-works
+            - listitem [ref=e151]:
+              - link "FAQ" [ref=e152] [cursor=pointer]:
+                - /url: /#faq
+        - generic [ref=e153]:
+          - heading "Legal" [level=4] [ref=e154]
+          - list [ref=e155]:
+            - listitem [ref=e156]:
+              - link "Privacy Policy" [ref=e157] [cursor=pointer]:
+                - /url: /privacy
+            - listitem [ref=e158]:
+              - link "Terms of Service" [ref=e159] [cursor=pointer]:
+                - /url: /terms
+      - generic [ref=e160]:
+        - paragraph [ref=e161]: © 2026 CGPA Helper. Free for all students.
+        - generic [ref=e163]: All calculations run locally
+  - generic [ref=e167]:
+    - button "Menu" [ref=e168]:
+      - img [ref=e170]
+      - generic: Menu
+    - button "Inspect" [ref=e174]:
+      - img [ref=e176]
+      - generic: Inspect
+    - button "Audit" [ref=e178]:
+      - img [ref=e180]
+      - generic: Audit
+    - button "Settings" [ref=e183]:
+      - img [ref=e185]
+      - generic: Settings

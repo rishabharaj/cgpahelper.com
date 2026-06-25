@@ -1,0 +1,160 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation "Main navigation" [ref=e3]:
+      - link "CGPA Helper" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e5]: CGPA
+        - generic [ref=e6]: Helper
+      - generic [ref=e7]:
+        - link "CGPA Calculator" [ref=e8] [cursor=pointer]:
+          - /url: /cgpa-calculator
+        - link "SGPA Calculator" [ref=e9] [cursor=pointer]:
+          - /url: /sgpa-calculator
+        - link "CGPA to %" [ref=e10] [cursor=pointer]:
+          - /url: /cgpa-to-percentage
+        - link "% to CGPA" [ref=e11] [cursor=pointer]:
+          - /url: /percentage-to-cgpa
+      - button "Toggle dark mode" [ref=e13]:
+        - img [ref=e14]
+  - main [ref=e16]:
+    - navigation "Breadcrumb" [ref=e17]:
+      - list [ref=e18]:
+        - listitem [ref=e19]:
+          - link "Home" [ref=e20] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e21]:
+          - img [ref=e22]
+        - listitem [ref=e24]: CGPA Calculator
+    - generic [ref=e25]:
+      - heading "CGPA Calculator" [level=1] [ref=e26]
+      - paragraph [ref=e27]: Enter your semester GPAs and credit hours to calculate your cumulative GPA. Supports standard 10-point, 4.0, and 5.0 grading scales — results update in real time.
+    - generic [ref=e28]:
+      - generic [ref=e29]:
+        - paragraph [ref=e30]: "This is a simple CGPA calculator that calculates your CGPA based on your grades and credits:"
+        - generic [ref=e32]:
+          - generic [ref=e33]: CGPA =
+          - generic [ref=e34]:
+            - generic [ref=e35]:
+              - text: ∑
+              - subscript [ref=e36]: i=1
+              - superscript [ref=e37]: "n"
+              - text: (grade
+              - subscript [ref=e38]: i
+              - text: × credit
+              - subscript [ref=e39]: i
+              - text: )
+            - generic [ref=e40]:
+              - text: ∑
+              - subscript [ref=e41]: i=1
+              - superscript [ref=e42]: "n"
+              - text: credit
+              - subscript [ref=e43]: i
+      - generic [ref=e44]:
+        - generic [ref=e45]:
+          - generic [ref=e46]: Grading System
+          - combobox "Select grading system" [ref=e47] [cursor=pointer]:
+            - option "CBSE / UGC India (10-point Scale) (10.0 Scale)" [selected]
+            - option "Standard 10-Point Scale (Common for VIT, SRM, KTU, AKTU, Anna Univ, JNTU, SPPU, GGSIPU) (10.0 Scale)"
+            - option "University of Mumbai (10-point Scale) (10.0 Scale)"
+            - option "Standard 4.0 Scale (Common for US, HEC Pakistan, UGC Bangladesh, BRACU, NSU, COMSATS) (4.0 Scale)"
+            - option "Standard 5.0 GPA Scale (5.0 Scale)"
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - generic [ref=e50]: Semester
+            - generic [ref=e51]: GPA
+            - generic [ref=e52]: Credits
+            - generic [ref=e53]: Remove
+          - list "Semester entries" [ref=e54]:
+            - listitem [ref=e55]:
+              - textbox "Semester name" [ref=e57]: Semester 1
+              - spinbutton "GPA value" [ref=e59]
+              - spinbutton "Credit hours" [ref=e61]
+              - button "Remove semester" [ref=e63] [cursor=pointer]:
+                - img [ref=e64]
+            - listitem [ref=e66]:
+              - textbox "Semester name" [ref=e68]: Semester 2
+              - spinbutton "GPA value" [ref=e70]
+              - spinbutton "Credit hours" [ref=e72]
+              - button "Remove semester" [ref=e74] [cursor=pointer]:
+                - img [ref=e75]
+          - button "Add Semester" [ref=e77] [cursor=pointer]:
+            - img [ref=e78]
+            - text: Add Semester
+    - group [ref=e81]:
+      - generic "ReferenceGrade Table for CBSE / UGC India" [ref=e82] [cursor=pointer]:
+        - generic [ref=e83]: ReferenceGrade Table for CBSE / UGC India
+        - img [ref=e84]
+    - generic [ref=e87]:
+      - generic [ref=e88]:
+        - generic [ref=e89]: FAQ
+        - heading "Frequently Asked Questions" [level=2] [ref=e90]
+      - generic [ref=e91]:
+        - group [ref=e92]:
+          - generic "What is CGPA and how is it calculated?" [ref=e93] [cursor=pointer]:
+            - text: What is CGPA and how is it calculated?
+            - img [ref=e94]
+        - group [ref=e96]:
+          - generic "What is the difference between SGPA and CGPA?" [ref=e97] [cursor=pointer]:
+            - text: What is the difference between SGPA and CGPA?
+            - img [ref=e98]
+        - group [ref=e100]:
+          - generic "Why do I need to enter credit hours?" [ref=e101] [cursor=pointer]:
+            - text: Why do I need to enter credit hours?
+            - img [ref=e102]
+        - group [ref=e104]:
+          - generic "Can I use this calculator for any university?" [ref=e105] [cursor=pointer]:
+            - text: Can I use this calculator for any university?
+            - img [ref=e106]
+        - group [ref=e108]:
+          - generic "How accurate is this CGPA calculator?" [ref=e109] [cursor=pointer]:
+            - text: How accurate is this CGPA calculator?
+            - img [ref=e110]
+        - group [ref=e112]:
+          - generic "Is my data safe?" [ref=e113] [cursor=pointer]:
+            - text: Is my data safe?
+            - img [ref=e114]
+  - contentinfo [ref=e116]:
+    - generic [ref=e117]:
+      - generic [ref=e118]:
+        - generic [ref=e119]:
+          - link "CGPA Helper" [ref=e120] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e121]: CGPA
+            - generic [ref=e122]: Helper
+          - paragraph [ref=e123]: Free, fast, and accurate CGPA & SGPA calculators for college students worldwide.
+        - generic [ref=e124]:
+          - heading "Calculators" [level=4] [ref=e125]
+          - list [ref=e126]:
+            - listitem [ref=e127]:
+              - link "CGPA Calculator" [ref=e128] [cursor=pointer]:
+                - /url: /cgpa-calculator
+            - listitem [ref=e129]:
+              - link "SGPA Calculator" [ref=e130] [cursor=pointer]:
+                - /url: /sgpa-calculator
+            - listitem [ref=e131]:
+              - link "CGPA to Percentage" [ref=e132] [cursor=pointer]:
+                - /url: /cgpa-to-percentage
+            - listitem [ref=e133]:
+              - link "Percentage to CGPA" [ref=e134] [cursor=pointer]:
+                - /url: /percentage-to-cgpa
+        - generic [ref=e135]:
+          - heading "Resources" [level=4] [ref=e136]
+          - list [ref=e137]:
+            - listitem [ref=e138]:
+              - link "How It Works" [ref=e139] [cursor=pointer]:
+                - /url: /#how-it-works
+            - listitem [ref=e140]:
+              - link "FAQ" [ref=e141] [cursor=pointer]:
+                - /url: /#faq
+        - generic [ref=e142]:
+          - heading "Legal" [level=4] [ref=e143]
+          - list [ref=e144]:
+            - listitem [ref=e145]:
+              - link "Privacy Policy" [ref=e146] [cursor=pointer]:
+                - /url: /privacy
+            - listitem [ref=e147]:
+              - link "Terms of Service" [ref=e148] [cursor=pointer]:
+                - /url: /terms
+      - generic [ref=e149]:
+        - paragraph [ref=e150]: © 2026 CGPA Helper. Free for all students.
+        - generic [ref=e152]: All calculations run locally

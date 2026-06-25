@@ -1,0 +1,187 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = 'CBSE Class 10 CGPA to Percentage Conversion: Official Multiplier & Guidelines';
+const description = 'Confused about how to convert your CBSE CGPA to percentage? Learn the official board formula, check conversion examples, and understand the 9.5 multiplier.';
+
+const articleData = {
+  category: 'Board Guides',
+  publishDate: 'June 23, 2026',
+  readTime: '5 min read',
+  author: 'Sarah Jenkins',
+  authorTitle: 'Board Exams Specialist & Counselor',
+  authorInitials: 'SJ'
+};
+---
+
+<Layout title={title} description={description} canonicalPath="/blog/cbse-cgpa-to-percentage">
+  <div class="container-page py-12 md:py-16 max-w-4xl">
+    
+    <!-- ── Breadcrumb ── -->
+    <nav aria-label="Breadcrumb" class="mb-8">
+      <ol class="flex items-center gap-1.5 text-sm text-neutral-400 dark:text-neutral-500">
+        <li>
+          <a href="/" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Home</a>
+        </li>
+        <li aria-hidden="true">
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </li>
+        <li>
+          <a href="/blog" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Blog</a>
+        </li>
+        <li aria-hidden="true">
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </li>
+        <li>
+          <span class="text-neutral-900 dark:text-neutral-100 font-medium">CBSE CGPA to %</span>
+        </li>
+      </ol>
+    </nav>
+
+    <!-- ── Article Header ── -->
+    <header class="mb-10 pb-8 border-b border-neutral-200 dark:border-neutral-800">
+      <span class="inline-block text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-3">
+        {articleData.category}
+      </span>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-neutral-900 dark:text-white mb-6 leading-tight">
+        CBSE Class 10 CGPA to Percentage: <span class="bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent">Official 9.5 Formula</span>
+      </h1>
+      
+      <!-- Meta info -->
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-950 flex items-center justify-center text-sm font-semibold text-indigo-600 dark:text-indigo-400">
+            {articleData.authorInitials}
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-neutral-950 dark:text-white">{articleData.author}</p>
+            <p class="text-xs text-neutral-500 dark:text-neutral-400">{articleData.authorTitle}</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 font-mono">
+          <span>{articleData.publishDate}</span>
+          <span>•</span>
+          <span>{articleData.readTime}</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Featured Image ── -->
+    <div class="mb-10 rounded-2xl overflow-hidden aspect-video bg-neutral-100 dark:bg-neutral-800 relative">
+      <img
+        src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop"
+        alt="CBSE Marks Sheet and calculations"
+        class="w-full h-full object-cover"
+      />
+    </div>
+
+    <!-- ── Article Content ── -->
+    <article class="prose dark:prose-invert max-w-none text-neutral-700 dark:text-neutral-300 space-y-6">
+      <p class="text-lg leading-relaxed font-normal text-neutral-600 dark:text-neutral-400">
+        Every year, millions of students passing through the Central Board of Secondary Education (CBSE) Class 10 examinations receive their final grades in CGPA rather than raw percentage points. However, during college admissions, scholarship applications, or resume reviews, students are frequently asked to enter their scores as a percentage. Understanding the official CBSE multiplier is key to converting your grades accurately.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white mt-8 mb-4">The Official CBSE Formula</h2>
+      <p>
+        The official CBSE Board conversion formula states:
+      </p>
+      <div class="p-6 my-4 bg-indigo-50/50 dark:bg-indigo-950/20 rounded-xl border border-indigo-100 dark:border-indigo-900/30 text-center">
+        <span class="text-xl sm:text-2xl font-mono font-semibold text-indigo-700 dark:text-indigo-400">
+          Percentage (%) = CGPA × 9.5
+        </span>
+      </div>
+      <p>
+        For instance, if your CGPA is 9.2:
+        <br />
+        <span class="font-mono text-neutral-900 dark:text-white bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded">
+          9.2 × 9.5 = 87.4%
+        </span>
+      </p>
+
+      <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white mt-8 mb-4">Why is the Multiplier 9.5?</h2>
+      <p>
+        A common question asked by students is: "Why does the board multiply by 9.5 instead of 10?"
+      </p>
+      <p>
+        According to CBSE, the board analyzed board exam scores over a multi-year period. By tracking the averages of students scoring in various grade bands, they determined that multiplying CGPA by 9.5 yields a statistically representative and fair equivalent percentage that aligns with CBSE's competitive grading standards.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white mt-8 mb-4">How to Convert Subject-Wise Grades</h2>
+      <p>
+        If you want to find the percentage equivalent of an individual subject, you use the subject's Grade Point (GP) and multiply it by 9.5:
+      </p>
+      <ul>
+        <li>Mathematics GP: 10 → 10 × 9.5 = 95%</li>
+        <li>Science GP: 9 → 9 × 9.5 = 85.5%</li>
+        <li>English GP: 8 → 8 × 9.5 = 76%</li>
+      </ul>
+
+      <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white mt-8 mb-4">CBSE CGPA to Percentage Conversion Table</h2>
+      <p>
+        Here is a quick reference table showing the percentage conversions for standard CGPAs:
+      </p>
+      
+      <div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-hidden shadow-sm max-w-md mx-auto my-6">
+        <table class="w-full text-sm border-collapse text-left">
+          <thead>
+            <tr class="border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-950/20 font-mono text-xs uppercase text-neutral-400">
+              <th class="px-6 py-3 font-semibold">CGPA</th>
+              <th class="px-6 py-3 font-semibold">Equivalent Percentage</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800 text-neutral-600 dark:text-neutral-400 font-mono">
+            <tr><td class="px-6 py-3 font-semibold text-neutral-800 dark:text-neutral-200">10.0</td><td class="px-6 py-3 text-indigo-600 dark:text-indigo-400 font-bold">95.0%</td></tr>
+            <tr><td class="px-6 py-3">9.5</td><td class="px-6 py-3">90.25%</td></tr>
+            <tr><td class="px-6 py-3">9.0</td><td class="px-6 py-3">85.5%</td></tr>
+            <tr><td class="px-6 py-3">8.5</td><td class="px-6 py-3">80.75%</td></tr>
+            <tr><td class="px-6 py-3">8.0</td><td class="px-6 py-3">76.0%</td></tr>
+            <tr><td class="px-6 py-3">7.5</td><td class="px-6 py-3">71.25%</td></tr>
+            <tr><td class="px-6 py-3">7.0</td><td class="px-6 py-3">66.5%</td></tr>
+            <tr><td class="px-6 py-3">6.5</td><td class="px-6 py-3">61.75%</td></tr>
+            <tr><td class="px-6 py-3">6.0</td><td class="px-6 py-3">57.0%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white mt-8 mb-4">Steps to Calculate Your Score:</h2>
+      <ol class="list-decimal pl-5 space-y-2">
+        <li>
+          Find the Grade Points for the five main subjects on your marks sheet.
+        </li>
+        <li>
+          Add them together and divide by 5 to calculate your average CGPA.
+        </li>
+        <li>
+          Multiply the resulting CGPA by 9.5 to get your aggregate percentage.
+        </li>
+      </ol>
+    </article>
+
+    <!-- ── Call to Action Card ── -->
+    <div class="mt-16 p-8 bg-neutral-900 dark:bg-neutral-900 border border-neutral-800 dark:border-neutral-800 rounded-2xl text-center text-white">
+      <h3 class="text-xl sm:text-2xl font-semibold mb-3">Convert CBSE CGPA Instantly</h3>
+      <p class="text-sm text-neutral-400 max-w-lg mx-auto mb-6">
+        No need to do manual multiplication! Open our free, custom CBSE Board CGPA converter tool to get instant results.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a
+          href="/board-cgpa-calculator?board=cbse"
+          class="px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-white text-neutral-900 hover:bg-neutral-100 transition-colors"
+        >
+          Open CBSE Board Calculator
+        </a>
+        <a
+          href="/blog"
+          class="px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider border border-neutral-700 text-neutral-300 hover:text-white hover:border-neutral-600 transition-colors"
+        >
+          Browse All Blogs
+        </a>
+      </div>
+    </div>
+
+  </div>
+</Layout>

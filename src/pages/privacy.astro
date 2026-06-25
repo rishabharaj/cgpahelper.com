@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = 'Privacy Policy — CGPA Helper';
+const description = 'Read the privacy policy for CGPA Helper. We do not store or collect your academic details or grades.';
+---
+
+<Layout title={title} description={description}>
+  <div class="container-page py-16 md:py-24 max-w-3xl">
+    <h1 class="text-4xl font-bold tracking-tight mb-6">Privacy Policy</h1>
+    
+    <div class="prose prose-neutral dark:prose-invert max-w-none text-neutral-600 dark:text-neutral-400 space-y-6 leading-relaxed">
+      <p><em>Last updated: June 25, 2026</em></p>
+      
+      <p>
+        At CGPA Helper, we take student privacy extremely seriously. This Privacy Policy details our approach to privacy and data handling across our calculators and conversion utilities.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-neutral-900 dark:text-neutral-100 mt-8 mb-3">1. No Data Collection</h2>
+      <p>
+        All calculations, inputs, semesters, course names, and grades entered into CGPA Helper are processed entirely on your local device using JavaScript. None of this information is sent to our servers, stored in databases, or shared with third parties.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-neutral-900 dark:text-neutral-100 mt-8 mb-3">2. Local Storage</h2>
+      <p>
+        To make the tool convenient, we use the browser's standard <code>localStorage</code> API to automatically save your semester and course list. This ensures that you don't lose your entries when you refresh or close the page. This data remains completely local to your browser and can be cleared at any time by deleting your browser cookies/site data.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-neutral-900 dark:text-neutral-100 mt-8 mb-3">3. External Links</h2>
+      <p>
+        Our website may contain links to external sites (such as official university domains). We are not responsible for the privacy practices or content of these external websites.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-neutral-900 dark:text-neutral-100 mt-8 mb-3">4. Consent</h2>
+      <p>
+        By using our website, you hereby consent to our Privacy Policy.
+      </p>
+    </div>
+  </div>
+</Layout>

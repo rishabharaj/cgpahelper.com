@@ -1,0 +1,5 @@
+[     369ms] ReferenceError: resultContent is not defined
+    at calculate (http://localhost:4321/src/pages/board-cgpa-calculator.astro?astro&type=script&index=0&lang.ts:498:2)
+    at initBoard (http://localhost:4321/src/pages/board-cgpa-calculator.astro?astro&type=script&index=0&lang.ts:465:2)
+    at checkUrlParams (http://localhost:4321/src/pages/board-cgpa-calculator.astro?astro&type=script&index=0&lang.ts:541:2)
+    at http://localhost:4321/src/pages/board-cgpa-calculator.astro?astro&type=script&index=0&lang.ts:544:1
