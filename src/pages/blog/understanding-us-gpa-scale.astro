@@ -1,0 +1,270 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = 'Understanding the US GPA Scale: How the 4.0 Grading System Works';
+const description = 'Demystify the U.S. grading system. Learn the difference between weighted and unweighted GPA, view the standard letter-to-GPA conversion chart, and master the calculation formula.';
+
+const articleData = {
+  category: 'International Systems',
+  publishDate: 'June 26, 2026',
+  readTime: '6 min read',
+  author: 'Sarah Jenkins',
+  authorTitle: 'Academic Advisor & International Counselor',
+  authorInitials: 'SJ'
+};
+---
+
+<Layout title={title} description={description} canonicalPath="/blog/understanding-us-gpa-scale">
+  <div class="container-page py-12 md:py-16 max-w-4xl">
+    
+    <!-- ── Breadcrumb ── -->
+    <nav aria-label="Breadcrumb" class="mb-8">
+      <ol class="flex items-center gap-1.5 text-sm text-neutral-400 dark:text-neutral-500">
+        <li>
+          <a href="/" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Home</a>
+        </li>
+        <li aria-hidden="true">
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </li>
+        <li>
+          <a href="/blog" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Blog</a>
+        </li>
+        <li aria-hidden="true">
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </li>
+        <li>
+          <span class="text-neutral-900 dark:text-neutral-100 font-medium">US GPA Scale Guide</span>
+        </li>
+      </ol>
+    </nav>
+
+    <!-- ── Article Header ── -->
+    <header class="mb-10 pb-8 border-b border-neutral-200 dark:border-neutral-800">
+      <span class="inline-block text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-3">
+        {articleData.category}
+      </span>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-neutral-900 dark:text-white mb-6 leading-tight">
+        Understanding the US GPA Scale: <span class="bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent">How the 4.0 Grading System Works</span>
+      </h1>
+      
+      <!-- Meta info -->
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-950 flex items-center justify-center text-sm font-semibold text-indigo-600 dark:text-indigo-400">
+            {articleData.authorInitials}
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-neutral-950 dark:text-white">{articleData.author}</p>
+            <p class="text-xs text-neutral-500 dark:text-neutral-400">{articleData.authorTitle}</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 font-mono">
+          <span>{articleData.publishDate}</span>
+          <span>•</span>
+          <span>{articleData.readTime}</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Featured Image ── -->
+    <div class="mb-10 rounded-2xl overflow-hidden aspect-video bg-neutral-100 dark:bg-neutral-800 relative">
+      <img
+        src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop"
+        alt="Graduation caps and university building"
+        class="w-full h-full object-cover"
+      />
+    </div>
+
+    <!-- ── Article Content ── -->
+    <article class="prose dark:prose-invert max-w-none text-neutral-700 dark:text-neutral-300 space-y-6">
+      <p class="text-lg leading-relaxed font-normal text-neutral-600 dark:text-neutral-400">
+        If you are planning to study in the United States, apply for a job at a global corporation, or submit a university application, you will inevitably encounter the U.S. GPA system. Unlike countries that grade students on percentages (out of 100) or 10-point scales, the United States uses a standard 4.0 scale. Understanding how this system assigns values to letter grades is essential for navigating your academic profile.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white mt-8 mb-4">What is a GPA?</h2>
+      <p>
+        <strong>GPA</strong> stands for Grade Point Average. It is a single number that summarizes your overall academic performance across a term or an entire degree program. In the U.S. educational system, courses are graded using letters (A, B, C, D, F). Each letter grade is assigned a numerical "point" value on a scale from 0.00 to 4.00.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white mt-8 mb-4">The Standard U.S. 4.0 Grading Chart</h2>
+      <p>
+        The table below displays the widely accepted conversion chart linking U.S. letter grades, typical percentage bands, and their equivalent grade points on the unweighted 4.0 scale:
+      </p>
+
+      <div class="overflow-x-auto my-6 border border-neutral-200 dark:border-neutral-800 rounded-xl">
+        <table class="w-full text-sm text-left border-collapse">
+          <thead>
+            <tr class="bg-neutral-50 dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800">
+              <th class="px-6 py-3 font-semibold text-neutral-900 dark:text-white">Letter Grade</th>
+              <th class="px-6 py-3 font-semibold text-neutral-900 dark:text-white">Percentage Range</th>
+              <th class="px-6 py-3 font-semibold text-neutral-900 dark:text-white">4.0 Grade Point</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800">
+            <tr>
+              <td class="px-6 py-3 font-mono font-medium">A+ / A</td>
+              <td class="px-6 py-3">90% – 100%</td>
+              <td class="px-6 py-3 font-mono font-semibold text-indigo-600 dark:text-indigo-400">4.00</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-3 font-mono font-medium">A-</td>
+              <td class="px-6 py-3">85% – 89%</td>
+              <td class="px-6 py-3 font-mono font-semibold text-indigo-600 dark:text-indigo-400">3.70</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-3 font-mono font-medium">B+</td>
+              <td class="px-6 py-3">80% – 84%</td>
+              <td class="px-6 py-3 font-mono font-semibold">3.30</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-3 font-mono font-medium">B</td>
+              <td class="px-6 py-3">75% – 79%</td>
+              <td class="px-6 py-3 font-mono font-semibold">3.00</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-3 font-mono font-medium">B-</td>
+              <td class="px-6 py-3">70% – 74%</td>
+              <td class="px-6 py-3 font-mono font-semibold">2.70</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-3 font-mono font-medium">C+</td>
+              <td class="px-6 py-3">65% – 69%</td>
+              <td class="px-6 py-3 font-mono font-semibold">2.30</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-3 font-mono font-medium">C</td>
+              <td class="px-6 py-3">60% – 64%</td>
+              <td class="px-6 py-3 font-mono font-semibold">2.00</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-3 font-mono font-medium">C-</td>
+              <td class="px-6 py-3">57% – 59%</td>
+              <td class="px-6 py-3 font-mono font-semibold">1.70</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-3 font-mono font-medium">D+</td>
+              <td class="px-6 py-3">55% – 56%</td>
+              <td class="px-6 py-3 font-mono font-semibold">1.30</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-3 font-mono font-medium">D</td>
+              <td class="px-6 py-3">52% – 54%</td>
+              <td class="px-6 py-3 font-mono font-semibold">1.00</td>
+            </tr>
+            <tr>
+              <td class="px-6 py-3 font-mono font-medium">D-</td>
+              <td class="px-6 py-3">50% – 51%</td>
+              <td class="px-6 py-3 font-mono font-semibold">0.70</td>
+            </tr>
+            <tr class="bg-red-50/20 dark:bg-red-950/10">
+              <td class="px-6 py-3 font-mono font-medium text-red-600 dark:text-red-400">F</td>
+              <td class="px-6 py-3 text-red-600 dark:text-red-400">Below 50%</td>
+              <td class="px-6 py-3 font-mono font-semibold text-red-600 dark:text-red-400">0.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white mt-8 mb-4">How GPA is Calculated (The Formula)</h2>
+      <p>
+        U.S. GPAs are calculated as credit-weighted averages. Simply taking the mathematical average of your grade points will result in an incorrect GPA if the courses carry different credit weights. The mathematical formula is:
+      </p>
+      <div class="p-6 my-4 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl text-center">
+        <span class="text-lg sm:text-xl font-mono font-semibold text-neutral-800 dark:text-neutral-100">
+          GPA = Σ (Grade Points × Course Credits) ÷ Total Credits
+        </span>
+      </div>
+
+      <h3 class="text-xl font-semibold text-neutral-900 dark:text-white mt-6 mb-2">Example Calculation:</h3>
+      <p>
+        Imagine a student completing four courses in their first semester at university:
+      </p>
+      <ul class="list-disc pl-6 space-y-2">
+        <li><strong>Calculus I</strong> (4 credits): Grade A (4.00 points) &rarr; <span class="font-mono">4.00 × 4 = 16.0 points</span></li>
+        <li><strong>Chemistry Lab</strong> (1 credit): Grade B+ (3.30 points) &rarr; <span class="font-mono">3.30 × 1 = 3.3 points</span></li>
+        <li><strong>English Literature</strong> (3 credits): Grade A- (3.70 points) &rarr; <span class="font-mono">3.70 × 3 = 11.1 points</span></li>
+        <li><strong>Intro to Psychology</strong> (3 credits): Grade C+ (2.30 points) &rarr; <span class="font-mono">2.30 × 3 = 6.9 points</span></li>
+      </ul>
+      <p>
+        <strong>Step 1:</strong> Sum up the total credit hours:
+        <br />
+        <span class="font-mono text-neutral-900 dark:text-white bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded">4 + 1 + 3 + 3 = 11 total credits</span>
+      </p>
+      <p>
+        <strong>Step 2:</strong> Sum up the calculated weighted points:
+        <br />
+        <span class="font-mono text-neutral-900 dark:text-white bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded">16.0 + 3.3 + 11.1 + 6.9 = 37.3 points</span>
+      </p>
+      <p>
+        <strong>Step 3:</strong> Divide total points by total credits:
+        <br />
+        <span class="font-mono text-neutral-900 dark:text-white bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded">GPA = 37.3 ÷ 11 = 3.39</span>
+      </p>
+      <p>
+        The student's Semester GPA is <strong>3.39</strong>, which falls between a B (3.0) and an A- (3.7), indicating a solid "Very Good" performance.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white mt-8 mb-4">Unweighted vs. Weighted GPA</h2>
+      <p>
+        If you are evaluating transcripts, especially at the U.S. high school level, you will hear the terms <em>unweighted GPA</em> and <em>weighted GPA</em>:
+      </p>
+      <div class="grid md:grid-cols-2 gap-6 my-6">
+        <div class="p-5 border border-neutral-200 dark:border-neutral-800 rounded-xl bg-white dark:bg-neutral-900">
+          <h4 class="font-semibold text-indigo-600 dark:text-indigo-400 mb-2">Unweighted GPA</h4>
+          <p class="text-sm leading-relaxed">
+            Grades are mapped on a standard 4.0 scale regardless of the class difficulty. An 'A' in an advanced AP Calculus course and an 'A' in a standard Algebra class both yield 4.0 points. Maximum possible GPA is 4.0.
+          </p>
+        </div>
+        <div class="p-5 border border-neutral-200 dark:border-neutral-800 rounded-xl bg-white dark:bg-neutral-900">
+          <h4 class="font-semibold text-indigo-600 dark:text-indigo-400 mb-2">Weighted GPA</h4>
+          <p class="text-sm leading-relaxed">
+            Reflects the rigor of courses. Advanced Placement (AP), International Baccalaureate (IB), and Honors courses are given extra points (usually +1.0 for AP/IB, +0.5 for Honors). An 'A' in AP Calculus yields 5.0 points. Weighted GPAs can exceed 4.0.
+          </p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white mt-8 mb-4">Applying to U.S. Universities as an International Student</h2>
+      <p>
+        Many international students worry that their local grades (e.g., a 10-point scale in India, or a percentage system in Pakistan or Bangladesh) will put them at a disadvantage. Here are some key points to keep in mind:
+      </p>
+      <ol class="list-decimal pl-6 space-y-3">
+        <li>
+          <strong>Do not self-convert:</strong> Most U.S. admissions offices explicitly request that you submit your transcripts in their native format. They have expert evaluation staff (or use third-party agencies like WES or ECE) who understand your local context and perform official evaluations.
+        </li>
+        <li>
+          <strong>The "WES Evaluation" Standard:</strong> Organizations like World Education Services (WES) evaluate international credentials. They often map high-performing ranges in other systems directly to U.S. letter grades based on historical performance distributions, rather than using raw mathematical fractions.
+        </li>
+        <li>
+          <strong>Class Rank Matters:</strong> U.S. colleges place high value on class rank and local reference context. If you scored 72% in a system where the highest score in the country was 78%, admissions committees will recognize your performance as outstanding.
+        </li>
+      </ol>
+    </article>
+
+    <!-- ── Call to Action Card ── -->
+    <div class="mt-16 p-8 bg-neutral-900 dark:bg-neutral-900 border border-neutral-800 dark:border-neutral-800 rounded-2xl text-center text-white">
+      <h3 class="text-xl sm:text-2xl font-semibold mb-3">Calculate Your GPA Instantly</h3>
+      <p class="text-sm text-neutral-400 max-w-lg mx-auto mb-6">
+        Ready to check your cumulative grades? Use our free CGPA and GPA calculators supporting the standard 4.0 scale and international systems.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a
+          href="/cgpa-calculator"
+          class="px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-white text-neutral-900 hover:bg-neutral-100 transition-colors"
+        >
+          Open CGPA Calculator
+        </a>
+        <a
+          href="/blog"
+          class="px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider border border-neutral-700 text-neutral-300 hover:text-white hover:border-neutral-600 transition-colors"
+        >
+          Browse All Guides
+        </a>
+      </div>
+    </div>
+
+  </div>
+</Layout>

@@ -1,0 +1,1046 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { gradingSystems } from '../data/grading-systems.js';
+
+const title = 'Universal GPA Converter & Calculator — Convert GPA to Any Scale';
+const description = 'Free universal GPA calculator and converter. Convert grades and transcripts between U.S. 4.0 GPA, Indian 10-point CGPA, UK Honours Class, European ECTS, Canada, and Australia scales in real time.';
+
+const faqs = [
+  {
+    question: 'How does the course-by-course conversion work?',
+    answer: 'The converter maps each of your courses individually. It takes the marks percentage or midpoint of the grade range in your source grading system, translates it to the corresponding grade range in the target grading system, and then calculates a credit-weighted GPA in the target system. This is the same rigorous method used by international evaluation agencies like WES.'
+  },
+  {
+    question: 'What is the "Pass Grade Protection" feature?',
+    answer: 'Unlike generic converters that map lower passing grades (like a D or P in India) directly to an F in the U.S. (because the raw percentage is under 50%), our smart tool includes pass grade protection. If a grade is a passing score in the source system, it is automatically mapped to at least a passing grade in the target system (e.g. D- on the US scale), preventing false failures.'
+  },
+  {
+    question: 'How do I download or print my converted transcript?',
+    answer: 'Once you enter your courses and select your source and target systems, scroll down to the "Conversion Summary". You can click "Export CSV" to download the data as a spreadsheet, or click "Print / Save PDF" to open a clean, beautifully formatted official transcript sheet optimized for printing or saving to your device.'
+  },
+  {
+    question: 'Is there a limit on calculations or a premium paywall?',
+    answer: 'No. Unlike competitor tools that restrict the number of calculations per day or lock specific international scales behind a paid membership, our Universal GPA Converter is 100% free, unlimited, privacy-first, and runs entirely in your browser.'
+  }
+];
+
+const systemEntries = Object.entries(gradingSystems);
+---
+
+<Layout title={title} description={description} faqs={faqs}>
+  <div class="container-page pt-6 pb-20">
+
+    <!-- ── Breadcrumb ── -->
+    <nav aria-label="Breadcrumb" class="mb-8">
+      <ol class="flex items-center gap-1.5 text-xs text-neutral-400 dark:text-neutral-500">
+        <li>
+          <a href="/" class="hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors">Home</a>
+        </li>
+        <li aria-hidden="true">
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </li>
+        <li>
+          <span class="text-neutral-700 dark:text-neutral-200 font-medium">Universal GPA Converter</span>
+        </li>
+      </ol>
+    </nav>
+
+    <!-- ── Page Header ── -->
+    <header class="mb-10 print:hidden">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-300 border border-indigo-100/50 dark:border-indigo-900/30 mb-4">
+        🌍 Global Grade Translation Tool
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight mb-3">
+        Universal GPA <span class="bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent">Converter &amp; Calculator</span>
+      </h1>
+      <p class="text-neutral-500 dark:text-neutral-400 max-w-3xl leading-relaxed">
+        Convert your academic transcripts between any two grading scales (e.g. US 4.0, Indian 10-point, UK Class, European ECTS) on a course-by-course basis. Built with automatic passing-grade protection.
+      </p>
+    </header>
+
+    <!-- ── Main Grid ── -->
+    <div class="grid lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Left Column: Inputs and Configuration -->
+      <section class="lg:col-span-8 space-y-6 print:w-full print:col-span-12">
+        <div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-sm p-6 md:p-8 print:border-0 print:shadow-none print:p-0">
+          
+          <!-- System Scale Configuration -->
+          <div class="grid sm:grid-cols-2 gap-6 mb-8 print:grid-cols-2 print:gap-4">
+            <!-- Source Side -->
+            <div class="space-y-4">
+              <div>
+                <label for="source-country-select" class="block text-sm font-semibold mb-2 text-neutral-800 dark:text-neutral-200">
+                  Source Country / Region
+                </label>
+                <div class="relative">
+                  <select
+                    id="source-country-select"
+                    class="w-full max-w-full min-w-0 appearance-none bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all cursor-pointer pr-10 truncate"
+                  >
+                    <!-- Populated dynamically -->
+                  </select>
+                  <svg class="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg>
+                </div>
+              </div>
+
+              <div>
+                <span class="block text-xs font-mono uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-2">
+                  Select System By
+                </span>
+                <div class="flex gap-4">
+                  <label class="inline-flex items-center text-sm font-medium cursor-pointer">
+                    <input type="radio" name="source-mode" value="scale" checked class="mr-2 accent-indigo-600" />
+                    Standard Scale
+                  </label>
+                  <label class="inline-flex items-center text-sm font-medium cursor-pointer">
+                    <input type="radio" name="source-mode" value="university" class="mr-2 accent-indigo-600" />
+                    University / Board
+                  </label>
+                </div>
+              </div>
+
+              <div>
+                <label id="source-select-label" for="source-system-select" class="block text-sm font-semibold mb-2 text-neutral-800 dark:text-neutral-200">
+                  Source Grading Scale
+                </label>
+                <div class="relative">
+                  <select
+                    id="source-system-select"
+                    class="w-full max-w-full min-w-0 appearance-none bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all cursor-pointer pr-10 truncate"
+                  >
+                    <!-- Populated dynamically -->
+                  </select>
+                  <svg class="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Target Side -->
+            <div class="space-y-4">
+              <div>
+                <label for="target-country-select" class="block text-sm font-semibold mb-2 text-neutral-800 dark:text-neutral-200">
+                  Target Country / Region
+                </label>
+                <div class="relative">
+                  <select
+                    id="target-country-select"
+                    class="w-full max-w-full min-w-0 appearance-none bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all cursor-pointer pr-10 truncate"
+                  >
+                    <!-- Populated dynamically -->
+                  </select>
+                  <svg class="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg>
+                </div>
+              </div>
+
+              <div>
+                <span class="block text-xs font-mono uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-2">
+                  Select System By
+                </span>
+                <div class="flex gap-4">
+                  <label class="inline-flex items-center text-sm font-medium cursor-pointer">
+                    <input type="radio" name="target-mode" value="scale" checked class="mr-2 accent-indigo-600" />
+                    Standard Scale
+                  </label>
+                  <label class="inline-flex items-center text-sm font-medium cursor-pointer">
+                    <input type="radio" name="target-mode" value="university" class="mr-2 accent-indigo-600" />
+                    University / Board
+                  </label>
+                </div>
+              </div>
+
+              <div>
+                <label id="target-select-label" for="target-system-select" class="block text-sm font-semibold mb-2 text-neutral-800 dark:text-neutral-200">
+                  Target Conversion Scale
+                </label>
+                <div class="relative">
+                  <select
+                    id="target-system-select"
+                    class="w-full max-w-full min-w-0 appearance-none bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all cursor-pointer pr-10 truncate"
+                  >
+                    <!-- Populated dynamically -->
+                  </select>
+                  <svg class="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Course Details Entry Table -->
+          <div>
+            <h2 class="text-lg font-semibold tracking-tight mb-4 text-neutral-900 dark:text-white flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
+              Course Transcript Entries
+            </h2>
+            
+            <!-- Table Header -->
+            <div class="hidden sm:grid sm:grid-cols-[2fr_100px_120px_40px] gap-4 mb-3 px-2 text-xs font-mono uppercase tracking-wider text-neutral-400 dark:text-neutral-500">
+              <span>Course Title / Subject</span>
+              <span>Credits</span>
+              <span>Source Grade</span>
+              <span class="sr-only">Actions</span>
+            </div>
+
+            <!-- Course Rows Container -->
+            <div id="course-rows-container" class="space-y-3" role="list">
+              <!-- Dynamically Populated by Javascript -->
+            </div>
+
+            <!-- Action buttons -->
+            <div class="flex flex-wrap items-center justify-between gap-4 mt-6 print:hidden">
+              <div class="flex items-center gap-2">
+                <button
+                  id="add-course-btn"
+                  type="button"
+                  class="inline-flex items-center gap-2 px-4 py-2 border border-neutral-200 dark:border-neutral-800 rounded-xl text-sm font-semibold hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+                >
+                  <svg class="w-4 h-4 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" d="M12 4.5v15m7.5-7.5h-15" />
+                  </svg>
+                  Add Course
+                </button>
+                <button
+                  id="add-multi-btn"
+                  type="button"
+                  class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors cursor-pointer"
+                >
+                  + Add 5 Rows
+                </button>
+              </div>
+              
+              <button
+                id="clear-all-btn"
+                type="button"
+                class="text-sm font-semibold text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 transition-colors cursor-pointer"
+              >
+                Clear All Courses
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Right Column: Results & Analytics Summary -->
+      <aside class="lg:col-span-4 space-y-6 print:w-full print:col-span-12">
+        
+        <!-- Scorecard Card -->
+        <div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-6 md:p-8 shadow-sm print:border-0 print:shadow-none print:p-0">
+          <h2 class="text-sm font-mono uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-6 print:hidden">
+            Calculated Results
+          </h2>
+
+          <div class="space-y-8">
+            <!-- Source GPA -->
+            <div class="relative">
+              <p class="text-xs text-neutral-400 dark:text-neutral-500 font-semibold uppercase tracking-wider mb-2">
+                Source Scale GPA
+              </p>
+              <div class="flex items-baseline gap-1.5">
+                <span id="source-gpa-display" class="text-4xl sm:text-5xl font-semibold tracking-tight text-neutral-900 dark:text-white">0.00</span>
+                <span id="source-gpa-max" class="text-neutral-400 dark:text-neutral-600 font-medium text-lg">/ 10.00</span>
+              </div>
+              <p id="source-scale-name" class="text-xs text-neutral-500 mt-1 truncate">CBSE / UGC India</p>
+            </div>
+
+            <!-- Arrow Divider -->
+            <div class="flex items-center gap-4 py-2 print:hidden">
+              <div class="flex-1 h-px bg-neutral-100 dark:bg-neutral-800"></div>
+              <div class="w-8 h-8 rounded-full bg-indigo-50 dark:bg-indigo-950 flex items-center justify-center border border-indigo-100/50 dark:border-indigo-900/30">
+                <svg class="w-4 h-4 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" d="M19 13.5L12 20.5M12 20.5L5 13.5M12 20.5V3.5" />
+                </svg>
+              </div>
+              <div class="flex-1 h-px bg-neutral-100 dark:bg-neutral-800"></div>
+            </div>
+
+            <!-- Target GPA -->
+            <div class="relative">
+              <p class="text-xs text-indigo-600 dark:text-indigo-400 font-semibold uppercase tracking-wider mb-2">
+                Target Converted GPA
+              </p>
+              <div class="flex items-baseline gap-1.5">
+                <span id="target-gpa-display" class="text-4xl sm:text-5xl font-semibold tracking-tight text-indigo-600 dark:text-indigo-400">0.00</span>
+                <span id="target-gpa-max" class="text-indigo-400 dark:text-indigo-600 font-medium text-lg">/ 4.00</span>
+              </div>
+              <p id="target-scale-name" class="text-xs text-neutral-500 mt-1 truncate">U.S. and International Grading Systems</p>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="pt-4 border-t border-neutral-100 dark:border-neutral-800 space-y-3 print:hidden">
+              <button
+                id="export-pdf-btn"
+                class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm transition-colors cursor-pointer shadow-sm shadow-indigo-500/10"
+              >
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m6.75 12H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                </svg>
+                Print / Save PDF Report
+              </button>
+              
+              <button
+                id="export-csv-btn"
+                class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 font-semibold text-sm transition-colors cursor-pointer"
+              >
+                <svg class="w-4 h-4 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                </svg>
+                Export CSV Spreadsheet
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </aside>
+
+    </div>
+
+    <!-- ── Print-only Conversion Sheet ── -->
+    <div id="print-sheet" class="hidden print:block font-serif text-neutral-900 bg-white p-8">
+      <div class="text-center pb-6 border-b-2 border-neutral-300 mb-8">
+        <h1 class="text-2xl font-bold uppercase tracking-wide">Academic Grade Translation &amp; GPA Report</h1>
+        <p class="text-sm mt-1">Generated by CGPAHelper.com — Privacy-First Conversion Tool</p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6 text-sm mb-8">
+        <div>
+          <p><strong>Evaluation Date:</strong> <span id="print-date">June 26, 2026</span></p>
+          <p><strong>Source System:</strong> <span id="print-source-name">CBSE / UGC India</span></p>
+          <p><strong>Target System:</strong> <span id="print-target-name">Standard 4.0 Scale</span></p>
+        </div>
+        <div class="text-right">
+          <p class="text-lg"><strong>Source GPA:</strong> <span id="print-source-gpa" class="font-bold">0.00</span> / <span id="print-source-max">10.00</span></p>
+          <p class="text-xl"><strong>Converted GPA:</strong> <span id="print-target-gpa" class="font-bold">0.00</span> / <span id="print-target-max">4.00</span></p>
+        </div>
+      </div>
+
+      <table class="w-full text-left border-collapse text-sm mb-8">
+        <thead>
+          <tr class="border-b-2 border-neutral-300">
+            <th class="py-2">Subject / Course</th>
+            <th class="py-2 text-right">Credits</th>
+            <th class="py-2 text-center">Source Grade</th>
+            <th class="py-2 text-right">Source Points</th>
+            <th class="py-2 text-center">Target Grade</th>
+            <th class="py-2 text-right">Target Points</th>
+          </tr>
+        </thead>
+        <tbody id="print-table-body">
+          <!-- Filled by Javascript before printing -->
+        </tbody>
+      </table>
+
+      <div class="border-t border-neutral-300 pt-6 mt-12 text-xs text-neutral-500">
+        <p><strong>Disclaimer:</strong> This report represents a mathematical conversion based on course-by-course mappings using standard midpoint grade percentages. Official academic evaluations should be requested from credentials evaluation bodies (e.g., WES, ECE) as required by individual academic institutions or employers.</p>
+      </div>
+    </div>
+
+    <!-- ── Conversion Methodology Explanation ── -->
+    <section class="max-w-4xl mt-16 print:hidden">
+      <h2 class="text-xl sm:text-2xl font-semibold tracking-tight mb-4">
+        How is the Conversion Calculated?
+      </h2>
+      <div class="prose dark:prose-invert text-neutral-600 dark:text-neutral-400 space-y-4 leading-relaxed">
+        <p>
+          Translating grades between international education systems is a complex mathematical process. Standard division (e.g. dividing a 10-point Indian CGPA by 2.5 to get a U.S. 4.0 GPA) is mathematically incorrect because the distribution of marks and student percentile ranks differs significantly between countries.
+        </p>
+        <p>
+          To solve this, our converter uses the <strong>midpoint percentage translation method</strong>:
+        </p>
+        <ol class="list-decimal pl-6 space-y-2">
+          <li>
+            For each course, we determine the grade you earned in your source system.
+          </li>
+          <li>
+            We extract the marks percentage range of that grade (e.g., in CBSE, the grade "A+" maps to a range of <span class="font-mono bg-neutral-100 dark:bg-neutral-800 px-1 py-0.5 rounded">81–90%</span>, with a midpoint of <span class="font-mono font-semibold text-neutral-900 dark:text-white">85.5%</span>).
+          </li>
+          <li>
+            We map that midpoint percentage into the target system's grading chart to find the corresponding target letter grade (e.g., <span class="font-mono bg-neutral-100 dark:bg-neutral-800 px-1 py-0.5 rounded">85.5%</span> in the U.S. grading system lands in the <span class="font-mono">85–89%</span> band, yielding an <span class="font-mono">A-</span> grade worth <span class="font-mono font-semibold text-indigo-600 dark:text-indigo-400">3.70</span> points).
+          </li>
+          <li>
+            Finally, we calculate the credit-weighted average GPA in both scales.
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ── FAQ Section ── -->
+    <section class="max-w-4xl mt-16 print:hidden">
+      <div class="border-t border-neutral-200 dark:border-neutral-800 pt-16">
+        <h2 class="text-2xl font-semibold tracking-tight mb-8 text-center sm:text-left">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+          {faqs.map((faq) => (
+            <details class="group bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-sm">
+              <summary class="flex items-center justify-between cursor-pointer p-6 text-sm font-semibold select-none">
+                {faq.question}
+                <svg class="w-5 h-5 text-neutral-400 transition-transform duration-200 group-open:rotate-180 shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div class="px-6 pb-6 text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed -mt-1">
+                {faq.answer}
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+  </div>
+</Layout>
+
+<script>
+  import { gradingSystems, convertGrade } from '../data/grading-systems.js';
+  import { universities } from '../data/universities.js';
+
+  // DOM elements
+  const sourceCountrySelect = document.getElementById('source-country-select') as HTMLSelectElement;
+  const sourceSelect = document.getElementById('source-system-select') as HTMLSelectElement;
+  const sourceSelectLabel = document.getElementById('source-select-label')!;
+  const targetCountrySelect = document.getElementById('target-country-select') as HTMLSelectElement;
+  const targetSelect = document.getElementById('target-system-select') as HTMLSelectElement;
+  const targetSelectLabel = document.getElementById('target-select-label')!;
+
+  const rowsContainer = document.getElementById('course-rows-container')!;
+  const addCourseBtn = document.getElementById('add-course-btn')!;
+  const addMultiBtn = document.getElementById('add-multi-btn')!;
+  const clearAllBtn = document.getElementById('clear-all-btn')!;
+  
+  const sourceGpaDisplay = document.getElementById('source-gpa-display')!;
+  const sourceGpaMax = document.getElementById('source-gpa-max')!;
+  const sourceScaleName = document.getElementById('source-scale-name')!;
+  
+  const targetGpaDisplay = document.getElementById('target-gpa-display')!;
+  const targetGpaMax = document.getElementById('target-gpa-max')!;
+  const targetScaleName = document.getElementById('target-scale-name')!;
+
+  const exportPdfBtn = document.getElementById('export-pdf-btn')!;
+  const exportCsvBtn = document.getElementById('export-csv-btn')!;
+
+  // State
+  let courseCount = 0;
+
+  // Helper to match country including multi-country strings like "Pakistan / Bangladesh"
+  function matchCountry(scaleCountry: string, selectedCountry: string) {
+    if (scaleCountry === selectedCountry) return true;
+    if (scaleCountry.includes('/') && scaleCountry.split('/').map(c => c.trim()).includes(selectedCountry)) {
+      return true;
+    }
+    return false;
+  }
+
+  // Get active selected scale ID for source/target
+  function getSelectedSourceSystemId() {
+    const val = sourceSelect.value;
+    const modeRadio = document.querySelector('input[name="source-mode"]:checked') as HTMLInputElement;
+    const mode = modeRadio ? modeRadio.value : 'scale';
+    if (mode === 'university') {
+      const uni = universities.find(u => u.slug === val);
+      return uni ? uni.system : '';
+    }
+    return val;
+  }
+
+  function getSelectedTargetSystemId() {
+    const val = targetSelect.value;
+    const modeRadio = document.querySelector('input[name="target-mode"]:checked') as HTMLInputElement;
+    const mode = modeRadio ? modeRadio.value : 'scale';
+    if (mode === 'university') {
+      const uni = universities.find(u => u.slug === val);
+      return uni ? uni.system : '';
+    }
+    return val;
+  }
+
+  // Get active selected name for source/target (university name or scale name)
+  function getSelectedSourceName() {
+    const val = sourceSelect.value;
+    const modeRadio = document.querySelector('input[name="source-mode"]:checked') as HTMLInputElement;
+    const mode = modeRadio ? modeRadio.value : 'scale';
+    if (mode === 'university') {
+      const uni = universities.find(u => u.slug === val);
+      return uni ? uni.name : '';
+    }
+    const sys = gradingSystems[val];
+    return sys ? sys.name : '';
+  }
+
+  function getSelectedTargetName() {
+    const val = targetSelect.value;
+    const modeRadio = document.querySelector('input[name="target-mode"]:checked') as HTMLInputElement;
+    const mode = modeRadio ? modeRadio.value : 'scale';
+    if (mode === 'university') {
+      const uni = universities.find(u => u.slug === val);
+      return uni ? uni.name : '';
+    }
+    const sys = gradingSystems[val];
+    return sys ? sys.name : '';
+  }
+
+  function getSelectedSourceSystem() {
+    const sysId = getSelectedSourceSystemId();
+    return gradingSystems[sysId];
+  }
+
+  function getSelectedTargetSystem() {
+    const sysId = getSelectedTargetSystemId();
+    return gradingSystems[sysId];
+  }
+
+  // Update disabled state for university mode if no universities exist for selected country
+  function updateModeToggles(country: string, side: 'source' | 'target') {
+    const hasUnis = universities.some(u => u.country === country);
+    const uniRadio = document.querySelector(`input[name="${side}-mode"][value="university"]`) as HTMLInputElement;
+    const scaleRadio = document.querySelector(`input[name="${side}-mode"][value="scale"]`) as HTMLInputElement;
+    
+    if (uniRadio && scaleRadio) {
+      if (!hasUnis) {
+        uniRadio.disabled = true;
+        uniRadio.parentElement?.classList.add('opacity-40', 'cursor-not-allowed');
+        uniRadio.parentElement?.classList.remove('cursor-pointer');
+        if (uniRadio.checked) {
+          scaleRadio.checked = true;
+        }
+      } else {
+        uniRadio.disabled = false;
+        uniRadio.parentElement?.classList.remove('opacity-40', 'cursor-not-allowed');
+        uniRadio.parentElement?.classList.add('cursor-pointer');
+      }
+    }
+  }
+
+  // Populate dynamic select element depending on selected country and mode
+  function populateSelector(
+    countrySelect: HTMLSelectElement,
+    modeName: string,
+    selectElement: HTMLSelectElement,
+    labelElement: HTMLElement,
+    selectedValue = ''
+  ) {
+    const country = countrySelect.value;
+    const modeRadio = document.querySelector(`input[name="${modeName}"]:checked`) as HTMLInputElement;
+    const mode = modeRadio ? modeRadio.value : 'scale';
+
+    if (mode === 'scale') {
+      labelElement.textContent = modeName.startsWith('source') ? 'Source Grading Scale' : 'Target Conversion Scale';
+      
+      const scales = Object.entries(gradingSystems).filter(([_, sys]) => {
+        return matchCountry(sys.country, country);
+      });
+      
+      selectElement.innerHTML = scales.map(([key, sys]) => {
+        const isSelected = key === selectedValue ? 'selected' : '';
+        return `<option value="${key}" ${isSelected}>${sys.shortName || sys.name} (${sys.maxGPA % 1 === 0 ? sys.maxGPA + '.0' : sys.maxGPA} Scale)</option>`;
+      }).join('');
+      
+    } else {
+      labelElement.textContent = modeName.startsWith('source') ? 'Source University / Board' : 'Target University / Board';
+      
+      const unis = universities.filter(u => u.country === country);
+      
+      selectElement.innerHTML = unis.map(u => {
+        const isSelected = u.slug === selectedValue ? 'selected' : '';
+        return `<option value="${u.slug}" ${isSelected}>${u.name}${u.abbreviation ? ` (${u.abbreviation})` : ''}</option>`;
+      }).join('');
+    }
+  }
+
+  // Generate grade dropdown HTML for the current source system
+  function getGradeOptionsHtml(systemId: string, selectedGradeLetter = '') {
+    const system = gradingSystems[systemId];
+    if (!system) return '';
+    return system.grades.map(g => {
+      const selected = g.letter === selectedGradeLetter ? 'selected' : '';
+      return `<option value="${g.letter}" ${selected}>${g.letter} (${g.point.toFixed(g.point % 1 === 0 ? 0 : 2)} pts)</option>`;
+    }).join('');
+  }
+
+  // Initialize
+  function init() {
+    // 1. Populate Country Dropdowns
+    const rawCountries = new Set<string>();
+    Object.values(gradingSystems).forEach(sys => {
+      if (sys.country.includes('/')) {
+        sys.country.split('/').forEach(c => rawCountries.add(c.trim()));
+      } else {
+        rawCountries.add(sys.country);
+      }
+    });
+    universities.forEach(u => {
+      rawCountries.add(u.country);
+    });
+    const allCountries = Array.from(rawCountries).sort();
+    const countryOptionsHtml = allCountries.map(c => `<option value="${c}">${c}</option>`).join('');
+    sourceCountrySelect.innerHTML = countryOptionsHtml;
+    targetCountrySelect.innerHTML = countryOptionsHtml;
+
+    // 2. Try loading from localStorage
+    const loaded = loadFromLocalStorage();
+    if (!loaded) {
+      sourceCountrySelect.value = 'India';
+      updateModeToggles('India', 'source');
+      populateSelector(sourceCountrySelect, 'source-mode', sourceSelect, sourceSelectLabel);
+      
+      targetCountrySelect.value = 'United States';
+      updateModeToggles('United States', 'target');
+      populateSelector(targetCountrySelect, 'target-mode', targetSelect, targetSelectLabel);
+      
+      for (let i = 0; i < 4; i++) {
+        addCourseRow();
+      }
+    }
+
+    updateDropdownLabels();
+    calculateGPA();
+  }
+
+  // Create course input row DOM
+  function addCourseRow(name = '', credits = '', selectedGrade = '') {
+    courseCount++;
+    const rowId = courseCount;
+    const sourceSystemId = getSelectedSourceSystemId();
+    
+    const row = document.createElement('div');
+    row.className = 'course-row grid grid-cols-6 sm:grid-cols-[2fr_100px_120px_40px] gap-3 items-end bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800/40 sm:border-0 rounded-2xl p-4 sm:p-2 sm:bg-transparent sm:rounded-none transition-all';
+    row.dataset.rowId = String(rowId);
+    row.setAttribute('role', 'listitem');
+
+    row.innerHTML = `
+      <div class="col-span-5 sm:col-span-1">
+        <label class="sm:hidden font-mono text-xs uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-1 block">Course Title</label>
+        <input
+          type="text"
+          value="${name}"
+          aria-label="Course title"
+          placeholder="e.g. Mathematics"
+          class="course-name-input w-full bg-transparent border-b border-neutral-200 dark:border-neutral-700 focus:border-indigo-500 outline-none text-sm py-1.5 transition-colors"
+        />
+      </div>
+
+      <div class="col-span-1 flex justify-end sm:hidden">
+        <button
+          type="button"
+          aria-label="Remove Course"
+          class="remove-course-btn w-8 h-8 flex items-center justify-center text-neutral-400 hover:text-red-500 transition-colors rounded-lg hover:bg-red-50 dark:hover:bg-red-950/20 cursor-pointer"
+        >
+          <svg class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="col-span-3 sm:col-span-1">
+        <label class="sm:hidden font-mono text-xs uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-1 block">Credits</label>
+        <input
+          type="number"
+          value="${credits}"
+          min="1"
+          step="0.5"
+          placeholder="e.g. 3"
+          aria-label="Credits"
+          class="course-credits-input w-full bg-transparent border-b border-neutral-200 dark:border-neutral-700 focus:border-indigo-500 outline-none text-sm py-1.5 transition-colors tabular-nums"
+        />
+      </div>
+
+      <div class="col-span-3 sm:col-span-1">
+        <label class="sm:hidden font-mono text-xs uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-1 block">Grade</label>
+        <div class="relative">
+          <select
+            aria-label="Grade select"
+            class="course-grade-select w-full bg-transparent border-b border-neutral-200 dark:border-neutral-700 focus:border-indigo-500 outline-none text-sm py-1.5 transition-colors cursor-pointer appearance-none pr-6 font-semibold text-neutral-800 dark:text-neutral-200"
+          >
+            ${getGradeOptionsHtml(sourceSystemId, selectedGrade)}
+          </select>
+          <svg class="w-3.5 h-3.5 absolute right-0 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg>
+        </div>
+      </div>
+
+      <div class="hidden sm:flex sm:justify-center">
+        <button
+          type="button"
+          aria-label="Remove Course"
+          class="remove-course-btn w-8 h-8 flex items-center justify-center text-neutral-400 hover:text-red-500 transition-colors rounded-lg hover:bg-red-50 dark:hover:bg-red-950/20 cursor-pointer"
+        >
+          <svg class="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    `;
+
+    row.querySelector('.course-name-input')?.addEventListener('input', () => { calculateGPA(); saveToLocalStorage(); });
+    row.querySelector('.course-credits-input')?.addEventListener('input', () => { calculateGPA(); saveToLocalStorage(); });
+    row.querySelector('.course-grade-select')?.addEventListener('change', () => { calculateGPA(); saveToLocalStorage(); });
+    row.querySelectorAll('.remove-course-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        row.remove();
+        if (rowsContainer.children.length === 0) {
+          addCourseRow();
+        }
+        calculateGPA();
+        saveToLocalStorage();
+      });
+    });
+
+    rowsContainer.appendChild(row);
+  }
+
+  // Update dropdown labels on scorecards
+  function updateDropdownLabels() {
+    const sourceSystem = getSelectedSourceSystem();
+    const targetSystem = getSelectedTargetSystem();
+    if (sourceSystem) {
+      sourceScaleName.textContent = getSelectedSourceName();
+      sourceGpaMax.textContent = `/ ${sourceSystem.maxGPA.toFixed(2)}`;
+    }
+    if (targetSystem) {
+      targetScaleName.textContent = getSelectedTargetName();
+      targetGpaMax.textContent = `/ ${targetSystem.maxGPA.toFixed(2)}`;
+    }
+  }
+
+  // Run conversion & calculations
+  function calculateGPA() {
+    const sourceSystemId = getSelectedSourceSystemId();
+    const targetSystemId = getSelectedTargetSystemId();
+
+    const sourceSystem = gradingSystems[sourceSystemId];
+    const targetSystem = gradingSystems[targetSystemId];
+    if (!sourceSystem || !targetSystem) return;
+
+    let totalCredits = 0;
+    let totalSourcePoints = 0;
+    let totalTargetPoints = 0;
+
+    const rows = rowsContainer.querySelectorAll('.course-row');
+    rows.forEach(row => {
+      const nameInput = row.querySelector('.course-name-input') as HTMLInputElement;
+      const creditsInput = row.querySelector('.course-credits-input') as HTMLInputElement;
+      const gradeSelect = row.querySelector('.course-grade-select') as HTMLSelectElement;
+
+      const credits = parseFloat(creditsInput.value);
+      const gradeLetter = gradeSelect.value;
+
+      if (!isNaN(credits) && credits > 0 && gradeLetter) {
+        const sourceGrade = sourceSystem.grades.find(g => g.letter === gradeLetter);
+        if (sourceGrade) {
+          const sourcePoint = sourceGrade.point;
+          totalSourcePoints += sourcePoint * credits;
+          
+          const targetGrade = convertGrade(sourceSystemId, gradeLetter, targetSystemId);
+          if (targetGrade) {
+            totalTargetPoints += targetGrade.point * credits;
+          }
+          totalCredits += credits;
+        }
+      }
+    });
+
+    if (totalCredits > 0) {
+      const finalSourceGpa = totalSourcePoints / totalCredits;
+      const finalTargetGpa = totalTargetPoints / totalCredits;
+
+      sourceGpaDisplay.textContent = finalSourceGpa.toFixed(2);
+      targetGpaDisplay.textContent = finalTargetGpa.toFixed(2);
+    } else {
+      sourceGpaDisplay.textContent = '0.00';
+      targetGpaDisplay.textContent = '0.00';
+    }
+  }
+
+  // Update grade lists in all row selectors when source system changes
+  function updateAllGradeSelectors() {
+    const sourceSystemId = getSelectedSourceSystemId();
+    const rows = rowsContainer.querySelectorAll('.course-row');
+    rows.forEach(row => {
+      const select = row.querySelector('.course-grade-select') as HTMLSelectElement;
+      const currentVal = select.value;
+      select.innerHTML = getGradeOptionsHtml(sourceSystemId);
+      const hasGrade = Array.from(select.options).some(opt => opt.value === currentVal);
+      if (hasGrade) {
+        select.value = currentVal;
+      }
+    });
+  }
+
+  // Storage
+  function saveToLocalStorage() {
+    const rows = rowsContainer.querySelectorAll('.course-row');
+    const coursesData = Array.from(rows).map(row => {
+      const nameVal = (row.querySelector('.course-name-input') as HTMLInputElement).value;
+      const creditsVal = (row.querySelector('.course-credits-input') as HTMLInputElement).value;
+      const gradeVal = (row.querySelector('.course-grade-select') as HTMLSelectElement).value;
+      return { name: nameVal, credits: creditsVal, grade: gradeVal };
+    });
+    
+    const sourceModeRadio = document.querySelector('input[name="source-mode"]:checked') as HTMLInputElement;
+    const sourceMode = sourceModeRadio ? sourceModeRadio.value : 'scale';
+    const targetModeRadio = document.querySelector('input[name="target-mode"]:checked') as HTMLInputElement;
+    const targetMode = targetModeRadio ? targetModeRadio.value : 'scale';
+
+    localStorage.setItem('cgpa-helper-universal-converter', JSON.stringify({
+      sourceCountry: sourceCountrySelect.value,
+      sourceMode: sourceMode,
+      sourceSystem: sourceSelect.value,
+      targetCountry: targetCountrySelect.value,
+      targetMode: targetMode,
+      targetSystem: targetSelect.value,
+      courses: coursesData
+    }));
+  }
+
+  function loadFromLocalStorage() {
+    try {
+      const stored = localStorage.getItem('cgpa-helper-universal-converter');
+      if (stored) {
+        const {
+          sourceCountry,
+          sourceMode,
+          sourceSystem,
+          targetCountry,
+          targetMode,
+          targetSystem,
+          courses
+        } = JSON.parse(stored);
+        
+        if (sourceCountry) {
+          sourceCountrySelect.value = sourceCountry;
+          updateModeToggles(sourceCountry, 'source');
+          if (sourceMode) {
+            const radio = document.querySelector(`input[name="source-mode"][value="${sourceMode}"]`) as HTMLInputElement;
+            if (radio && !radio.disabled) {
+              radio.checked = true;
+            }
+          }
+          populateSelector(sourceCountrySelect, 'source-mode', sourceSelect, sourceSelectLabel, sourceSystem);
+        }
+        
+        if (targetCountry) {
+          targetCountrySelect.value = targetCountry;
+          updateModeToggles(targetCountry, 'target');
+          if (targetMode) {
+            const radio = document.querySelector(`input[name="target-mode"][value="${targetMode}"]`) as HTMLInputElement;
+            if (radio && !radio.disabled) {
+              radio.checked = true;
+            }
+          }
+          populateSelector(targetCountrySelect, 'target-mode', targetSelect, targetSelectLabel, targetSystem);
+        }
+        
+        if (Array.isArray(courses) && courses.length > 0) {
+          rowsContainer.innerHTML = '';
+          courses.forEach(c => {
+            addCourseRow(c.name, c.credits, c.grade);
+          });
+          return true;
+        }
+      }
+    } catch(e) {
+      console.error(e);
+    }
+    return false;
+  }
+
+  // Exporters
+  function exportCSV() {
+    const sourceSystemId = getSelectedSourceSystemId();
+    const targetSystemId = getSelectedTargetSystemId();
+    const sourceSystem = gradingSystems[sourceSystemId];
+    const targetSystem = gradingSystems[targetSystemId];
+    if (!sourceSystem || !targetSystem) return;
+
+    let csvContent = "Course Title,Credits,Source Grade,Source Points,Target Grade,Target Points\r\n";
+    const rows = rowsContainer.querySelectorAll('.course-row');
+    
+    rows.forEach((row, idx) => {
+      const nameVal = (row.querySelector('.course-name-input') as HTMLInputElement).value || `Course ${idx+1}`;
+      const creditsVal = parseFloat((row.querySelector('.course-credits-input') as HTMLInputElement).value) || 0;
+      const gradeVal = (row.querySelector('.course-grade-select') as HTMLSelectElement).value;
+
+      if (creditsVal > 0 && gradeVal) {
+        const sourceGrade = sourceSystem.grades.find(g => g.letter === gradeVal);
+        const targetGrade = convertGrade(sourceSystemId, gradeVal, targetSystemId);
+
+        const sourcePoint = sourceGrade ? sourceGrade.point.toFixed(2) : '0.00';
+        const targetLetter = targetGrade ? targetGrade.letter : '—';
+        const targetPoint = targetGrade ? targetGrade.point.toFixed(2) : '0.00';
+
+        csvContent += `"${nameVal.replace(/"/g, '""')}",${creditsVal},${gradeVal},${sourcePoint},${targetLetter},${targetPoint}\r\n`;
+      }
+    });
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", `GPA_Conversion_Report_${new Date().toISOString().slice(0,10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  function preparePrintSheet() {
+    const sourceSystemId = getSelectedSourceSystemId();
+    const targetSystemId = getSelectedTargetSystemId();
+    const sourceSystem = gradingSystems[sourceSystemId];
+    const targetSystem = gradingSystems[targetSystemId];
+    if (!sourceSystem || !targetSystem) return;
+
+    document.getElementById('print-date')!.textContent = new Date().toLocaleDateString(undefined, { dateStyle: 'long' });
+    document.getElementById('print-source-name')!.textContent = getSelectedSourceName();
+    document.getElementById('print-target-name')!.textContent = getSelectedTargetName();
+
+    let totalCredits = 0;
+    let totalSourcePoints = 0;
+    let totalTargetPoints = 0;
+
+    const tbody = document.getElementById('print-table-body')!;
+    tbody.innerHTML = '';
+
+    const rows = rowsContainer.querySelectorAll('.course-row');
+    rows.forEach((row, idx) => {
+      const nameVal = (row.querySelector('.course-name-input') as HTMLInputElement).value || `Course ${idx+1}`;
+      const creditsVal = parseFloat((row.querySelector('.course-credits-input') as HTMLInputElement).value) || 0;
+      const gradeVal = (row.querySelector('.course-grade-select') as HTMLSelectElement).value;
+
+      if (creditsVal > 0 && gradeVal) {
+        const sourceGrade = sourceSystem.grades.find(g => g.letter === gradeVal);
+        const targetGrade = convertGrade(sourceSystemId, gradeVal, targetSystemId);
+
+        const sourcePoint = sourceGrade ? sourceGrade.point : 0;
+        const targetLetter = targetGrade ? targetGrade.letter : '—';
+        const targetPoint = targetGrade ? targetGrade.point : 0;
+
+        totalCredits += creditsVal;
+        totalSourcePoints += sourcePoint * creditsVal;
+        totalTargetPoints += targetPoint * creditsVal;
+
+        const tr = document.createElement('tr');
+        tr.className = 'border-b border-neutral-200';
+        tr.innerHTML = `
+          <td class="py-2.5">${nameVal}</td>
+          <td class="py-2.5 text-right font-mono">${creditsVal}</td>
+          <td class="py-2.5 text-center font-mono font-medium">${gradeVal}</td>
+          <td class="py-2.5 text-right font-mono">${sourcePoint.toFixed(2)}</td>
+          <td class="py-2.5 text-center font-mono font-medium">${targetLetter}</td>
+          <td class="py-2.5 text-right font-mono">${targetPoint.toFixed(2)}</td>
+        `;
+        tbody.appendChild(tr);
+      }
+    });
+
+    if (totalCredits > 0) {
+      const sourceGpa = totalSourcePoints / totalCredits;
+      const targetGpa = totalTargetPoints / totalCredits;
+      document.getElementById('print-source-gpa')!.textContent = sourceGpa.toFixed(2);
+      document.getElementById('print-target-gpa')!.textContent = targetGpa.toFixed(2);
+    } else {
+      document.getElementById('print-source-gpa')!.textContent = '0.00';
+      document.getElementById('print-target-gpa')!.textContent = '0.00';
+    }
+
+    document.getElementById('print-source-max')!.textContent = sourceSystem.maxGPA.toFixed(2);
+    document.getElementById('print-target-max')!.textContent = targetSystem.maxGPA.toFixed(2);
+  }
+
+  // Wire event handlers
+  sourceCountrySelect.addEventListener('change', () => {
+    updateModeToggles(sourceCountrySelect.value, 'source');
+    populateSelector(sourceCountrySelect, 'source-mode', sourceSelect, sourceSelectLabel);
+    updateDropdownLabels();
+    updateAllGradeSelectors();
+    calculateGPA();
+    saveToLocalStorage();
+  });
+
+  sourceSelect.addEventListener('change', () => {
+    updateDropdownLabels();
+    updateAllGradeSelectors();
+    calculateGPA();
+    saveToLocalStorage();
+  });
+
+  targetCountrySelect.addEventListener('change', () => {
+    updateModeToggles(targetCountrySelect.value, 'target');
+    populateSelector(targetCountrySelect, 'target-mode', targetSelect, targetSelectLabel);
+    updateDropdownLabels();
+    calculateGPA();
+    saveToLocalStorage();
+  });
+
+  targetSelect.addEventListener('change', () => {
+    updateDropdownLabels();
+    calculateGPA();
+    saveToLocalStorage();
+  });
+
+  // Wire radio button handlers
+  document.querySelectorAll('input[name="source-mode"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      populateSelector(sourceCountrySelect, 'source-mode', sourceSelect, sourceSelectLabel);
+      updateDropdownLabels();
+      updateAllGradeSelectors();
+      calculateGPA();
+      saveToLocalStorage();
+    });
+  });
+
+  document.querySelectorAll('input[name="target-mode"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      populateSelector(targetCountrySelect, 'target-mode', targetSelect, targetSelectLabel);
+      updateDropdownLabels();
+      calculateGPA();
+      saveToLocalStorage();
+    });
+  });
+
+  addCourseBtn.addEventListener('click', () => {
+    addCourseRow();
+    calculateGPA();
+    saveToLocalStorage();
+  });
+
+  addMultiBtn.addEventListener('click', () => {
+    for (let i = 0; i < 5; i++) {
+      addCourseRow();
+    }
+    calculateGPA();
+    saveToLocalStorage();
+  });
+
+  clearAllBtn.addEventListener('click', () => {
+    rowsContainer.innerHTML = '';
+    addCourseRow();
+    calculateGPA();
+    saveToLocalStorage();
+  });
+
+  exportCsvBtn.addEventListener('click', exportCSV);
+  exportPdfBtn.addEventListener('click', () => {
+    preparePrintSheet();
+    window.print();
+  });
+
+  // Init
+  init();
+</script>
+
+<style>
+  /* Print styling rules */
+  @media print {
+    body {
+      background: white !important;
+      color: black !important;
+    }
+    .container-page, footer, nav, header, aside, section, .print\:hidden {
+      display: none !important;
+    }
+    #print-sheet {
+      display: block !important;
+    }
+  }
+</style>

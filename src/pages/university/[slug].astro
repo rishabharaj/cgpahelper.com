@@ -44,7 +44,22 @@ const faqs = [
   }
 ];
 
-const systemEntries = Object.entries(gradingSystems);
+const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
+  return [
+    'us-4-0',
+    'cbse-ugc-india',
+    'icse-board',
+    'pk-bd-unis',
+    'aus-7-0',
+    'can-4-33',
+    'ects',
+    'uk-honours',
+    'sg-5-0',
+    'nz-9-0',
+    'my-4-0',
+    uni.system
+  ].includes(key);
+});
 ---
 
 <Layout title={title} description={description} faqs={faqs}>

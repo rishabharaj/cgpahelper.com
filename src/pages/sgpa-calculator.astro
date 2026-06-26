@@ -14,7 +14,21 @@ const faqs = [
   { question: 'How can I improve my SGPA?', answer: 'Focus on high-credit courses as they have more impact on your SGPA. Aim for higher grades in these courses. Also, avoid failing any course since F grades drastically reduce your SGPA. Consistent study and regular attendance help maintain a good SGPA.' },
 ];
 
-const systemEntries = Object.entries(gradingSystems);
+const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
+  return [
+    'us-4-0',
+    'cbse-ugc-india',
+    'icse-board',
+    'pk-bd-unis',
+    'aus-7-0',
+    'can-4-33',
+    'ects',
+    'uk-honours',
+    'sg-5-0',
+    'nz-9-0',
+    'my-4-0'
+  ].includes(key);
+});
 ---
 
 <Layout title={title} description={description} faqs={faqs}>

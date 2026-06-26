@@ -13,7 +13,7 @@ export const universities = [
     country: 'India',
     description: 'IIT Delhi is a premier public engineering and research institute in India, recognized globally for academic excellence and top-tier technical training.',
     est: '1961',
-    system: 'standard-10-point',
+    system: 'cbse-ugc-india',
     website: 'https://home.iitd.ac.in'
   },
   {
@@ -48,7 +48,7 @@ export const universities = [
     country: 'India',
     description: 'State Boards of Education are governing authorities of school education in different states of India. They design curriculum, conduct exams, and award marksheets for classes 10 and 12.',
     est: '1950',
-    system: 'standard-10-point',
+    system: 'cbse-ugc-india',
     website: '',
     isBoard: true
   },
@@ -72,7 +72,7 @@ export const universities = [
     country: 'India',
     description: 'IIT Bombay is one of India\'s leading research and engineering universities, known for its innovation hub, entrepreneurship, and technical breakthroughs.',
     est: '1958',
-    system: 'standard-10-point',
+    system: 'cbse-ugc-india',
     website: 'https://www.iitb.ac.in'
   },
   {
@@ -83,7 +83,7 @@ export const universities = [
     country: 'India',
     description: 'VIT is a highly ranked private research university in India, popular for its flexible credit system, diverse student body, and modern infrastructure.',
     est: '1984',
-    system: 'standard-10-point',
+    system: 'cbse-ugc-india',
     website: 'https://vit.ac.in'
   },
   {
@@ -94,7 +94,7 @@ export const universities = [
     country: 'India',
     description: 'SRM Institute is a prominent private higher education institute in India, offering state-of-the-art engineering, medical, and management courses.',
     est: '1985',
-    system: 'standard-10-point',
+    system: 'cbse-ugc-india',
     website: 'https://www.srmist.edu.in'
   },
   {
@@ -105,7 +105,7 @@ export const universities = [
     country: 'India',
     description: 'University of Mumbai is one of the oldest and largest public state universities in India, offering diverse academic streams and professional degrees.',
     est: '1857',
-    system: 'mumbai-university',
+    system: 'cbse-ugc-india',
     website: 'https://mu.ac.in'
   },
   {
@@ -116,7 +116,7 @@ export const universities = [
     country: 'India',
     description: 'IET DAVV is a premier engineering college in Indore, affiliated with Devi Ahilya Vishwavidyalaya (DAVV), renowned for technical education and robust placements.',
     est: '1996',
-    system: 'iet-davv',
+    system: 'cbse-ugc-india',
     website: 'https://www.ietdavv.edu.in'
   },
   {
@@ -149,7 +149,7 @@ export const universities = [
     country: 'India',
     description: 'MANIT Bhopal (NIT Bhopal) is a premier technological institute of national importance, offering top-tier engineering education and excellent research opportunities.',
     est: '1960',
-    system: 'standard-10-point',
+    system: 'cbse-ugc-india',
     website: 'https://www.manit.ac.in'
   },
   {
@@ -160,7 +160,7 @@ export const universities = [
     country: 'India',
     description: 'Delhi Technological University (formerly Delhi College of Engineering) is a premier collegiate public university, highly ranked for engineering and computer science programs.',
     est: '1941',
-    system: 'standard-10-point',
+    system: 'cbse-ugc-india',
     website: 'https://www.dtu.ac.in'
   },
   {
@@ -171,7 +171,7 @@ export const universities = [
     country: 'India',
     description: 'MAHE Manipal is a leading private research university of eminence, offering world-class education in engineering, medicine, sciences, and humanities.',
     est: '1953',
-    system: 'standard-10-point',
+    system: 'cbse-ugc-india',
     website: 'https://manipal.edu'
   },
   {
@@ -182,7 +182,7 @@ export const universities = [
     country: 'India',
     description: 'Jadavpur University is a premier public state research university in Kolkata, famous for its rigorous engineering courses and academic heritage.',
     est: '1955',
-    system: 'standard-10-point',
+    system: 'cbse-ugc-india',
     website: 'http://www.jaduniv.edu.in'
   },
   {
@@ -193,7 +193,7 @@ export const universities = [
     country: 'India',
     description: 'BITS Pilani is one of India\'s top private science and engineering institutes, recognized as an Institute of Eminence with a strong culture of research and start-ups.',
     est: '1964',
-    system: 'standard-10-point',
+    system: 'cbse-ugc-india',
     website: 'https://www.bits-pilani.ac.in'
   },
   {
@@ -204,7 +204,7 @@ export const universities = [
     country: 'India',
     description: 'AKTU is a public state technological university in UP, affiliating numerous engineering, architecture, management, and pharmacy institutions across the state.',
     est: '2000',
-    system: 'standard-10-point',
+    system: 'cbse-ugc-india',
     website: 'https://aktu.ac.in'
   },
   {
@@ -215,7 +215,7 @@ export const universities = [
     country: 'India',
     description: 'SPPU (formerly University of Pune) is a premier state research university in Maharashtra, often referred to as the \'Oxford of the East\' for its academic heritage.',
     est: '1949',
-    system: 'standard-10-point',
+    system: 'cbse-ugc-india',
     website: 'http://www.unipune.ac.in'
   },
   {
@@ -226,7 +226,7 @@ export const universities = [
     country: 'India',
     description: 'LPU is a giant private university in Punjab, India, hosting students from all over the country and internationally with state-of-the-art modern infrastructure.',
     est: '2005',
-    system: 'standard-10-point',
+    system: 'cbse-ugc-india',
     website: 'https://www.lpu.in'
   },
   {
@@ -237,7 +237,7 @@ export const universities = [
     country: 'India',
     description: 'Amity University is a leading private research university system in India with campuses across Noida, Gurugram, Jaipur, and multiple international locations.',
     est: '2005',
-    system: 'standard-10-point',
+    system: 'cbse-ugc-india',
     website: 'https://www.amity.edu'
   },
   {
@@ -248,7 +248,7 @@ export const universities = [
     country: 'India',
     description: 'Anna University is a leading public state university in Tamil Nadu, India, coordinating technical and engineering education across the state.',
     est: '1978',
-    system: 'standard-10-point',
+    system: 'cbse-ugc-india',
     website: 'https://www.annauniv.edu'
   },
   {
@@ -259,7 +259,7 @@ export const universities = [
     country: 'India',
     description: 'KTU is a state technological university in Kerala, coordinating engineering colleges, technical education, and curriculum development.',
     est: '2014',
-    system: 'standard-10-point',
+    system: 'cbse-ugc-india',
     website: 'https://ktu.edu.in'
   },
   {
@@ -273,7 +273,325 @@ export const universities = [
     system: 'cbse-ugc-india',
     website: 'http://www.du.ac.in'
   },
-
+  {
+    slug: 'vtu-cgpa-calculator',
+    abbreviation: 'VTU',
+    name: 'Visvesvaraya Technological University',
+    location: 'Belagavi, Karnataka, India',
+    country: 'India',
+    description: 'VTU is one of the largest technological universities in India, affiliating hundreds of engineering colleges across Karnataka.',
+    est: '1998',
+    system: 'cbse-ugc-india',
+    website: 'https://vtu.ac.in'
+  },
+  {
+    slug: 'jntuh-cgpa-calculator',
+    abbreviation: 'JNTUH',
+    name: 'Jawaharlal Nehru Technological University Hyderabad',
+    location: 'Hyderabad, Telangana, India',
+    country: 'India',
+    description: 'JNTUH is a premier engineering university in Telangana, coordinating technological education, research, and affiliated colleges.',
+    est: '1972',
+    system: 'cbse-ugc-india',
+    website: 'https://jntuh.ac.in'
+  },
+  {
+    slug: 'gtu-cgpa-calculator',
+    abbreviation: 'GTU',
+    name: 'Gujarat Technological University',
+    location: 'Ahmedabad, Gujarat, India',
+    country: 'India',
+    description: 'GTU is a statewide public state technological university affiliating technical colleges across Gujarat.',
+    est: '2007',
+    system: 'cbse-ugc-india',
+    website: 'https://www.gtu.ac.in'
+  },
+  {
+    slug: 'rtu-cgpa-calculator',
+    abbreviation: 'RTU',
+    name: 'Rajasthan Technical University',
+    location: 'Kota, Rajasthan, India',
+    country: 'India',
+    description: 'RTU focuses on enhancing technical education across Rajasthan by affiliating engineering, architecture, and management colleges.',
+    est: '2006',
+    system: 'cbse-ugc-india',
+    website: 'https://www.rtu.ac.in'
+  },
+  {
+    slug: 'calcutta-university-cgpa-calculator',
+    abbreviation: 'Calcutta University',
+    name: 'University of Calcutta',
+    location: 'Kolkata, West Bengal, India',
+    country: 'India',
+    description: 'The University of Calcutta is a prestigious public state university, recognized as a five-star university in West Bengal.',
+    est: '1857',
+    system: 'cbse-ugc-india',
+    website: 'https://www.caluniv.ac.in'
+  },
+  {
+    slug: 'madras-university-cgpa-calculator',
+    abbreviation: 'Madras University',
+    name: 'University of Madras',
+    location: 'Chennai, Tamil Nadu, India',
+    country: 'India',
+    description: 'University of Madras is one of the oldest collegiate public state universities in India, offering dynamic academic pathways.',
+    est: '1857',
+    system: 'cbse-ugc-india',
+    website: 'https://www.unom.ac.in'
+  },
+  {
+    slug: 'osmania-university-cgpa-calculator',
+    abbreviation: 'Osmania University',
+    name: 'Osmania University',
+    location: 'Hyderabad, Telangana, India',
+    country: 'India',
+    description: 'Osmania University is a historic public state university in Hyderabad, offering rich courses in sciences, humanities, and engineering.',
+    est: '1918',
+    system: 'cbse-ugc-india',
+    website: 'https://www.osmania.ac.in'
+  },
+  {
+    slug: 'andhra-university-cgpa-calculator',
+    abbreviation: 'Andhra University',
+    name: 'Andhra University',
+    location: 'Visakhapatnam, Andhra Pradesh, India',
+    country: 'India',
+    description: 'Andhra University is a highly ranked public state university, recognized for engineering, pharmaceutical, and scientific research.',
+    est: '1926',
+    system: 'cbse-ugc-india',
+    website: 'https://www.andhrauniversity.edu.in'
+  },
+  {
+    slug: 'panjab-university-cgpa-calculator',
+    abbreviation: 'Panjab University',
+    name: 'Panjab University',
+    location: 'Chandigarh, India',
+    country: 'India',
+    description: 'Panjab University is a historic central-state collaborative university, popular for sciences, law, and engineering streams.',
+    est: '1882',
+    system: 'cbse-ugc-india',
+    website: 'https://puchd.ac.in'
+  },
+  {
+    slug: 'gndu-cgpa-calculator',
+    abbreviation: 'GNDU',
+    name: 'Guru Nanak Dev University',
+    location: 'Amritsar, Punjab, India',
+    country: 'India',
+    description: 'GNDU is a prominent public state university in Punjab, recognized for scientific research and sports achievements.',
+    est: '1969',
+    system: 'cbse-ugc-india',
+    website: 'http://www.gndu.ac.in'
+  },
+  {
+    slug: 'csjmu-cgpa-calculator',
+    abbreviation: 'CSJMU',
+    name: 'Chhatrapati Shahu Ji Maharaj University',
+    location: 'Kanpur, Uttar Pradesh, India',
+    country: 'India',
+    description: 'CSJMU (formerly Kanpur University) affiliates hundreds of colleges, serving higher education needs across urban and rural UP.',
+    est: '1966',
+    system: 'cbse-ugc-india',
+    website: 'https://kanpuruniversity.org'
+  },
+  {
+    slug: 'bput-cgpa-calculator',
+    abbreviation: 'BPUT',
+    name: 'Biju Patnaik University of Technology',
+    location: 'Rourkela, Odisha, India',
+    country: 'India',
+    description: 'BPUT is the state technological university of Odisha, coordinating engineering, pharmacy, and management curricula.',
+    est: '2002',
+    system: 'cbse-ugc-india',
+    website: 'https://www.bput.ac.in'
+  },
+  {
+    slug: 'calicut-university-cgpa-calculator',
+    abbreviation: 'Calicut University',
+    name: 'University of Calicut',
+    location: 'Malappuram, Kerala, India',
+    country: 'India',
+    description: 'University of Calicut is the largest public state university in Kerala, serving educational hubs in northern Kerala.',
+    est: '1968',
+    system: 'cbse-ugc-india',
+    website: 'https://uoc.ac.in'
+  },
+  {
+    slug: 'kurukshetra-university-cgpa-calculator',
+    abbreviation: 'KUK',
+    name: 'Kurukshetra University',
+    location: 'Kurukshetra, Haryana, India',
+    country: 'India',
+    description: 'Kurukshetra University is a premier institution of higher learning in Haryana, recognized for sports and humanities excellence.',
+    est: '1956',
+    system: 'cbse-ugc-india',
+    website: 'https://www.kuk.ac.in'
+  },
+  {
+    slug: 'amu-cgpa-calculator',
+    abbreviation: 'AMU',
+    name: 'Aligarh Muslim University',
+    location: 'Aligarh, Uttar Pradesh, India',
+    country: 'India',
+    description: 'Aligarh Muslim University is a premier public central university in India, originally established by Sir Syed Ahmad Khan.',
+    est: '1875',
+    system: 'cbse-ugc-india',
+    website: 'https://www.amu.ac.in'
+  },
+  {
+    slug: 'iit-kharagpur-gpa-calculator',
+    abbreviation: 'IIT Kharagpur',
+    name: 'Indian Institute of Technology Kharagpur',
+    location: 'Kharagpur, West Bengal, India',
+    country: 'India',
+    description: 'IIT Kharagpur is the oldest of the Indian Institutes of Technology, established to train top-tier scientific and engineering talent.',
+    est: '1951',
+    system: 'cbse-ugc-india',
+    website: 'https://www.iitkgp.ac.in'
+  },
+  {
+    slug: 'iit-madras-gpa-calculator',
+    abbreviation: 'IIT Madras',
+    name: 'Indian Institute of Technology Madras',
+    location: 'Chennai, Tamil Nadu, India',
+    country: 'India',
+    description: 'IIT Madras is a highly ranked public technical and research university in Tamil Nadu, recognized as an Institute of Eminence.',
+    est: '1959',
+    system: 'cbse-ugc-india',
+    website: 'https://www.iitm.ac.in'
+  },
+  {
+    slug: 'iit-roorkee-gpa-calculator',
+    abbreviation: 'IIT Roorkee',
+    name: 'Indian Institute of Technology Roorkee',
+    location: 'Roorkee, Uttarakhand, India',
+    country: 'India',
+    description: 'IIT Roorkee is a premier engineering university, originally founded as the Thomason College of Civil Engineering (oldest in Asia).',
+    est: '1847',
+    system: 'cbse-ugc-india',
+    website: 'https://www.iitr.ac.in'
+  },
+  {
+    slug: 'jnu-cgpa-calculator',
+    abbreviation: 'JNU',
+    name: 'Jawaharlal Nehru University',
+    location: 'New Delhi, India',
+    country: 'India',
+    description: 'Jawaharlal Nehru University is a highly ranked public central university, renowned for humanities, social sciences, and research.',
+    est: '1969',
+    system: 'cbse-ugc-india',
+    website: 'https://www.jnu.ac.in'
+  },
+  {
+    slug: 'christ-university-cgpa-calculator',
+    abbreviation: 'Christ University',
+    name: 'Christ (Deemed to be University)',
+    location: 'Bengaluru, Karnataka, India',
+    country: 'India',
+    description: 'Christ University is a highly popular private deemed-to-be university, recognized for business administration, humanities, and social sciences.',
+    est: '1969',
+    system: 'cbse-ugc-india',
+    website: 'https://christuniversity.in'
+  },
+  {
+    slug: 'ggsipu-cgpa-calculator',
+    abbreviation: 'GGSIPU',
+    name: 'Guru Gobind Singh Indraprastha University',
+    location: 'New Delhi, India',
+    country: 'India',
+    description: 'GGSIPU is a public state university in Delhi, affiliating numerous professional colleges across Delhi-NCR.',
+    est: '1998',
+    system: 'cbse-ugc-india',
+    website: 'http://www.ipu.ac.in'
+  },
+  {
+    slug: 'thapar-university-cgpa-calculator',
+    abbreviation: 'Thapar University',
+    name: 'Thapar Institute of Engineering and Technology',
+    location: 'Patiala, Punjab, India',
+    country: 'India',
+    description: 'Thapar University is a premier private deemed-to-be engineering university, recognized for its industry partnerships and research.',
+    est: '1956',
+    system: 'cbse-ugc-india',
+    website: 'https://www.thapar.edu'
+  },
+  {
+    slug: 'nmims-cgpa-calculator',
+    abbreviation: 'NMIMS',
+    name: 'Narsee Monjee Institute of Management Studies',
+    location: 'Mumbai, Maharashtra, India',
+    country: 'India',
+    description: 'SVKM\'s NMIMS is a highly ranked deemed-to-be university, renowned for management studies, commerce, and engineering.',
+    est: '1981',
+    system: 'cbse-ugc-india',
+    website: 'https://www.nmims.edu'
+  },
+  {
+    slug: 'tiss-cgpa-calculator',
+    abbreviation: 'TISS',
+    name: 'Tata Institute of Social Sciences',
+    location: 'Mumbai, Maharashtra, India',
+    country: 'India',
+    description: 'TISS is a premier public research university, globally recognized for its programs in social work, human resources, and social sciences.',
+    est: '1936',
+    system: 'cbse-ugc-india',
+    website: 'https://www.tiss.edu'
+  },
+  {
+    slug: 'ashoka-university-cgpa-calculator',
+    abbreviation: 'Ashoka',
+    name: 'Ashoka University',
+    location: 'Sonepat, Haryana, India',
+    country: 'India',
+    description: 'Ashoka University is a premier private liberal arts and sciences university, pioneering interdisciplinary higher education.',
+    est: '2014',
+    system: 'cbse-ugc-india',
+    website: 'https://www.ashoka.edu.in'
+  },
+  {
+    slug: 'cusat-cgpa-calculator',
+    abbreviation: 'CUSAT',
+    name: 'Cochin University of Science and Technology',
+    location: 'Kochi, Kerala, India',
+    country: 'India',
+    description: 'CUSAT is a premier public state scientific and technological university in Kerala, famous for marine science and engineering.',
+    est: '1971',
+    system: 'cbse-ugc-india',
+    website: 'https://cusat.ac.in'
+  },
+  {
+    slug: 'snu-cgpa-calculator',
+    abbreviation: 'Shiv Nadar',
+    name: 'Shiv Nadar University',
+    location: 'Greater Noida, Uttar Pradesh, India',
+    country: 'India',
+    description: 'Shiv Nadar University is a highly ranked private research-focused multidisciplinary university in Uttar Pradesh.',
+    est: '2011',
+    system: 'cbse-ugc-india',
+    website: 'https://snu.edu.in'
+  },
+  {
+    slug: 'sastra-cgpa-calculator',
+    abbreviation: 'SASTRA',
+    name: 'SASTRA (Deemed to be University)',
+    location: 'Thanjavur, Tamil Nadu, India',
+    country: 'India',
+    description: 'SASTRA University is a prominent deemed-to-be university in Tamil Nadu, highly ranked for engineering, sciences, and law.',
+    est: '1984',
+    system: 'cbse-ugc-india',
+    website: 'https://www.sastra.edu'
+  },
+  {
+    slug: 'sathyabama-cgpa-calculator',
+    abbreviation: 'Sathyabama',
+    name: 'Sathyabama Institute of Science and Technology',
+    location: 'Chennai, Tamil Nadu, India',
+    country: 'India',
+    description: 'Sathyabama is a premier deemed-to-be university, recognized for research in aerospace, biotechnology, and computer engineering.',
+    est: '1987',
+    system: 'cbse-ugc-india',
+    website: 'https://www.sathyabama.ac.in'
+  },
   // United States (Popular)
   {
     slug: 'harvard-gpa-calculator',
@@ -362,7 +680,7 @@ export const universities = [
     country: 'United Kingdom',
     description: 'Oxford is the oldest university in the English-speaking world, recognized for academic prestige, tutorials, and historic research.',
     est: '1096',
-    system: 'standard-10-point',
+    system: 'cbse-ugc-india',
     website: 'https://www.ox.ac.uk'
   },
   {
@@ -373,7 +691,7 @@ export const universities = [
     country: 'United Kingdom',
     description: 'Cambridge is the second-oldest university in the English-speaking world, offering historic academic excellence and collegiate learning.',
     est: '1209',
-    system: 'standard-10-point',
+    system: 'cbse-ugc-india',
     website: 'https://www.cam.ac.uk'
   },
   {
@@ -384,7 +702,7 @@ export const universities = [
     country: 'United Kingdom',
     description: 'Imperial College London is a world top-ten university specializing in science, engineering, medicine, and business.',
     est: '1907',
-    system: 'standard-10-point',
+    system: 'cbse-ugc-india',
     website: 'https://www.imperial.ac.uk'
   },
   {
@@ -395,7 +713,7 @@ export const universities = [
     country: 'United Kingdom',
     description: 'UCL is a premier public research university in London, recognized for its global impact, diverse streams, and history of innovation.',
     est: '1826',
-    system: 'standard-10-point',
+    system: 'cbse-ugc-india',
     website: 'https://www.ucl.ac.uk'
   },
 

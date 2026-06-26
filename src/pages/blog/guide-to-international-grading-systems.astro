@@ -1,0 +1,238 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = 'Guide to International Grading Systems: How to Compare GPA, CGPA & ECTS';
+const description = 'Compare global grading scales. A complete reference comparing the U.S. 4.0 Scale, Indian 10-point CGPA, UK Degree Classifications, European ECTS, Canada, and Australia.';
+
+const articleData = {
+  category: 'International Systems',
+  publishDate: 'June 26, 2026',
+  readTime: '7 min read',
+  author: 'Dr. Vivek Sharma',
+  authorTitle: 'Academic Advisor & Professor',
+  authorInitials: 'VS'
+};
+---
+
+<Layout title={title} description={description} canonicalPath="/blog/guide-to-international-grading-systems">
+  <div class="container-page py-12 md:py-16 max-w-4xl">
+    
+    <!-- ── Breadcrumb ── -->
+    <nav aria-label="Breadcrumb" class="mb-8">
+      <ol class="flex items-center gap-1.5 text-sm text-neutral-400 dark:text-neutral-500">
+        <li>
+          <a href="/" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Home</a>
+        </li>
+        <li aria-hidden="true">
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </li>
+        <li>
+          <a href="/blog" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Blog</a>
+        </li>
+        <li aria-hidden="true">
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </li>
+        <li>
+          <span class="text-neutral-900 dark:text-neutral-100 font-medium">International Grading Systems</span>
+        </li>
+      </ol>
+    </nav>
+
+    <!-- ── Article Header ── -->
+    <header class="mb-10 pb-8 border-b border-neutral-200 dark:border-neutral-800">
+      <span class="inline-block text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-3">
+        {articleData.category}
+      </span>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-neutral-900 dark:text-white mb-6 leading-tight">
+        Guide to International Grading Systems: <span class="bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent">How to Compare GPA, CGPA & ECTS</span>
+      </h1>
+      
+      <!-- Meta info -->
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-950 flex items-center justify-center text-sm font-semibold text-indigo-600 dark:text-indigo-400">
+            {articleData.authorInitials}
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-neutral-950 dark:text-white">{articleData.author}</p>
+            <p class="text-xs text-neutral-500 dark:text-neutral-400">{articleData.authorTitle}</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 font-mono">
+          <span>{articleData.publishDate}</span>
+          <span>•</span>
+          <span>{articleData.readTime}</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Featured Image ── -->
+    <div class="mb-10 rounded-2xl overflow-hidden aspect-video bg-neutral-100 dark:bg-neutral-800 relative">
+      <img
+        src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop"
+        alt="Students studying and comparing notes"
+        class="w-full h-full object-cover"
+      />
+    </div>
+
+    <!-- ── Article Content ── -->
+    <article class="prose dark:prose-invert max-w-none text-neutral-700 dark:text-neutral-300 space-y-6">
+      <p class="text-lg leading-relaxed font-normal text-neutral-600 dark:text-neutral-400">
+        In a globalized education system, students are more mobile than ever. An Indian student might apply for a Master’s degree in Germany, while an American graduate might seek employment in London. However, one major obstacle stands in the way: <strong>incompatible grading systems</strong>. Each region has its own scale, credit units, and terminology. Here is a definitive guide to comparing and translating grading systems across the world.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white mt-8 mb-4">Core International Grading Scales</h2>
+      <p>
+        Before comparing systems, let’s identify the most common academic grading frameworks globally:
+      </p>
+      <ul class="list-disc pl-6 space-y-2">
+        <li><strong>United States:</strong> 4.0 Scale (Unweighted), measured by Grade Point Average (GPA).</li>
+        <li><strong>India:</strong> 10-Point Scale (CBSE/UGC guidelines), measured by Cumulative Grade Point Average (CGPA).</li>
+        <li><strong>United Kingdom:</strong> Honours Classification system (First, 2:1, 2:2, Third).</li>
+        <li><strong>Europe (Bologna Process):</strong> ECTS (European Credit Transfer and Accumulation System) grading bands.</li>
+        <li><strong>Australia:</strong> 7.0 Scale (Standard) or 4.0 Scale depending on the university.</li>
+        <li><strong>Canada:</strong> 4.0, 4.33, or 9.0 Scales depending on the province or institution.</li>
+      </ul>
+
+      <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white mt-8 mb-4">Comparison Table: Global Equivalencies</h2>
+      <p>
+        The table below provides a rough translation guide that universities and employers often refer to when evaluating international transcripts:
+      </p>
+
+      <div class="overflow-x-auto my-6 border border-neutral-200 dark:border-neutral-800 rounded-xl">
+        <table class="w-full text-sm text-left border-collapse">
+          <thead>
+            <tr class="bg-neutral-50 dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800">
+              <th class="px-4 py-3 font-semibold text-neutral-900 dark:text-white">U.S. GPA (4.0)</th>
+              <th class="px-4 py-3 font-semibold text-neutral-900 dark:text-white">India CGPA (10.0)</th>
+              <th class="px-4 py-3 font-semibold text-neutral-900 dark:text-white">UK Degree Class</th>
+              <th class="px-4 py-3 font-semibold text-neutral-900 dark:text-white">ECTS Grade</th>
+              <th class="px-4 py-3 font-semibold text-neutral-900 dark:text-white">German Grade</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800">
+            <tr>
+              <td class="px-4 py-3 font-mono font-semibold text-indigo-600 dark:text-indigo-400">3.70 – 4.00</td>
+              <td class="px-4 py-3 font-mono">9.00 – 10.00</td>
+              <td class="px-4 py-3 font-medium">First Class (1st)</td>
+              <td class="px-4 py-3 font-mono">A</td>
+              <td class="px-4 py-3 font-mono">1.0 – 1.5 (Excellent)</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-mono font-semibold text-indigo-600 dark:text-indigo-400">3.30 – 3.69</td>
+              <td class="px-4 py-3 font-mono">8.00 – 8.99</td>
+              <td class="px-4 py-3 font-medium">Upper Second (2:1)</td>
+              <td class="px-4 py-3 font-mono">B</td>
+              <td class="px-4 py-3 font-mono">1.6 – 2.0 (Very Good)</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-mono font-semibold">3.00 – 3.29</td>
+              <td class="px-4 py-3 font-mono">7.00 – 7.99</td>
+              <td class="px-4 py-3 font-medium">Lower Second (2:2)</td>
+              <td class="px-4 py-3 font-mono">C</td>
+              <td class="px-4 py-3 font-mono">2.1 – 3.0 (Good)</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-mono font-semibold">2.50 – 2.99</td>
+              <td class="px-4 py-3 font-mono">6.00 – 6.99</td>
+              <td class="px-4 py-3 font-medium">Third Class (3rd)</td>
+              <td class="px-4 py-3 font-mono">D</td>
+              <td class="px-4 py-3 font-mono">3.1 – 3.5 (Satisfactory)</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-mono font-semibold">2.00 – 2.49</td>
+              <td class="px-4 py-3 font-mono">5.00 – 5.99</td>
+              <td class="px-4 py-3 font-medium">Pass (Ordinary)</td>
+              <td class="px-4 py-3 font-mono">E</td>
+              <td class="px-4 py-3 font-mono">3.6 – 4.0 (Sufficient)</td>
+            </tr>
+            <tr class="bg-red-50/20 dark:bg-red-950/10">
+              <td class="px-4 py-3 font-mono text-red-600 dark:text-red-400">Below 2.00</td>
+              <td class="px-4 py-3 font-mono text-red-600 dark:text-red-400">Below 5.00</td>
+              <td class="px-4 py-3 text-red-600 dark:text-red-400 font-medium">Fail</td>
+              <td class="px-4 py-3 font-mono text-red-600 dark:text-red-400">FX / F</td>
+              <td class="px-4 py-3 font-mono text-red-600 dark:text-red-400">4.1 – 5.0 (Fail)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-neutral-500 dark:text-neutral-500 italic">
+        Note: German grades are inverted—lower values represent better grades (1.0 is highest, 4.0 is minimum pass, 5.0 is fail).
+      </p>
+
+      <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white mt-8 mb-4">Understanding the Systems</h2>
+
+      <h3 class="text-xl font-semibold text-neutral-900 dark:text-white mt-6 mb-2">1. The European ECTS System</h3>
+      <p>
+        The European Credit Transfer and Accumulation System (ECTS) does not replace national grades but provides a standard translation. ECTS grades are assigned relative to class percentiles within the passing cohort:
+      </p>
+      <ul class="list-disc pl-6 space-y-1">
+        <li><strong>A:</strong> Top 10% of passing students</li>
+        <li><strong>B:</strong> Next 25% of passing students</li>
+        <li><strong>C:</strong> Next 30% of passing students</li>
+        <li><strong>D:</strong> Next 25% of passing students</li>
+        <li><strong>E:</strong> Remaining 10% of passing students</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-neutral-900 dark:text-white mt-6 mb-2">2. The UK Degree Classifications</h3>
+      <p>
+        UK universities classify degrees based on your final aggregate mark (weighted across second and final year studies):
+      </p>
+      <ul class="list-disc pl-6 space-y-2">
+        <li><strong>First-Class Honours (1st):</strong> 70%+ aggregate score. Shows exceptional mastery. Roughly equivalent to a U.S. GPA of 3.7+ or Indian CGPA of 9.0+.</li>
+        <li><strong>Upper Second-Class Honours (2:1):</strong> 60% – 69%. The entry threshold for most UK corporate graduate schemes and post-grad programs. Equivalent to a U.S. GPA of 3.3 – 3.69.</li>
+        <li><strong>Lower Second-Class Honours (2:2):</strong> 50% – 59%. Often the minimum qualification for entry-level jobs.</li>
+        <li><strong>Third-Class Honours (3rd):</strong> 40% – 49%. Pass without distinction.</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold text-neutral-900 dark:text-white mt-6 mb-2">3. Indian 10-Point CGPA & Percentages</h3>
+      <p>
+        In India, universities typically score students on a 10.0 scale (following CBSE, UGC, or university-specific rules). Because of differences in class distributions, converting an Indian 10-point scale to a U.S. 4.0 scale by dividing by 2.5 is mathematically incorrect. For example, a 7.5/10.0 CGPA represents a much stronger standing than a 3.0/4.0 GPA (which is 75%), but evaluation agencies like WES frequently adjust it to a U.S. 3.2-3.4 equivalent depending on course difficulty.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-neutral-900 dark:text-white mt-8 mb-4">How Do Universities Convert Grades?</h2>
+      <p>
+        When you apply for higher education overseas, the admissions office will convert your credentials. They typically rely on:
+      </p>
+      <ol class="list-decimal pl-6 space-y-3">
+        <li>
+          <strong>The modified Bavarian Formula (for Germany):</strong> German universities convert foreign grades using a standard formula:
+          <br />
+          <span class="font-semibold text-neutral-800 dark:text-neutral-200">German Grade = 1 + 3 × [(N_max − N_obtained) ÷ (N_max − N_min)]</span>
+          <br />
+          Where <span class="font-mono">N_max</span> is the maximum grade, <span class="font-mono">N_min</span> is the minimum passing grade, and <span class="font-mono">N_obtained</span> is your score.
+        </li>
+        <li>
+          <strong>Official Course-by-Course Evaluations:</strong> Professional organizations read every course on your syllabus, examine your local credits, and convert each course to a corresponding grade and semester credit value in the destination system, producing an official GPA report.
+        </li>
+      </ol>
+    </article>
+
+    <!-- ── Call to Action Card ── -->
+    <div class="mt-16 p-8 bg-neutral-900 dark:bg-neutral-900 border border-neutral-800 dark:border-neutral-800 rounded-2xl text-center text-white">
+      <h3 class="text-xl sm:text-2xl font-semibold mb-3">Map Your Grade Conversions</h3>
+      <p class="text-sm text-neutral-400 max-w-lg mx-auto mb-6">
+        Need to compute percentage equivalents or explore reverse conversions? Use our official conversion tools designed for international students.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a
+          href="/cgpa-to-percentage"
+          class="px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-white text-neutral-900 hover:bg-neutral-100 transition-colors"
+        >
+          CGPA to Percentage Converter
+        </a>
+        <a
+          href="/blog"
+          class="px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider border border-neutral-700 text-neutral-300 hover:text-white hover:border-neutral-600 transition-colors"
+        >
+          Back to Blog
+        </a>
+      </div>
+    </div>
+
+  </div>
+</Layout>

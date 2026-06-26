@@ -28,7 +28,21 @@ const faqs = [
   }
 ];
 
-const systemEntries = Object.entries(gradingSystems);
+const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
+  return [
+    'us-4-0',
+    'cbse-ugc-india',
+    'icse-board',
+    'pk-bd-unis',
+    'aus-7-0',
+    'can-4-33',
+    'ects',
+    'uk-honours',
+    'sg-5-0',
+    'nz-9-0',
+    'my-4-0'
+  ].includes(key);
+});
 ---
 
 <Layout title={title} description={description} canonicalPath="/cgpa-vs-sgpa" faqs={faqs}>
@@ -445,7 +459,7 @@ const systemEntries = Object.entries(gradingSystems);
   let rowIdCounter = 0;
 
   function getCurrentSystem() {
-    return gradingSystems[systemSelect.value] || gradingSystems['cbse-ugc-india'];
+    return gradingSystems[systemSelect.value] || gradingSystems['us-4-0'];
   }
 
   function updateValidationRanges() {

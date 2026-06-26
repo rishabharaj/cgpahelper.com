@@ -4,20 +4,40 @@
  */
 
 export const gradingSystems = {
+  'us-4-0': {
+    name: 'U.S. and International Grading Systems (Standard 4.0 Scale)',
+    shortName: 'U.S. and International Grading Systems',
+    country: 'United States',
+    maxGPA: 4,
+    grades: [
+      { letter: 'A+ / A', point: 4.00, range: '90–100' },
+      { letter: 'A-',     point: 3.70, range: '85–89'  },
+      { letter: 'B+',     point: 3.30, range: '80–84'  },
+      { letter: 'B',      point: 3.00, range: '75–79'  },
+      { letter: 'B-',     point: 2.70, range: '70–74'  },
+      { letter: 'C+',     point: 2.30, range: '65–69'  },
+      { letter: 'C',      point: 2.00, range: '60–64'  },
+      { letter: 'C-',     point: 1.70, range: '57–59'  },
+      { letter: 'D+',     point: 1.30, range: '55–56'  },
+      { letter: 'D',      point: 1.00, range: '52–54'  },
+      { letter: 'D-',     point: 0.70, range: '50–51'  },
+      { letter: 'F',      point: 0.00, range: '0–49'   },
+    ],
+  },
   'cbse-ugc-india': {
-    name: 'CBSE / UGC India (10-point Scale)',
-    shortName: 'CBSE / UGC India',
+    name: 'CBSE / UGC India / VIT / SRM / Mumbai University (Standard 10-point Scale)',
+    shortName: 'CBSE / UGC / Indian Universities (10-point)',
     country: 'India',
     maxGPA: 10,
     grades: [
-      { letter: 'O',  point: 10,  range: '91–100' },
-      { letter: 'A+', point: 9,   range: '81–90'  },
-      { letter: 'A',  point: 8,   range: '71–80'  },
-      { letter: 'B+', point: 7,   range: '61–70'  },
-      { letter: 'B',  point: 6,   range: '51–60'  },
-      { letter: 'C',  point: 5,   range: '41–50'  },
-      { letter: 'P',  point: 4,   range: '35–40'  },
-      { letter: 'F',  point: 0,   range: '0–34'   },
+      { letter: 'O / S',  point: 10,  range: '90–100' },
+      { letter: 'A+',     point: 9,   range: '80–89'  },
+      { letter: 'A',      point: 8,   range: '70–79'  },
+      { letter: 'B+',     point: 7,   range: '60–69'  },
+      { letter: 'B',      point: 6,   range: '50–59'  },
+      { letter: 'C',      point: 5,   range: '45–49'  },
+      { letter: 'D / P',  point: 4,   range: '40–44'  },
+      { letter: 'F',      point: 0,   range: '0–39'   },
     ],
   },
   'icse-board': {
@@ -37,62 +57,10 @@ export const gradingSystems = {
       { letter: 'Grade 9', point: 0,  range: '0–29'   },
     ],
   },
-  'standard-10-point': {
-    name: 'Standard 10-Point Scale (Common for VIT, SRM, KTU, AKTU, Anna Univ, JNTU, SPPU, GGSIPU)',
-    shortName: 'Standard 10-Point Scale',
-    country: 'India',
-    maxGPA: 10,
-    grades: [
-      { letter: 'O / S',  point: 10, range: '90–100' },
-      { letter: 'A+',     point: 9,  range: '80–89'  },
-      { letter: 'A',      point: 8,  range: '70–79'  },
-      { letter: 'B+',     point: 7,  range: '60–69'  },
-      { letter: 'B',      point: 6,  range: '55–59'  },
-      { letter: 'C',      point: 5,  range: '50–54'  },
-      { letter: 'D / P',  point: 4,  range: '40–49'  },
-      { letter: 'F',      point: 0,  range: '0–39'   },
-    ],
-  },
-  'mumbai-university': {
-    name: 'University of Mumbai (10-point Scale)',
-    shortName: 'Mumbai University',
-    country: 'India',
-    maxGPA: 10,
-    grades: [
-      { letter: 'O',  point: 10, range: '80–100' },
-      { letter: 'A+', point: 9,  range: '70–79'  },
-      { letter: 'A',  point: 8,  range: '60–69'  },
-      { letter: 'B+', point: 7,  range: '55–59'  },
-      { letter: 'B',  point: 6,  range: '50–54'  },
-      { letter: 'C',  point: 5,  range: '45–49'  },
-      { letter: 'D',  point: 4,  range: '40–44'  },
-      { letter: 'F',  point: 0,  range: '0–39'   },
-    ],
-  },
-  'us-4-0': {
-    name: 'Standard 4.0 Scale (Common for US, HEC Pakistan, UGC Bangladesh, BRACU, NSU, COMSATS)',
-    shortName: 'Standard 4.0 Scale',
-    country: 'International',
-    maxGPA: 4,
-    grades: [
-      { letter: 'A+ / A', point: 4.00, range: '90–100' },
-      { letter: 'A-',     point: 3.70, range: '85–89'  },
-      { letter: 'B+',     point: 3.30, range: '80–84'  },
-      { letter: 'B',      point: 3.00, range: '75–79'  },
-      { letter: 'B-',     point: 2.70, range: '70–74'  },
-      { letter: 'C+',     point: 2.30, range: '65–69'  },
-      { letter: 'C',      point: 2.00, range: '60–64'  },
-      { letter: 'C-',     point: 1.70, range: '57–59'  },
-      { letter: 'D+',     point: 1.30, range: '55–56'  },
-      { letter: 'D',      point: 1.00, range: '52–54'  },
-      { letter: 'D-',     point: 0.70, range: '50–51'  },
-      { letter: 'F',      point: 0.00, range: '0–49'   },
-    ],
-  },
   'pk-bd-unis': {
     name: 'HEC PK / UGC BD (NUST, LUMS, BRACU, NSU) (4.0 Scale)',
     shortName: 'HEC PK / UGC BD',
-    country: 'International',
+    country: 'Pakistan / Bangladesh',
     maxGPA: 4,
     grades: [
       { letter: 'A',  point: 4.00, range: '85–100' },
@@ -141,22 +109,6 @@ export const gradingSystems = {
       { letter: 'F',  point: 0,  range: '0–39'   },
     ],
   },
-  'iet-davv': {
-    name: 'IET DAVV Indore (Devi Ahilya Vishwavidyalaya)',
-    shortName: 'IET DAVV Indore',
-    country: 'India',
-    maxGPA: 10,
-    grades: [
-      { letter: 'O',  point: 10, range: '90–100' },
-      { letter: 'A+', point: 9,  range: '80–89'  },
-      { letter: 'A',  point: 8,  range: '70–79'  },
-      { letter: 'B+', point: 7,  range: '60–69'  },
-      { letter: 'B',  point: 6,  range: '50–59'  },
-      { letter: 'C',  point: 5,  range: '40–49'  },
-      { letter: 'P',  point: 4,  range: '35–39'  },
-      { letter: 'F',  point: 0,  range: '0–34'   },
-    ],
-  },
   'aus-7-0': {
     name: 'Standard 7.0 GPA Scale (Common for Australia)',
     shortName: 'Australian 7.0 Scale',
@@ -192,7 +144,7 @@ export const gradingSystems = {
   'asia-4-5': {
     name: 'Standard 4.5 GPA Scale (Common for South Korea, Taiwan & East Asia)',
     shortName: 'East Asia 4.5 Scale',
-    country: 'International',
+    country: 'East Asia',
     maxGPA: 4.5,
     grades: [
       { letter: 'A+', point: 4.50, range: '95–100' },
@@ -206,12 +158,105 @@ export const gradingSystems = {
       { letter: 'F',  point: 0.00, range: '0–59'   },
     ],
   },
+  'ects': {
+    name: 'European ECTS / Nigeria 5.0 GPA Scale',
+    shortName: 'ECTS / Nigeria Scale',
+    country: 'Europe / Nigeria',
+    maxGPA: 5,
+    grades: [
+      { letter: 'A', point: 5.0, range: '90–100' },
+      { letter: 'B', point: 4.0, range: '80–89'  },
+      { letter: 'C', point: 3.0, range: '70–79'  },
+      { letter: 'D', point: 2.0, range: '60–69'  },
+      { letter: 'E', point: 1.0, range: '50–59'  },
+      { letter: 'F', point: 0.0, range: '0–49'   },
+    ],
+  },
+  'uk-honours': {
+    name: 'United Kingdom & South Africa Honours Degree / Class Classification',
+    shortName: 'UK & South Africa Honours',
+    country: 'United Kingdom / South Africa',
+    maxGPA: 4,
+    grades: [
+      { letter: 'First Class (1st)', point: 4.0, range: '70–100' },
+      { letter: 'Upper Second / Second Class Div 1 (2:1)', point: 3.0, range: '60–69'  },
+      { letter: 'Lower Second / Second Class Div 2 (2:2)', point: 2.0, range: '50–59'  },
+      { letter: 'Third Class / Pass (3rd)', point: 1.0, range: '40–49'  },
+      { letter: 'Fail', point: 0.0, range: '0–34'   },
+    ],
+  },
+  'sg-5-0': {
+    name: 'Singapore & Saudi Arabia 5.0 GPA Scale',
+    shortName: 'Singapore & Saudi Arabia 5.0 Scale',
+    country: 'Singapore / Saudi Arabia',
+    maxGPA: 5,
+    grades: [
+      { letter: 'A+ / A', point: 5.0, range: '80–100' },
+      { letter: 'A-',     point: 4.5, range: '75–79'  },
+      { letter: 'B+',     point: 4.0, range: '70–74'  },
+      { letter: 'B',      point: 3.5, range: '65–69'  },
+      { letter: 'B-',     point: 3.0, range: '60–64'  },
+      { letter: 'C+',     point: 2.5, range: '55–59'  },
+      { letter: 'C',      point: 2.0, range: '50–54'  },
+      { letter: 'D+',     point: 1.5, range: '45–49'  },
+      { letter: 'D',      point: 1.0, range: '40–44'  },
+      { letter: 'F',      point: 0.0, range: '0–39'   },
+    ],
+  },
+  'nz-9-0': {
+    name: 'New Zealand 9.0 GPA Scale',
+    shortName: 'New Zealand 9.0 Scale',
+    country: 'New Zealand',
+    maxGPA: 9,
+    grades: [
+      { letter: 'A+', point: 9.0, range: '85–100' },
+      { letter: 'A',  point: 8.0, range: '80–84'  },
+      { letter: 'A-', point: 7.0, range: '75–79'  },
+      { letter: 'B+', point: 6.0, range: '70–74'  },
+      { letter: 'B',  point: 5.0, range: '65–69'  },
+      { letter: 'B-', point: 4.0, range: '60–64'  },
+      { letter: 'C+', point: 3.0, range: '55–59'  },
+      { letter: 'C',  point: 2.0, range: '50–54'  },
+      { letter: 'C-', point: 1.0, range: '40–49'  },
+      { letter: 'D / E / F', point: 0.0, range: '0–39' },
+    ],
+  },
+  'my-4-0': {
+    name: 'Nepal & Malaysia 4.0 GPA Scale',
+    shortName: 'Nepal & Malaysia 4.0 Scale',
+    country: 'Nepal / Malaysia',
+    maxGPA: 4,
+    grades: [
+      { letter: 'A',  point: 4.00, range: '80–100' },
+      { letter: 'A-', point: 3.67, range: '75–79'  },
+      { letter: 'B+', point: 3.33, range: '70–74'  },
+      { letter: 'B',  point: 3.00, range: '65–69'  },
+      { letter: 'B-', point: 2.67, range: '60–64'  },
+      { letter: 'C+', point: 2.33, range: '55–59'  },
+      { letter: 'C',  point: 2.00, range: '50–54'  },
+      { letter: 'C-', point: 1.67, range: '45–49'  },
+      { letter: 'D+', point: 1.33, range: '40–44'  },
+      { letter: 'D',  point: 1.00, range: '35–39'  },
+      { letter: 'F',  point: 0.00, range: '0–34'   },
+    ],
+  },
+
 };
 
 /* ─────────────────────────────────────────────
  * Conversion rules for CGPA ↔ Percentage
  * ───────────────────────────────────────────── */
 export const conversionRules = {
+  'us-4-0': {
+    name: 'U.S. and International Grading Systems (Standard 4.0 Scale)',
+    shortName: 'U.S. and International Grading Systems',
+    maxGPA: 4,
+    type: 'multiply',
+    factor: 25,
+    formula: 'Percentage = CGPA × 25',
+    reverseFormula: 'CGPA = Percentage ÷ 25',
+    note: 'Standard 4.0 scale conversion.',
+  },
   'cbse-ugc-india': {
     name: 'CBSE / UGC India',
     shortName: 'CBSE / UGC India',
@@ -252,16 +297,6 @@ export const conversionRules = {
     formula: 'Percentage = (7.1 × CGPA) + 11',
     reverseFormula: 'CGPA = (Percentage − 11) ÷ 7.1',
     note: 'Mumbai University official conversion formula.',
-  },
-  'us-4-0': {
-    name: 'Standard 4.0 Scale (US, HEC Pakistan, UGC BD, BRACU, NSU, COMSATS, etc.)',
-    shortName: 'Standard 4.0 Scale',
-    maxGPA: 4,
-    type: 'multiply',
-    factor: 25,
-    formula: 'Percentage = CGPA × 25',
-    reverseFormula: 'CGPA = Percentage ÷ 25',
-    note: 'Standard 4.0 scale conversion.',
   },
   'pk-bd-unis': {
     name: 'HEC PK / UGC BD (NUST, LUMS, BRACU, NSU)',
@@ -391,4 +426,64 @@ export function getGradeLetter(systemId, gpa) {
     if (gpa >= g.point) return g.letter;
   }
   return 'F';
+}
+
+/** Get percentage midpoint for a grade */
+export function getGradePercent(rangeStr, point, maxGPA) {
+  if (!rangeStr) return (point / maxGPA) * 100;
+  const clean = rangeStr.replace(/[–—]/g, '-').trim();
+  const parts = clean.split('-');
+  if (parts.length === 2) {
+    const start = parseFloat(parts[0]);
+    const end = parseFloat(parts[1]);
+    if (!isNaN(start) && !isNaN(end)) {
+      return (start + end) / 2;
+    }
+  }
+  const singleVal = parseFloat(clean);
+  if (!isNaN(singleVal)) return singleVal;
+  return (point / maxGPA) * 100;
+}
+
+/** Convert a course grade from one system to a target system */
+export function convertGrade(sourceSystemId, sourceGradeLetter, targetSystemId) {
+  const sourceSystem = gradingSystems[sourceSystemId];
+  const targetSystem = gradingSystems[targetSystemId];
+  if (!sourceSystem || !targetSystem) return null;
+
+  const sourceGrade = sourceSystem.grades.find(g => g.letter === sourceGradeLetter);
+  if (!sourceGrade) return null;
+
+  const pct = getGradePercent(sourceGrade.range, sourceGrade.point, sourceSystem.maxGPA);
+
+  const targetGradesWithStart = targetSystem.grades.map(g => {
+    const rangeClean = g.range.replace(/[–—]/g, '-').trim();
+    const parts = rangeClean.split('-');
+    const start = parts.length > 0 ? parseFloat(parts[0]) : 0;
+    return { ...g, start: isNaN(start) ? 0 : start };
+  }).sort((a, b) => b.start - a.start);
+
+  let matchedGrade = targetGradesWithStart.find(g => pct >= g.start);
+  if (!matchedGrade) {
+    matchedGrade = targetGradesWithStart[targetGradesWithStart.length - 1];
+  }
+
+  // If source grade is a pass (point > 0) but target maps to a fail (point == 0),
+  // upgrade to the lowest passing grade in target
+  if (sourceGrade.point > 0 && matchedGrade.point === 0) {
+    const passingGrades = targetGradesWithStart.filter(g => g.point > 0);
+    if (passingGrades.length > 0) {
+      matchedGrade = passingGrades[passingGrades.length - 1];
+    }
+  }
+
+  // If source grade is a fail (point == 0), ensure target is a fail
+  if (sourceGrade.point === 0) {
+    const failGrades = targetGradesWithStart.filter(g => g.point === 0);
+    if (failGrades.length > 0) {
+      matchedGrade = failGrades[0];
+    }
+  }
+
+  return matchedGrade;
 }
