@@ -27,18 +27,47 @@ const fullTitle = title === 'CGPA Helper' ? 'CGPA Calculator — Free CGPA to Pe
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9692128749713900"
-     crossorigin="anonymous"></script>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GLFH5K12YS"></script>
+    <!-- Google AdSense (deferred — not render-blocking) -->
     <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      (function() {
+        function loadAdSense() {
+          var s = document.createElement('script');
+          s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9692128749713900';
+          s.crossOrigin = 'anonymous';
+          s.async = true;
+          document.head.appendChild(s);
+        }
+        if (typeof requestIdleCallback !== 'undefined') {
+          requestIdleCallback(loadAdSense);
+        } else {
+          setTimeout(loadAdSense, 3500);
+        }
+      })();
+    </script>
 
-      gtag('config', 'G-GLFH5K12YS');
+    <!-- Google Analytics (deferred until interaction or timeout) -->
+    <script is:inline>
+      (function() {
+        var loaded = false;
+        function loadGA() {
+          if (loaded) return;
+          loaded = true;
+          var s = document.createElement('script');
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-GLFH5K12YS';
+          s.async = true;
+          s.onload = function() {
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-GLFH5K12YS');
+          };
+          document.head.appendChild(s);
+        }
+        ['scroll','click','keydown','touchstart','mousemove'].forEach(function(e) {
+          addEventListener(e, loadGA, {once:true, passive:true});
+        });
+        setTimeout(loadGA, 3500);
+      })();
     </script>
 
     <!-- Primary SEO -->
@@ -70,13 +99,25 @@ const fullTitle = title === 'CGPA Helper' ? 'CGPA Calculator — Free CGPA to Pe
     <meta name="twitter:image" content={ogImageURL} />
     <meta name="twitter:image:alt" content={fullTitle} />
 
-    <!-- Google Fonts: Inter + JetBrains Mono -->
+    <!-- Google Fonts: Inter + JetBrains Mono (non-blocking) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
     />
+    <script is:inline>
+      (function() {
+        var l = document.createElement('link');
+        l.rel = 'stylesheet';
+        l.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap';
+        document.head.appendChild(l);
+      })();
+    </script>
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    </noscript>
 
     <!-- Prevent dark-mode FOUC -->
     <script is:inline>

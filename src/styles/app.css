@@ -3,10 +3,33 @@
 /* ── Dark-mode: class-based toggle ── */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ── Font fallbacks with metric overrides (CLS prevention) ── */
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial'), local('Helvetica Neue'), local('Helvetica');
+  font-style: normal;
+  font-weight: 400 700;
+  ascent-override: 90.49%;
+  descent-override: 22.56%;
+  line-gap-override: 0%;
+  size-adjust: 107.0%;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono Fallback';
+  src: local('Courier New'), local('Courier');
+  font-style: normal;
+  font-weight: 400 500;
+  ascent-override: 78%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+  size-adjust: 118%;
+}
+
 /* ── Design tokens ── */
 @theme {
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+  --font-sans: 'Inter', 'Inter Fallback', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'JetBrains Mono Fallback', ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
 
   /* Brand accent — indigo for distinctiveness */
   --color-accent: #4f46e5;

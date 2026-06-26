@@ -251,6 +251,18 @@ const systemEntries = Object.entries(gradingSystems);
   const CIRCUMFERENCE = 251.33;
   let semesterCount = 0;
 
+  // ── Debounce utility (INP optimization) ──
+  function debounce<T extends (...args: any[]) => void>(fn: T, delay: number): T {
+    let timer: ReturnType<typeof setTimeout>;
+    return ((...args: any[]) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn(...args), delay);
+    }) as unknown as T;
+  }
+
+  // Debounced save — avoids synchronous localStorage writes on every keystroke
+  const debouncedSave = debounce(saveToLocalStorage, 300);
+
   // ── Helpers ──
   function getCurrentSystem() {
     return gradingSystems[systemSelect.value];
@@ -414,7 +426,7 @@ const systemEntries = Object.entries(gradingSystems);
       }
     });
 
-    saveToLocalStorage();
+    debouncedSave();
 
     if (totalCredits === 0) {
       resultSection.style.display = 'none';
@@ -440,10 +452,13 @@ const systemEntries = Object.entries(gradingSystems);
     resultCredits.textContent = `${totalCredits} credit${totalCredits !== 1 ? 's' : ''} total`;
 
     // Update gauge
+    // Use rAF for gauge visual update (avoids layout thrashing)
     const ratio = roundedCGPA / maxGPA;
     const offset = CIRCUMFERENCE - (ratio * CIRCUMFERENCE);
-    gaugeRing.style.strokeDashoffset = String(offset);
-    gaugeRing.setAttribute('stroke', classification.ring);
+    requestAnimationFrame(() => {
+      gaugeRing.style.strokeDashoffset = String(offset);
+      gaugeRing.setAttribute('stroke', classification.ring);
+    });
 
     // Pop animation
     resultContent.classList.remove('result-pop');

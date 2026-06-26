@@ -279,6 +279,17 @@ const systemEntries = Object.entries(gradingSystems);
   let courseCounter = 0;
   const GAUGE_CIRCUMFERENCE = 2 * Math.PI * 60; // r=60
 
+  // ── Debounce utility (INP optimization) ──
+  function debounce<T extends (...args: any[]) => void>(fn: T, delay: number): T {
+    let timer: ReturnType<typeof setTimeout>;
+    return ((...args: any[]) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn(...args), delay);
+    }) as unknown as T;
+  }
+
+  const debouncedSave = debounce(saveToLocalStorage, 300);
+
   /* ── Helpers ── */
   function getCurrentSystem() {
     return gradingSystems[systemSelect.value];
@@ -448,7 +459,7 @@ const systemEntries = Object.entries(gradingSystems);
       }
     });
 
-    saveToLocalStorage();
+    debouncedSave();
 
     if (!hasValidRow || totalCredits === 0) {
       resultSection.classList.add('hidden');
@@ -471,12 +482,14 @@ const systemEntries = Object.entries(gradingSystems);
     resultClassification.textContent = classification.label;
     resultClassification.className = `inline-block mt-1 text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full ${classification.bg} ${classification.color}`;
 
-    /* SVG Gauge */
+    /* SVG Gauge (rAF to avoid layout thrashing) */
     const ratio = Math.min(sgpa / maxGPA, 1);
     const offset = GAUGE_CIRCUMFERENCE * (1 - ratio);
-    gaugeRing.style.strokeDasharray = String(GAUGE_CIRCUMFERENCE);
-    gaugeRing.style.strokeDashoffset = String(offset);
-    gaugeRing.style.stroke = classification.ring;
+    requestAnimationFrame(() => {
+      gaugeRing.style.strokeDasharray = String(GAUGE_CIRCUMFERENCE);
+      gaugeRing.style.strokeDashoffset = String(offset);
+      gaugeRing.style.stroke = classification.ring;
+    });
 
     /* Show result */
     resultSection.classList.remove('hidden');
