@@ -117,3 +117,18 @@
 .result-pop {
   animation: result-pop 0.3s ease-out;
 }
+
+/* ── Prevent select elements from expanding and causing layout overflows on mobile ── */
+select {
+  max-width: 100% !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Ensure select option values are contained */
+select option {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

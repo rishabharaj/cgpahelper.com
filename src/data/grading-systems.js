@@ -6,7 +6,7 @@
 export const gradingSystems = {
   'us-4-0': {
     name: 'U.S. and International Grading Systems (Standard 4.0 Scale)',
-    shortName: 'U.S. and International Grading Systems',
+    shortName: 'U.S. / International (4.0)',
     country: 'United States',
     maxGPA: 4,
     grades: [
@@ -25,8 +25,8 @@ export const gradingSystems = {
     ],
   },
   'cbse-ugc-india': {
-    name: 'CBSE / UGC India / VIT / SRM / Mumbai University (Standard 10-point Scale)',
-    shortName: 'CBSE / UGC / Indian Universities (10-point)',
+    name: 'UGC India / VIT / SRM / Mumbai University (Standard 10-point Scale)',
+    shortName: 'UGC / Indian Unis (10.0)',
     country: 'India',
     maxGPA: 10,
     grades: [
@@ -42,7 +42,7 @@ export const gradingSystems = {
   },
   'icse-board': {
     name: 'ICSE / ISC Board 9-Point Scale',
-    shortName: 'ICSE Board',
+    shortName: 'ICSE Board (10.0)',
     country: 'India',
     maxGPA: 10,
     grades: [
@@ -59,7 +59,7 @@ export const gradingSystems = {
   },
   'pk-bd-unis': {
     name: 'HEC PK / UGC BD (NUST, LUMS, BRACU, NSU) (4.0 Scale)',
-    shortName: 'HEC PK / UGC BD',
+    shortName: 'HEC PK / UGC BD (4.0)',
     country: 'Pakistan / Bangladesh',
     maxGPA: 4,
     grades: [
@@ -78,7 +78,7 @@ export const gradingSystems = {
   },
   'five-point': {
     name: 'Standard 5.0 GPA Scale',
-    shortName: '5.0 Scale',
+    shortName: 'Standard 5.0 (5.0)',
     country: 'International',
     maxGPA: 5,
     grades: [
@@ -95,7 +95,7 @@ export const gradingSystems = {
   },
   'rgpv': {
     name: 'Rajiv Gandhi Proudyogiki Vishwavidyalaya (RGPV MP)',
-    shortName: 'RGPV MP',
+    shortName: 'RGPV MP (10.0)',
     country: 'India',
     maxGPA: 10,
     grades: [
@@ -111,7 +111,7 @@ export const gradingSystems = {
   },
   'aus-7-0': {
     name: 'Standard 7.0 GPA Scale (Common for Australia)',
-    shortName: 'Australian 7.0 Scale',
+    shortName: 'Australia (7.0)',
     country: 'Australia',
     maxGPA: 7,
     grades: [
@@ -124,7 +124,7 @@ export const gradingSystems = {
   },
   'can-4-33': {
     name: 'Standard 4.33 GPA Scale (Common for Canada & SFU)',
-    shortName: 'Canada 4.33 Scale',
+    shortName: 'Canada (4.33)',
     country: 'Canada',
     maxGPA: 4.33,
     grades: [
@@ -143,7 +143,7 @@ export const gradingSystems = {
   },
   'asia-4-5': {
     name: 'Standard 4.5 GPA Scale (Common for South Korea, Taiwan & East Asia)',
-    shortName: 'East Asia 4.5 Scale',
+    shortName: 'East Asia (4.5)',
     country: 'East Asia',
     maxGPA: 4.5,
     grades: [
@@ -160,7 +160,7 @@ export const gradingSystems = {
   },
   'ects': {
     name: 'European ECTS / Nigeria 5.0 GPA Scale',
-    shortName: 'ECTS / Nigeria Scale',
+    shortName: 'ECTS / Nigeria (5.0)',
     country: 'Europe / Nigeria',
     maxGPA: 5,
     grades: [
@@ -174,7 +174,7 @@ export const gradingSystems = {
   },
   'uk-honours': {
     name: 'United Kingdom & South Africa Honours Degree / Class Classification',
-    shortName: 'UK & South Africa Honours',
+    shortName: 'UK & SA Honours (4.0)',
     country: 'United Kingdom / South Africa',
     maxGPA: 4,
     grades: [
@@ -187,7 +187,7 @@ export const gradingSystems = {
   },
   'sg-5-0': {
     name: 'Singapore & Saudi Arabia 5.0 GPA Scale',
-    shortName: 'Singapore & Saudi Arabia 5.0 Scale',
+    shortName: 'Singapore / Saudi (5.0)',
     country: 'Singapore / Saudi Arabia',
     maxGPA: 5,
     grades: [
@@ -205,7 +205,7 @@ export const gradingSystems = {
   },
   'nz-9-0': {
     name: 'New Zealand 9.0 GPA Scale',
-    shortName: 'New Zealand 9.0 Scale',
+    shortName: 'New Zealand (9.0)',
     country: 'New Zealand',
     maxGPA: 9,
     grades: [
@@ -223,7 +223,7 @@ export const gradingSystems = {
   },
   'my-4-0': {
     name: 'Nepal & Malaysia 4.0 GPA Scale',
-    shortName: 'Nepal & Malaysia 4.0 Scale',
+    shortName: 'Nepal / Malaysia (4.0)',
     country: 'Nepal / Malaysia',
     maxGPA: 4,
     grades: [
@@ -258,8 +258,8 @@ export const conversionRules = {
     note: 'Standard 4.0 scale conversion.',
   },
   'cbse-ugc-india': {
-    name: 'CBSE / UGC India',
-    shortName: 'CBSE / UGC India',
+    name: 'UGC India',
+    shortName: 'UGC India',
     maxGPA: 10,
     type: 'multiply',
     factor: 9.5,

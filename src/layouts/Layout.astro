@@ -208,5 +208,107 @@ const fullTitle = title === 'CGPA Helper' ? 'CGPA Calculator — Free CGPA to Pe
       <slot />
     </main>
     <Footer />
+    <script>
+      function initCustomDropdowns() {
+        const dropdowns = document.querySelectorAll('.custom-dropdown');
+        dropdowns.forEach(container => {
+          if ((container as HTMLElement).dataset.initialized) return;
+          (container as HTMLElement).dataset.initialized = 'true';
+          const trigger = container.querySelector('.custom-dropdown-trigger');
+          const optionsContainer = container.querySelector('.custom-dropdown-options');
+          const select = container.querySelector('select');
+          const selectedTextSpan = container.querySelector('.custom-dropdown-selected-text');
+          const arrowIcon = trigger ? trigger.querySelector('svg') : null;
+          const options = container.querySelectorAll('.custom-dropdown-option');
+
+          if (!trigger || !optionsContainer || !select || !selectedTextSpan) return;
+
+          const closeDropdown = () => {
+            optionsContainer.classList.add('hidden');
+            arrowIcon?.classList.remove('rotate-180');
+          };
+
+          const rebuildOptions = () => {
+            optionsContainer.innerHTML = '';
+            Array.from(select.options).forEach(opt => {
+              const div = document.createElement('div');
+              div.className = 'custom-dropdown-option cursor-pointer select-none relative py-2 px-4 text-neutral-900 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors';
+              div.dataset.value = opt.value;
+              div.textContent = opt.text;
+              
+              div.addEventListener('click', (e) => {
+                e.stopPropagation();
+                select.value = opt.value;
+                select.dispatchEvent(new Event('change'));
+                closeDropdown();
+              });
+              optionsContainer.appendChild(div);
+            });
+            syncSelection();
+          };
+
+          const syncSelection = () => {
+            const activeOption = select.options[select.selectedIndex];
+            if (activeOption) {
+              selectedTextSpan.textContent = activeOption.text;
+            }
+            
+            const currentOptions = optionsContainer.querySelectorAll('.custom-dropdown-option');
+            currentOptions.forEach(opt => {
+              const val = (opt as HTMLElement).dataset.value;
+              if (val === select.value) {
+                opt.classList.add('bg-indigo-50', 'dark:bg-indigo-950/40', 'text-indigo-600', 'dark:text-indigo-400', 'font-semibold');
+              } else {
+                opt.classList.remove('bg-indigo-50', 'dark:bg-indigo-950/40', 'text-indigo-600', 'dark:text-indigo-400', 'font-semibold');
+              }
+            });
+          };
+
+          trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.querySelectorAll('.custom-dropdown-options').forEach(el => {
+              if (el !== optionsContainer) el.classList.add('hidden');
+            });
+            document.querySelectorAll('.custom-dropdown-trigger svg').forEach(el => {
+              if (el !== arrowIcon) el.classList.remove('rotate-180');
+            });
+
+            const isHidden = optionsContainer.classList.toggle('hidden');
+            if (!isHidden) {
+              arrowIcon?.classList.add('rotate-180');
+            } else {
+              arrowIcon?.classList.remove('rotate-180');
+            }
+          });
+
+          // Handle initial static options click
+          options.forEach(opt => {
+            opt.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const val = (opt as HTMLElement).dataset.value;
+              if (val) {
+                select.value = val;
+                select.dispatchEvent(new Event('change'));
+              }
+              closeDropdown();
+            });
+          });
+
+          select.addEventListener('change', syncSelection);
+          select.addEventListener('optionsChanged', rebuildOptions);
+
+          // Initial sync
+          syncSelection();
+        });
+
+        document.addEventListener('click', () => {
+          document.querySelectorAll('.custom-dropdown-options').forEach(el => el.classList.add('hidden'));
+          document.querySelectorAll('.custom-dropdown-trigger svg').forEach(el => el.classList.remove('rotate-180'));
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', initCustomDropdowns);
+      initCustomDropdowns();
+    </script>
   </body>
 </html>
