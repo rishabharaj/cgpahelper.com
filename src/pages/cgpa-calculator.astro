@@ -146,30 +146,19 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
 
       <!-- Result section -->
       <div id="result-section" class="border-t border-neutral-200 dark:border-neutral-800 px-5 py-8 md:px-6 flex flex-col sm:flex-row items-center gap-6 sm:gap-10" style="display:none;">
-        <!-- SVG Gauge -->
-        <div class="shrink-0">
-          <svg id="gauge-svg" width="100" height="100" viewBox="0 0 100 100" aria-hidden="true">
-            <!-- Track ring -->
-            <circle
-              cx="50" cy="50" r="40"
-              fill="none"
-              stroke-width="6"
-              class="stroke-neutral-200 dark:stroke-neutral-700"
-            />
-            <!-- Value ring -->
-            <circle
+        <!-- Linear Progress Bar -->
+        <div class="w-full sm:w-48 shrink-0 space-y-2">
+          <div class="flex justify-between text-xs font-semibold text-neutral-500 dark:text-neutral-400 font-mono">
+            <span>0%</span>
+            <span id="gauge-percent-text">0%</span>
+          </div>
+          <div class="w-full bg-neutral-100 dark:bg-neutral-800 h-3 rounded-full overflow-hidden">
+            <div
               id="gauge-ring"
-              cx="50" cy="50" r="40"
-              fill="none"
-              stroke-width="6"
-              stroke-linecap="round"
-              stroke="#4f46e5"
-              stroke-dasharray="251.33"
-              stroke-dashoffset="251.33"
-              transform="rotate(-90 50 50)"
-              class="gauge-ring"
-            />
-          </svg>
+              class="h-full rounded-full transition-all duration-500 ease-out"
+              style="width: 0%; background-color: #4f46e5;"
+            ></div>
+          </div>
         </div>
 
         <!-- Text result -->
@@ -258,11 +247,10 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
   const resultLabel = document.getElementById('result-label')!;
   const resultCredits = document.getElementById('result-credits')!;
   const resultContent = document.getElementById('result-content')!;
-  const gaugeRing = document.getElementById('gauge-ring') as SVGCircleElement;
+  const gaugeRing = document.getElementById('gauge-ring') as HTMLDivElement;
+  const gaugePercentText = document.getElementById('gauge-percent-text')!;
   const gradingTableTitle = document.getElementById('grading-table-title')!;
   const gradingTableBody = document.getElementById('grading-table-body')!;
-
-  const CIRCUMFERENCE = 251.33;
   let semesterCount = 0;
 
   // ── Debounce utility (INP optimization) ──
@@ -465,13 +453,12 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
     // Update credits display
     resultCredits.textContent = `${totalCredits} credit${totalCredits !== 1 ? 's' : ''} total`;
 
-    // Update gauge
-    // Use rAF for gauge visual update (avoids layout thrashing)
+    // Update linear progress bar
     const ratio = roundedCGPA / maxGPA;
-    const offset = CIRCUMFERENCE - (ratio * CIRCUMFERENCE);
     requestAnimationFrame(() => {
-      gaugeRing.style.strokeDashoffset = String(offset);
-      gaugeRing.setAttribute('stroke', classification.ring);
+      gaugeRing.style.width = `${ratio * 100}%`;
+      gaugeRing.style.backgroundColor = classification.ring;
+      gaugePercentText.textContent = `${Math.round(ratio * 100)}%`;
     });
 
     // Pop animation

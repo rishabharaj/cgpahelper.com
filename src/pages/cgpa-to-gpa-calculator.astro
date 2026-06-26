@@ -1,0 +1,417 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = 'CGPA to GPA & GPA to CGPA Converter Online';
+const description = 'Convert your 10-point scale CGPA to a standard US 4.0 GPA scale or vice-versa using our dual interactive converter with sliders and live formula updates.';
+const keywords = 'cgpa to gpa, gpa to cgpa, cgpa to gpa converter, convert cgpa to gpa, 10 point cgpa to 4.0 gpa, universal gpa converter';
+
+const faqs = [
+  {
+    question: 'How do you convert CGPA to GPA using the linear formula?',
+    answer: 'To convert cumulative grade point average (CGPA) to grade point average (GPA) on a different scale, divide your CGPA by its maximum possible value (CGPA Scale) and then multiply by the maximum value of the target scale (GPA Scale). Formula: GPA = (CGPA ÷ CGPA Scale) × GPA Scale.',
+  },
+  {
+    question: 'How do you convert a 4-point GPA back to a 10-point CGPA?',
+    answer: 'The reverse linear conversion formula is: CGPA = (GPA ÷ GPA Scale) × CGPA Scale. For example, if you have a 3.30 GPA out of 4.0, your CGPA on a 10-point scale is (3.30 ÷ 4) × 10 = 8.25.',
+  },
+  {
+    question: 'Is a simple linear conversion accepted by WES?',
+    answer: 'A simple linear conversion is useful for quick estimates, but official evaluation services like WES (World Education Services) use course-by-course transcript reviews. They evaluate your individual course grades and credit weights rather than applying a single formula to your cumulative score.',
+  },
+];
+---
+
+<Layout title={title} description={description} keywords={keywords} faqs={faqs} canonicalPath="/cgpa-to-gpa-calculator">
+  <!-- Backdrop subtle gradient -->
+  <div class="absolute inset-x-0 top-0 h-96 bg-gradient-to-b from-indigo-50/40 via-transparent to-transparent dark:from-indigo-950/15 pointer-events-none" aria-hidden="true"></div>
+
+  <div class="container-page pt-6 pb-20 relative">
+    <!-- ── Breadcrumb ── -->
+    <nav aria-label="Breadcrumb" class="mb-8">
+      <ol class="flex items-center gap-1.5 text-sm text-neutral-400 dark:text-neutral-500">
+        <li>
+          <a href="/" class="hover:text-neutral-700 dark:hover:text-neutral-300 transition-colors">Home</a>
+        </li>
+        <li aria-hidden="true">
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </li>
+        <li>
+          <span class="text-neutral-700 dark:text-neutral-200 font-medium">CGPA to GPA Converter</span>
+        </li>
+      </ol>
+    </nav>
+
+    <!-- ── Page Header ── -->
+    <div class="text-center max-w-3xl mx-auto mb-10">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-neutral-900 dark:text-white leading-[1.15] mb-4">
+        CGPA to GPA &amp; GPA to CGPA
+      </h1>
+      <p class="text-neutral-500 dark:text-neutral-400 text-base sm:text-lg leading-relaxed">
+        Move the sliders or type values — results update instantly.
+      </p>
+    </div>
+
+    <!-- ── Interactive Converter Grid ── -->
+    <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-16">
+      
+      <!-- Card 1: CGPA to GPA -->
+      <div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-6 shadow-sm flex flex-col">
+        <div class="flex justify-between items-baseline mb-6">
+          <h2 class="text-xl font-bold text-neutral-900 dark:text-white">CGPA &rarr; GPA</h2>
+          <span class="text-xs text-neutral-400 dark:text-neutral-500 font-mono">Linear mapping</span>
+        </div>
+
+        <!-- Scale Selectors -->
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div>
+            <label for="cg1-scale-select" class="block text-xs font-semibold text-neutral-500 dark:text-neutral-400 mb-1.5 uppercase tracking-wide">CGPA Scale</label>
+            <select
+              id="cg1-scale-select"
+              class="w-full bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl px-3 py-2.5 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all cursor-pointer"
+            >
+              <option value="10" selected>10-point</option>
+              <option value="9">9-point</option>
+              <option value="7">7-point</option>
+              <option value="5">5-point</option>
+              <option value="4">4.0 scale</option>
+            </select>
+          </div>
+          <div>
+            <label for="gpa1-scale-select" class="block text-xs font-semibold text-neutral-500 dark:text-neutral-400 mb-1.5 uppercase tracking-wide">GPA Scale</label>
+            <select
+              id="gpa1-scale-select"
+              class="w-full bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl px-3 py-2.5 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all cursor-pointer"
+            >
+              <option value="4" selected>4.0</option>
+              <option value="5">5.0</option>
+              <option value="7">7.0</option>
+              <option value="9">9.0</option>
+              <option value="10">10-point</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Input Section -->
+        <div class="mb-6">
+          <label for="cg1-input" class="block text-xs font-semibold text-neutral-500 dark:text-neutral-400 mb-1.5 uppercase tracking-wide">Your CGPA</label>
+          <div class="flex border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-hidden bg-neutral-50 dark:bg-neutral-950 focus-within:ring-2 focus-within:ring-indigo-500/40 focus-within:border-indigo-500">
+            <span class="bg-neutral-100 dark:bg-neutral-900 text-xs font-bold text-neutral-500 dark:text-neutral-400 px-4 py-3 flex items-center border-r border-neutral-200 dark:border-neutral-800 select-none">
+              CGPA
+            </span>
+            <input
+              type="number"
+              id="cg1-input"
+              value="8.20"
+              step="0.01"
+              min="0"
+              max="10"
+              class="w-full bg-transparent px-4 py-3 text-sm font-medium focus:outline-none tabular-nums text-neutral-800 dark:text-neutral-200"
+            />
+          </div>
+
+          <!-- Range Slider -->
+          <div class="mt-4">
+            <input
+              type="range"
+              id="cg1-slider"
+              value="8.20"
+              step="0.01"
+              min="0"
+              max="10"
+              class="w-full h-1.5 bg-neutral-200 dark:bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-blue-600 dark:accent-blue-500"
+            />
+          </div>
+        </div>
+
+        <!-- Result Box -->
+        <div class="bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl p-5 mt-auto relative">
+          <div class="flex justify-between items-start mb-4">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">ESTIMATED GPA</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">Formula</span>
+          </div>
+          <div class="flex justify-between items-end">
+            <span id="cg1-result" class="text-4xl sm:text-5xl font-extrabold text-blue-900 dark:text-blue-400 tracking-tight leading-none">3.28</span>
+            <span id="cg1-formula-text" class="text-[11px] font-mono font-bold text-rose-600 dark:text-rose-400 text-right max-w-[60%] leading-normal">
+              (CGPA / CGPA_scale) &times; GPA_scale
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: GPA to CGPA -->
+      <div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-6 shadow-sm flex flex-col">
+        <div class="flex justify-between items-baseline mb-6">
+          <h2 class="text-xl font-bold text-neutral-900 dark:text-white">GPA &rarr; CGPA</h2>
+          <span class="text-xs text-neutral-400 dark:text-neutral-500 font-mono">Linear mapping</span>
+        </div>
+
+        <!-- Scale Selectors -->
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div>
+            <label for="gpa2-scale-select" class="block text-xs font-semibold text-neutral-500 dark:text-neutral-400 mb-1.5 uppercase tracking-wide">GPA Scale</label>
+            <select
+              id="gpa2-scale-select"
+              class="w-full bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl px-3 py-2.5 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all cursor-pointer"
+            >
+              <option value="4" selected>4.0</option>
+              <option value="5">5.0</option>
+              <option value="7">7.0</option>
+              <option value="9">9.0</option>
+              <option value="10">10-point</option>
+            </select>
+          </div>
+          <div>
+            <label for="cg2-scale-select" class="block text-xs font-semibold text-neutral-500 dark:text-neutral-400 mb-1.5 uppercase tracking-wide">CGPA Scale</label>
+            <select
+              id="cg2-scale-select"
+              class="w-full bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl px-3 py-2.5 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all cursor-pointer"
+            >
+              <option value="10" selected>10-point</option>
+              <option value="9">9-point</option>
+              <option value="7">7-point</option>
+              <option value="5">5-point</option>
+              <option value="4">4.0 scale</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Input Section -->
+        <div class="mb-6">
+          <label for="gpa2-input" class="block text-xs font-semibold text-neutral-500 dark:text-neutral-400 mb-1.5 uppercase tracking-wide">Your GPA</label>
+          <div class="flex border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-hidden bg-neutral-50 dark:bg-neutral-950 focus-within:ring-2 focus-within:ring-indigo-500/40 focus-within:border-indigo-500">
+            <span class="bg-neutral-100 dark:bg-neutral-900 text-xs font-bold text-neutral-500 dark:text-neutral-400 px-4 py-3 flex items-center border-r border-neutral-200 dark:border-neutral-800 select-none">
+              GPA
+            </span>
+            <input
+              type="number"
+              id="gpa2-input"
+              value="3.30"
+              step="0.01"
+              min="0"
+              max="4"
+              class="w-full bg-transparent px-4 py-3 text-sm font-medium focus:outline-none tabular-nums text-neutral-800 dark:text-neutral-200"
+            />
+          </div>
+
+          <!-- Range Slider -->
+          <div class="mt-4">
+            <input
+              type="range"
+              id="gpa2-slider"
+              value="3.30"
+              step="0.01"
+              min="0"
+              max="4"
+              class="w-full h-1.5 bg-neutral-200 dark:bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-blue-600 dark:accent-blue-500"
+            />
+          </div>
+        </div>
+
+        <!-- Result Box -->
+        <div class="bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-xl p-5 mt-auto relative">
+          <div class="flex justify-between items-start mb-4">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">ESTIMATED CGPA</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">Formula</span>
+          </div>
+          <div class="flex justify-between items-end">
+            <span id="cg2-result" class="text-4xl sm:text-5xl font-extrabold text-blue-900 dark:text-blue-400 tracking-tight leading-none">8.25</span>
+            <span id="cg2-formula-text" class="text-[11px] font-mono font-bold text-rose-600 dark:text-rose-400 text-right max-w-[60%] leading-normal">
+              (GPA / GPA_scale) &times; CGPA_scale
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Comprehensive Guide: CGPA to GPA ── -->
+    <article class="bg-neutral-50 dark:bg-neutral-950 border-t border-neutral-200 dark:border-neutral-800/65">
+      <div class="container-page py-16 md:py-20">
+        <div class="max-w-4xl mx-auto">
+          
+          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 mt-16 mb-6">
+            Understanding CGPA to GPA Conversion
+          </h2>
+          <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+            Cumulative Grade Point Average (CGPA) and Grade Point Average (GPA) are standard metrics used by universities worldwide to measure a student’s overall academic performance. While the terms are often used interchangeably, CGPA typically refers to cumulative scores on a 10-point scale (standard in India, Singapore, and Europe), whereas GPA commonly refers to scores on a 4.0 scale (popular in the US, Canada, and global institutions).
+          </p>
+          <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+            When applying for higher education abroad, particularly in the United States or Canada, translating your CGPA into a US 4.0 GPA scale is one of the most critical steps in the admission process. 
+          </p>
+
+          <h3 class="text-xl md:text-2xl font-semibold tracking-tight text-neutral-800 dark:text-neutral-200 mt-10 mb-4">
+            The Linear Formula for Quick Conversion
+          </h3>
+          <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+            For a simple mapping estimation, universities and student coordinators apply the standard linear ratio conversion:
+          </p>
+          <div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl p-6 mb-6 font-mono text-sm text-neutral-800 dark:text-neutral-200">
+            <strong>Formula:</strong> Estimated GPA = (CGPA &divide; CGPA Max Scale) &times; Target GPA Scale
+          </div>
+          <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+            For example, if your CGPA is 8.20 out of a 10-point scale, and you wish to find its equivalent on a 4.0 scale:
+          </p>
+          <div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl p-6 mb-6 font-mono text-sm text-neutral-800 dark:text-neutral-200">
+            Estimated GPA = (8.20 &divide; 10) &times; 4.0 = 3.28
+          </div>
+
+          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 mt-16 mb-6">
+            CGPA to GPA Reference Table
+          </h2>
+          <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+            Below is a quick reference table showing standard linear mapping values from a 10-point scale to a standard US 4.0 scale:
+          </p>
+
+          <div class="overflow-x-auto mb-8">
+            <table class="w-full text-sm border-collapse">
+              <thead>
+                <tr class="bg-neutral-100 dark:bg-neutral-900">
+                  <th class="border border-neutral-200 dark:border-neutral-800 px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-100">10-Point CGPA</th>
+                  <th class="border border-neutral-200 dark:border-neutral-800 px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-100">US GPA (4.0 Scale)</th>
+                  <th class="border border-neutral-200 dark:border-neutral-800 px-4 py-3 text-left font-semibold text-neutral-900 dark:text-neutral-100">Percentage Equivalent</th>
+                </tr>
+              </thead>
+              <tbody class="text-neutral-600 dark:text-neutral-400">
+                <tr><td class="border border-neutral-200 dark:border-neutral-800 px-4 py-2.5">10.00</td><td class="border border-neutral-200 dark:border-neutral-800 px-4 py-2.5">4.00</td><td class="border border-neutral-200 dark:border-neutral-800 px-4 py-2.5">100%</td></tr>
+                <tr><td class="border border-neutral-200 dark:border-neutral-800 px-4 py-2.5">9.00</td><td class="border border-neutral-200 dark:border-neutral-800 px-4 py-2.5">3.60</td><td class="border border-neutral-200 dark:border-neutral-800 px-4 py-2.5">90%</td></tr>
+                <tr><td class="border border-neutral-200 dark:border-neutral-800 px-4 py-2.5">8.00</td><td class="border border-neutral-200 dark:border-neutral-800 px-4 py-2.5">3.20</td><td class="border border-neutral-200 dark:border-neutral-800 px-4 py-2.5">80%</td></tr>
+                <tr><td class="border border-neutral-200 dark:border-neutral-800 px-4 py-2.5">7.00</td><td class="border border-neutral-200 dark:border-neutral-800 px-4 py-2.5">2.80</td><td class="border border-neutral-200 dark:border-neutral-800 px-4 py-2.5">70%</td></tr>
+                <tr><td class="border border-neutral-200 dark:border-neutral-800 px-4 py-2.5">6.00</td><td class="border border-neutral-200 dark:border-neutral-800 px-4 py-2.5">2.40</td><td class="border border-neutral-200 dark:border-neutral-800 px-4 py-2.5">60%</td></tr>
+                <tr><td class="border border-neutral-200 dark:border-neutral-800 px-4 py-2.5">5.00</td><td class="border border-neutral-200 dark:border-neutral-800 px-4 py-2.5">2.00</td><td class="border border-neutral-200 dark:border-neutral-800 px-4 py-2.5">50%</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 mt-16 mb-6">
+            Official Evaluation vs. Linear Conversion
+          </h2>
+          <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+            While the linear converter is highly helpful for planning and quick evaluations, credential review agencies like World Education Services (WES) do not calculate GPA using simple ratios. WES uses a course-by-course mapping methodology:
+          </p>
+          <ul class="list-disc list-inside space-y-2 text-neutral-600 dark:text-neutral-400 mb-6 ml-4">
+            <li><strong>Subject-Wise Review:</strong> Each letter grade earned in your home country is mapped directly to a US equivalent (A, B, C, D, F).</li>
+            <li><strong>GPA Weighting:</strong> Standard point weights (A = 4.0, B = 3.0, C = 2.0) are multiplied by the credit hours of the course.</li>
+            <li><strong>Final GPA Recalculation:</strong> The total weighted grade points are divided by the total number of academic credits.</li>
+          </ul>
+          <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+            This means your final WES GPA might be slightly higher or lower than the linear conversion depending on how well you performed in high-credit courses.
+          </p>
+
+          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 mt-16 mb-6">
+            Tips for Managing Your GPA
+          </h2>
+          <ul class="list-disc list-inside space-y-2 text-neutral-600 dark:text-neutral-400 mb-6 ml-4">
+            <li><strong>Focus on High-Credit Modules:</strong> Courses carrying 4 or 5 credits impact your cumulative score far more than 1 or 2 credit electives.</li>
+            <li><strong>Track Your Academic Trajectory:</strong> Consistently improving your marks across semesters looks positive to graduate admissions panels.</li>
+            <li><strong>Leverage Free Tool Sets:</strong> Use our integrated tools to calculate your semester values dynamically at <a href="/sgpa-calculator" class="text-indigo-600 dark:text-indigo-400 hover:underline">SGPA Calculator</a> or cumulative progress at <a href="/cgpa-calculator" class="text-indigo-600 dark:text-indigo-400 hover:underline">CGPA Calculator</a>.</li>
+          </ul>
+
+        </div>
+      </div>
+    </article>
+
+  </div>
+</Layout>
+
+<script>
+  // ── DOM Elements Left Card ──
+  const cg1Select = document.getElementById('cg1-scale-select') as HTMLSelectElement;
+  const gpa1Select = document.getElementById('gpa1-scale-select') as HTMLSelectElement;
+  const cg1Input = document.getElementById('cg1-input') as HTMLInputElement;
+  const cg1Slider = document.getElementById('cg1-slider') as HTMLInputElement;
+  const cg1Result = document.getElementById('cg1-result')!;
+  const cg1FormulaText = document.getElementById('cg1-formula-text')!;
+
+  // ── DOM Elements Right Card ──
+  const gpa2Select = document.getElementById('gpa2-scale-select') as HTMLSelectElement;
+  const cg2Select = document.getElementById('cg2-scale-select') as HTMLSelectElement;
+  const gpa2Input = document.getElementById('gpa2-input') as HTMLInputElement;
+  const gpa2Slider = document.getElementById('gpa2-slider') as HTMLInputElement;
+  const cg2Result = document.getElementById('cg2-result')!;
+  const cg2FormulaText = document.getElementById('cg2-formula-text')!;
+
+  // Update validation and calculation
+  function calculateLeftCard() {
+    const cgScale = parseFloat(cg1Select.value);
+    const gpaScale = parseFloat(gpa1Select.value);
+    
+    // Set max attribute dynamically
+    cg1Input.max = String(cgScale);
+    cg1Slider.max = String(cgScale);
+
+    let val = parseFloat(cg1Input.value);
+    if (isNaN(val)) val = 0;
+    if (val > cgScale) {
+      val = cgScale;
+      cg1Input.value = val.toFixed(2);
+    }
+    if (val < 0) {
+      val = 0;
+      cg1Input.value = '0.00';
+    }
+
+    const calculated = (val / cgScale) * gpaScale;
+    cg1Result.textContent = calculated.toFixed(2);
+    cg1Slider.value = String(val);
+
+    // Update Formula Text
+    cg1FormulaText.innerHTML = `(${val.toFixed(2)} / ${cgScale}) &times; ${gpaScale}`;
+  }
+
+  function calculateRightCard() {
+    const gpaScale = parseFloat(gpa2Select.value);
+    const cgScale = parseFloat(cg2Select.value);
+
+    // Set max attribute dynamically
+    gpa2Input.max = String(gpaScale);
+    gpa2Slider.max = String(gpaScale);
+
+    let val = parseFloat(gpa2Input.value);
+    if (isNaN(val)) val = 0;
+    if (val > gpaScale) {
+      val = gpaScale;
+      gpa2Input.value = val.toFixed(2);
+    }
+    if (val < 0) {
+      val = 0;
+      gpa2Input.value = '0.00';
+    }
+
+    const calculated = (val / gpaScale) * cgScale;
+    cg2Result.textContent = calculated.toFixed(2);
+    gpa2Slider.value = String(val);
+
+    // Update Formula Text
+    cg2FormulaText.innerHTML = `(${val.toFixed(2)} / ${gpaScale}) &times; ${cgScale}`;
+  }
+
+  // Bind Left Card Events
+  cg1Select.addEventListener('change', calculateLeftCard);
+  gpa1Select.addEventListener('change', calculateLeftCard);
+  
+  cg1Input.addEventListener('input', () => {
+    calculateLeftCard();
+  });
+  cg1Slider.addEventListener('input', () => {
+    cg1Input.value = parseFloat(cg1Slider.value).toFixed(2);
+    calculateLeftCard();
+  });
+
+  // Bind Right Card Events
+  gpa2Select.addEventListener('change', calculateRightCard);
+  cg2Select.addEventListener('change', calculateRightCard);
+
+  gpa2Input.addEventListener('input', () => {
+    calculateRightCard();
+  });
+  gpa2Slider.addEventListener('input', () => {
+    gpa2Input.value = parseFloat(gpa2Slider.value).toFixed(2);
+    calculateRightCard();
+  });
+
+  // Init
+  calculateLeftCard();
+  calculateRightCard();
+</script>

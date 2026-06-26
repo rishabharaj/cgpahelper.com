@@ -108,15 +108,18 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
       <!-- Result Section -->
       <div id="result-section" class="hidden border-t border-neutral-100 dark:border-neutral-800 pt-6">
         <div class="flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
-          <!-- SVG Gauge -->
-          <div class="relative shrink-0">
-            <svg id="gauge-svg" width="140" height="140" viewBox="0 0 140 140" class="transform -rotate-90">
-              <circle cx="70" cy="70" r="60" fill="none" stroke-width="10" class="stroke-neutral-200 dark:stroke-neutral-800"/>
-              <circle id="gauge-ring" cx="70" cy="70" r="60" fill="none" stroke-width="10" stroke-linecap="round"
-                stroke-dasharray="376.99" stroke-dashoffset="376.99" class="gauge-ring transition-all duration-700"/>
-            </svg>
-            <div class="absolute inset-0 flex items-center justify-center">
-              <span id="gauge-value" class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 rotate-0">0.00</span>
+          <!-- Linear Progress Bar -->
+          <div class="w-full sm:w-48 shrink-0 space-y-2">
+            <div class="flex justify-between text-xs font-semibold text-neutral-500 dark:text-neutral-400 font-mono">
+              <span>0%</span>
+              <span id="gauge-percent-text">0%</span>
+            </div>
+            <div class="w-full bg-neutral-100 dark:bg-neutral-800 h-3 rounded-full overflow-hidden">
+              <div
+                id="gauge-ring"
+                class="h-full rounded-full transition-all duration-500 ease-out"
+                style="width: 0%; background-color: #4f46e5;"
+              ></div>
             </div>
           </div>
 
@@ -280,8 +283,8 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
   const coursesContainer = document.getElementById('courses-container')!;
   const addCourseBtn = document.getElementById('add-course-btn')!;
   const resultSection = document.getElementById('result-section')!;
-  const gaugeRing = document.getElementById('gauge-ring') as SVGCircleElement;
-  const gaugeValue = document.getElementById('gauge-value')!;
+  const gaugeRing = document.getElementById('gauge-ring') as HTMLDivElement;
+  const gaugePercentText = document.getElementById('gauge-percent-text')!;
   const resultGPA = document.getElementById('result-gpa')!;
   const resultScale = document.getElementById('result-scale')!;
   const resultClassification = document.getElementById('result-classification')!;
@@ -291,7 +294,6 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
   const gradingTableBody = document.getElementById('grading-table-body')!;
 
   let courseCounter = 0;
-  const GAUGE_CIRCUMFERENCE = 2 * Math.PI * 60; // r=60
 
   // ── Debounce utility (INP optimization) ──
   function debounce<T extends (...args: any[]) => void>(fn: T, delay: number): T {
@@ -487,7 +489,6 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
     /* Update text */
     const sgpaStr = sgpa.toFixed(2);
     resultGPA.textContent = sgpaStr;
-    gaugeValue.textContent = sgpaStr;
     resultScale.textContent = `out of ${maxGPA.toFixed(1)}`;
     resultCredits.textContent = String(totalCredits);
     resultPoints.textContent = totalGradePoints.toFixed(2);
@@ -496,13 +497,12 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
     resultClassification.textContent = classification.label;
     resultClassification.className = `inline-block mt-1 text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full ${classification.bg} ${classification.color}`;
 
-    /* SVG Gauge (rAF to avoid layout thrashing) */
+    /* Update linear progress bar */
     const ratio = Math.min(sgpa / maxGPA, 1);
-    const offset = GAUGE_CIRCUMFERENCE * (1 - ratio);
     requestAnimationFrame(() => {
-      gaugeRing.style.strokeDasharray = String(GAUGE_CIRCUMFERENCE);
-      gaugeRing.style.strokeDashoffset = String(offset);
-      gaugeRing.style.stroke = classification.ring;
+      gaugeRing.style.width = `${ratio * 100}%`;
+      gaugeRing.style.backgroundColor = classification.ring;
+      gaugePercentText.textContent = `${Math.round(ratio * 100)}%`;
     });
 
     /* Show result */
