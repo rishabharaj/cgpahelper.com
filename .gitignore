@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # playwright mcp temp logs
 .playwright-mcp/
+
+#screenshots for reference
+screenshots/
