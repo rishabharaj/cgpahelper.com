@@ -27,7 +27,17 @@ const faqs = [
 const systemEntries = Object.entries(gradingSystems);
 ---
 
-<Layout title={title} description={description} faqs={faqs}>
+<Layout
+  title={title}
+  description={description}
+  canonicalPath="/universal-gpa-converter"
+  keywords="universal gpa converter, gpa converter, convert gpa, ects to gpa converter, gpa scale converter, wes gpa calculator, grade point average converter"
+  faqs={faqs}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Universal GPA Converter', url: '/universal-gpa-converter' }
+  ]}
+>
   <div class="container-page pt-6 pb-20">
 
     <!-- ── Breadcrumb ── -->
@@ -636,8 +646,8 @@ const systemEntries = Object.entries(gradingSystems);
     if (mode === 'scale') {
       labelElement.textContent = modeName.startsWith('source') ? 'Source Grading Scale' : 'Target Conversion Scale';
       
-      const scales = Object.entries(gradingSystems).filter(([_, sys]) => {
-        return matchCountry(sys.country, country);
+      const scales = Object.entries(gradingSystems).filter(([key, sys]) => {
+        return matchCountry(sys.country, country) && key !== 'icse-board' && key !== 'rgpv';
       });
       
       selectElement.innerHTML = scales.map(([key, sys]) => {

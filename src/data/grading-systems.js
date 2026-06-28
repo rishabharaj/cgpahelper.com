@@ -159,9 +159,9 @@ export const gradingSystems = {
     ],
   },
   'ects': {
-    name: 'European ECTS / Nigeria 5.0 GPA Scale',
-    shortName: 'ECTS / Nigeria (5.0)',
-    country: 'Europe / Nigeria',
+    name: 'European ECTS / Germany / Nigeria 5.0 GPA Scale',
+    shortName: 'ECTS / Germany / Nigeria (5.0)',
+    country: 'Europe / Germany / Nigeria',
     maxGPA: 5,
     grades: [
       { letter: 'A', point: 5.0, range: '90–100' },

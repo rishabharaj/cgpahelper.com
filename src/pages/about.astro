@@ -1,26 +1,46 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const title = 'Free About Us — CGPA Helper';
-const description = 'Learn more about CGPA Helper, our mission, and how we build privacy-first calculators for students worldwide.';
+const title = 'About Us — GPA & CGPA Calculator Utilities';
+const description = 'Learn more about CGPA Helper, our mission, and how we build privacy-first academic calculators for university and board exam students globally.';
 ---
 
-<Layout title={title} description={description}>
+<Layout
+  title={title}
+  description={description}
+  canonicalPath="/about"
+  keywords="about cgpa helper, gpa calculator creators, privacy-first gpa tool, college cgpa tools"
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'About Us', url: '/about' }
+  ]}
+>
   <div class="container-page py-16 md:py-24 max-w-3xl">
     <h1 class="text-4xl font-bold tracking-tight mb-6">About Us</h1>
     <p class="text-lg text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed">
-      CGPA Helper is a dedicated academic utility built to solve a common problem faced by students worldwide: the confusion of grade calculations and university conversions.
+      CGPA Helper is a dedicated academic utility built to solve a common problem faced by high school, college, and university students worldwide: the complexity of grade calculations and transcript translations.
     </p>
     <p class="text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed">
-      We believe that checking your academic standing shouldn't require complex spreadsheets, paid subscriptions, or giving away your personal details. That's why we created a suite of completely free tools that require no signups and display no intrusive ads.
+      We believe that checking your academic standing or preparing study abroad applications shouldn't require complex spreadsheets, paid evaluation tools, or sharing your personal student details. That's why we created a suite of completely free academic tools that require no registration, keep your data secure, and follow official grading guidelines.
     </p>
 
-    <h2 class="text-2xl font-bold mt-10 mb-4">Our Mission</h2>
+    <h2 class="text-2xl font-bold mt-10 mb-4">What We Build</h2>
+    <p class="text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed">
+      Our platforms offer tailored solutions depending on where you study and where you plan to apply. This includes:
+    </p>
+    <ul class="list-disc list-inside space-y-3 text-neutral-600 dark:text-neutral-400 mb-8 ml-4">
+      <li><strong>CGPA & SGPA Calculators:</strong> Real-time calculators configured for standard 10-point, 4.0, and 5.0 systems, helping you estimate and project your semester performance.</li>
+      <li><strong>Official Board Exam Percentage Tools:</strong> Built-in support for CBSE, ICSE, and Indian State Boards, including automatic application of the CBSE 9.5 multiplier and the "Best of 5" subject rule.</li>
+      <li><strong>Universal GPA Converter:</strong> A course-by-course transcript converter mapping grades across US 4.0 GPA, UK Honours classification, European ECTS, Canada, Australia, and Asian university scales.</li>
+      <li><strong>CGPA to GPA evaluation:</strong> Tools using linear formulas and explaining credential reviews like WES to prepare students for study abroad admissions.</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold mt-10 mb-4">Our Principles</h2>
     <div class="grid gap-6 mt-6">
       <div class="p-5 rounded-xl border border-neutral-200 dark:border-neutral-800">
         <h3 class="font-semibold text-lg mb-2">🔒 Privacy First</h3>
         <p class="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
-          Your grades are your business. Unlike other calculators that store records on their servers, all computations on CGPA Helper run directly inside your web browser. No data is ever collected or shared.
+          Your grades are your business. Unlike other calculators that store records on their servers, all computations on CGPA Helper run directly inside your web browser. No data is ever collected, stored, or shared.
         </p>
       </div>
       <div class="p-5 rounded-xl border border-neutral-200 dark:border-neutral-800">

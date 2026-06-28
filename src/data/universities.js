@@ -680,7 +680,7 @@ export const universities = [
     country: 'United Kingdom',
     description: 'Oxford is the oldest university in the English-speaking world, recognized for academic prestige, tutorials, and historic research.',
     est: '1096',
-    system: 'cbse-ugc-india',
+    system: 'uk-honours',
     website: 'https://www.ox.ac.uk'
   },
   {
@@ -691,7 +691,7 @@ export const universities = [
     country: 'United Kingdom',
     description: 'Cambridge is the second-oldest university in the English-speaking world, offering historic academic excellence and collegiate learning.',
     est: '1209',
-    system: 'cbse-ugc-india',
+    system: 'uk-honours',
     website: 'https://www.cam.ac.uk'
   },
   {
@@ -702,7 +702,7 @@ export const universities = [
     country: 'United Kingdom',
     description: 'Imperial College London is a world top-ten university specializing in science, engineering, medicine, and business.',
     est: '1907',
-    system: 'cbse-ugc-india',
+    system: 'uk-honours',
     website: 'https://www.imperial.ac.uk'
   },
   {
@@ -713,7 +713,7 @@ export const universities = [
     country: 'United Kingdom',
     description: 'UCL is a premier public research university in London, recognized for its global impact, diverse streams, and history of innovation.',
     est: '1826',
-    system: 'cbse-ugc-india',
+    system: 'uk-honours',
     website: 'https://www.ucl.ac.uk'
   },
 
@@ -952,5 +952,143 @@ export const universities = [
     est: '1921',
     system: 'us-4-0',
     website: 'https://uet.edu.pk'
+  },
+  // Australia
+  {
+    slug: 'melbourne-gpa-calculator',
+    abbreviation: 'UniMelb',
+    name: 'University of Melbourne',
+    location: 'Melbourne, Victoria, Australia',
+    country: 'Australia',
+    description: 'The University of Melbourne is a public research university in Melbourne, Australia, consistently ranked among the top universities globally.',
+    est: '1853',
+    system: 'aus-7-0',
+    website: 'https://www.unimelb.edu.au'
+  },
+  {
+    slug: 'anu-gpa-calculator',
+    abbreviation: 'ANU',
+    name: 'Australian National University',
+    location: 'Canberra, ACT, Australia',
+    country: 'Australia',
+    description: 'ANU is a celebrated national research university in Canberra, Australia, recognized for outstanding arts, sciences, and international policy programs.',
+    est: '1946',
+    system: 'aus-7-0',
+    website: 'https://www.anu.edu.au'
+  },
+  {
+    slug: 'sydney-gpa-calculator',
+    abbreviation: 'USyd',
+    name: 'University of Sydney',
+    location: 'Sydney, New South Wales, Australia',
+    country: 'Australia',
+    description: 'The University of Sydney is one of Australia\'s leading sandstone universities, offering diverse undergraduate and postgraduate programs.',
+    est: '1850',
+    system: 'aus-7-0',
+    website: 'https://www.sydney.edu.au'
+  },
+  // Singapore
+  {
+    slug: 'nus-gpa-calculator',
+    abbreviation: 'NUS',
+    name: 'National University of Singapore',
+    location: 'Singapore',
+    country: 'Singapore',
+    description: 'NUS is a top-ranked global university centered in Asia, offering a global approach to education and research with a focus on Asian perspectives.',
+    est: '1905',
+    system: 'sg-5-0',
+    website: 'https://nus.edu.sg'
+  },
+  {
+    slug: 'ntu-gpa-calculator',
+    abbreviation: 'NTU',
+    name: 'Nanyang Technological University',
+    location: 'Singapore',
+    country: 'Singapore',
+    description: 'NTU Singapore is a research-intensive public university, particularly renowned for engineering, science, business, and humanities schools.',
+    est: '1981',
+    system: 'sg-5-0',
+    website: 'https://www.ntu.edu.sg'
+  },
+  // Germany
+  {
+    slug: 'tum-gpa-calculator',
+    abbreviation: 'TUM',
+    name: 'Technical University of Munich',
+    location: 'Munich, Bavaria, Germany',
+    country: 'Germany',
+    description: 'TUM is one of Europe\'s top universities, highly specialized in engineering, technology, medicine, and applied natural sciences.',
+    est: '1868',
+    system: 'ects',
+    website: 'https://www.tum.de'
+  },
+  // Malaysia
+  {
+    slug: 'um-gpa-calculator',
+    abbreviation: 'UM',
+    name: 'Universiti Malaya',
+    location: 'Kuala Lumpur, Malaysia',
+    country: 'Malaysia',
+    description: 'Universiti Malaya is the oldest and highest-ranking public research university in Malaysia, located in Kuala Lumpur.',
+    est: '1905',
+    system: 'my-4-0',
+    website: 'https://www.um.edu.my'
+  },
+  {
+    slug: 'upm-gpa-calculator',
+    abbreviation: 'UPM',
+    name: 'Universiti Putra Malaysia',
+    location: 'Serdang, Selangor, Malaysia',
+    country: 'Malaysia',
+    description: 'UPM is a leading public research university in Malaysia, globally recognized for agricultural sciences, forestry, and biotechnology.',
+    est: '1971',
+    system: 'my-4-0',
+    website: 'https://www.upm.edu.my'
+  },
+  // New Zealand
+  {
+    slug: 'auckland-gpa-calculator',
+    abbreviation: 'Auckland',
+    name: 'University of Auckland',
+    location: 'Auckland, New Zealand',
+    country: 'New Zealand',
+    description: 'The University of Auckland is the largest and highest-ranked university in New Zealand, offering standard 9-point grading scale conversions.',
+    est: '1883',
+    system: 'nz-9-0',
+    website: 'https://www.auckland.ac.nz'
+  },
+  {
+    slug: 'otago-gpa-calculator',
+    abbreviation: 'Otago',
+    name: 'University of Otago',
+    location: 'Dunedin, Otago, New Zealand',
+    country: 'New Zealand',
+    description: 'The University of Otago is New Zealand\'s oldest university, famous for outstanding health sciences, research, and collegiate life.',
+    est: '1869',
+    system: 'nz-9-0',
+    website: 'https://www.otago.ac.nz'
+  },
+  // Nepal
+  {
+    slug: 'tribhuvan-gpa-calculator',
+    abbreviation: 'TU',
+    name: 'Tribhuvan University',
+    location: 'Kirtipur, Kathmandu, Nepal',
+    country: 'Nepal',
+    description: 'Tribhuvan University is the oldest and largest public university in Nepal, coordinating academic programs across hundreds of colleges.',
+    est: '1959',
+    system: 'my-4-0',
+    website: 'https://tribhuvan-university.edu.np'
+  },
+  {
+    slug: 'kathmandu-gpa-calculator',
+    abbreviation: 'KU',
+    name: 'Kathmandu University',
+    location: 'Dhulikhel, Kavre, Nepal',
+    country: 'Nepal',
+    description: 'Kathmandu University is a leading autonomous public university in Nepal, recognized for high academic standards in engineering, science, and medicine.',
+    est: '1991',
+    system: 'my-4-0',
+    website: 'https://ku.edu.np'
   }
 ];

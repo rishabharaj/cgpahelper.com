@@ -48,7 +48,17 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
 });
 ---
 
-<Layout title={title} description={description}>
+<Layout
+  title={title}
+  description={description}
+  canonicalPath="/cgpa-calculator"
+  keywords="cgpa calculator, sgpa calculator, cumulative gpa calculator, semester gpa calculator, cgpa to percentage, cgpa to percentage converter, sgpa to cgpa"
+  faqs={[...cgpaFaqs, ...sgpaFaqs, ...percentageFaqs]}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'CGPA Calculator', url: '/cgpa-calculator' }
+  ]}
+>
   <!-- ── Breadcrumb ── -->
   <nav aria-label="Breadcrumb" class="container-page pt-6 pb-2">
     <ol class="flex items-center gap-1.5 text-xs text-neutral-400 dark:text-neutral-500">
@@ -70,9 +80,9 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
   <header class="container-page pt-6 pb-8 md:pt-8 md:pb-10 print:hidden">
     <!-- SGPA Header -->
     <div id="header-sgpa" class="tab-header hidden">
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.15] mb-3">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.15] mb-3">
         Semester GPA <span class="bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent">Calculator</span>
-      </h1>
+      </h2>
       <p class="text-neutral-600 dark:text-neutral-400 max-w-2xl leading-relaxed text-sm sm:text-base">
         Calculate your Semester GPA by entering course names, credit hours, and selecting grades. Results update dynamically in real time.
       </p>
@@ -90,9 +100,9 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
 
     <!-- Percentage Header -->
     <div id="header-percentage" class="tab-header hidden">
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.15] mb-3">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.15] mb-3">
         Percentage <span class="bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent">Converter</span>
-      </h1>
+      </h2>
       <p class="text-neutral-600 dark:text-neutral-400 max-w-2xl leading-relaxed text-sm sm:text-base">
         Convert your Cumulative GPA to percentage and vice-versa using official university formulas. Select your system for instant results.
       </p>
@@ -473,6 +483,19 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
                   <div id="pct-steps-content" class="text-xs font-mono text-neutral-600 dark:text-neutral-300 space-y-1"></div>
                 </div>
 
+                <!-- Download PDF Button -->
+                <div class="w-full flex justify-center print:hidden">
+                  <button
+                    id="print-pdf-btn-percentage"
+                    type="button"
+                    class="inline-flex items-center justify-center gap-2 w-full px-5 py-2.5 border border-neutral-200 dark:border-neutral-800 rounded-xl text-sm font-semibold hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors cursor-pointer text-neutral-700 dark:text-neutral-300"
+                  >
+                    <svg class="w-4 h-4 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                    </svg>
+                    Download PDF
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -671,6 +694,59 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
         ))}
       </div>
 
+    </div>
+  </section>
+
+  <!-- ── Related Calculators & Guides ── -->
+  <section class="container-page py-16 md:py-20 print:hidden border-t border-neutral-200 dark:border-neutral-800">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-semibold tracking-tight text-center mb-8">Related GPA Calculators & Guides</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card 1 -->
+        <a href="/universal-gpa-converter" class="group bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-5 hover:border-indigo-500 dark:hover:border-indigo-400 transition-all hover:shadow-md">
+          <h3 class="font-bold text-neutral-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center gap-1.5">
+            🌍 Universal GPA Converter
+            <svg class="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </h3>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+            Convert grade sheets and transcripts between U.S., UK, European, Canadian, and Australian systems.
+          </p>
+        </a>
+        <!-- Card 2 -->
+        <a href="/cgpa-to-gpa-calculator" class="group bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-5 hover:border-indigo-500 dark:hover:border-indigo-400 transition-all hover:shadow-md">
+          <h3 class="font-bold text-neutral-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center gap-1.5">
+            🎓 CGPA to GPA Converter
+            <svg class="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </h3>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+            Quickly translate your 10-point Indian CGPA to a U.S. 4.0 scale using direct linear formulas.
+          </p>
+        </a>
+        <!-- Card 3 -->
+        <a href="/cgpa-vs-sgpa" class="group bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-5 hover:border-indigo-500 dark:hover:border-indigo-400 transition-all hover:shadow-md sm:col-span-2 lg:col-span-1">
+          <h3 class="font-bold text-neutral-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center gap-1.5">
+            🔑 CGPA vs SGPA Comparison
+            <svg class="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </h3>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+            Understand differences in how semester average and cumulative averages work, and try our compounding simulator.
+          </p>
+        </a>
+      </div>
+      <div class="mt-8 text-center">
+        <a href="/universities" class="inline-flex items-center gap-1 text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">
+          Browse all supported universities & boards
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -1296,6 +1372,7 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
   const pctGaugeCircle = document.getElementById('pct-gauge-circle') as SVGCircleElement;
   const pctGaugeText = document.getElementById('pct-gauge-percent-text')!;
   const pctStepsContent = document.getElementById('pct-steps-content')!;
+  const pctPrintBtn = document.getElementById('print-pdf-btn-percentage') as HTMLButtonElement;
 
   const pctRefHeaderInput = document.getElementById('pct-ref-header-input')!;
   const pctRefHeaderOutput = document.getElementById('pct-ref-header-output')!;
@@ -1583,7 +1660,10 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
       // ── Header ──
       doc.setFontSize(20);
       doc.setFont('helvetica', 'bold');
-      const headerText = activeTab === 'sgpa' ? 'SGPA Calculation Report' : 'CGPA Calculation Report';
+      let headerText = 'GPA Calculation Report';
+      if (activeTab === 'sgpa') headerText = 'SGPA Calculation Report';
+      else if (activeTab === 'cgpa') headerText = 'CGPA Calculation Report';
+      else if (activeTab === 'percentage') headerText = 'CGPA to Percentage Conversion';
       doc.text(headerText, pageWidth / 2, y, { align: 'center' });
       y += 8;
 
@@ -1603,7 +1683,9 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
       doc.setTextColor(60);
       doc.setFontSize(11);
       const dateVal = new Date().toLocaleDateString(undefined, { dateStyle: 'long' });
-      const sysName = getSharedSystem().name;
+      const sysName = activeTab === 'percentage'
+        ? (gradingSystems[pctSystemSelect.value]?.name || 'UGC/CBSE India')
+        : getSharedSystem().name;
 
       doc.setFont('helvetica', 'bold');
       doc.text('Date:', margin, y);
@@ -1749,6 +1831,68 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
             y = 25;
           }
         });
+      } else if (activeTab === 'percentage') {
+        // ── Percentage Result Summary ──
+        const isToPct = currentPercentageMode === 'gpa-to-pct';
+        const typeText = isToPct ? 'CGPA to Percentage (%)' : 'Percentage (%) to CGPA';
+        const inputVal = isToPct ? (cgpaInputField.value || '—') : (pctInputField.value || '—');
+        
+        let outputVal = '—';
+        if (isToPct) {
+          outputVal = (pctResultValueToPct.textContent || '—') + '%';
+        } else {
+          outputVal = (pctResultValueFromPct.textContent || '0.00') + ' ' + (pctResultScaleFromPct.textContent || '/ 10.0');
+        }
+
+        const formulaText = pctFormulaDisplay.textContent || '';
+        const stepsText = Array.from(pctStepsContent.children).map(el => el.textContent).join('\n');
+
+        doc.setFontSize(14);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(30);
+        doc.text(`Conversion: ${typeText}`, margin, y);
+        y += 8;
+
+        doc.setFontSize(11);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Input Value:', margin, y);
+        doc.setFont('helvetica', 'normal');
+        doc.text(inputVal, margin + 28, y);
+        y += 7;
+
+        doc.setFont('helvetica', 'bold');
+        doc.text('Converted Value:', margin, y);
+        doc.setFont('helvetica', 'normal');
+        doc.text(outputVal, margin + 35, y);
+        y += 12;
+
+        // ── Details Box ──
+        doc.setFillColor(248, 249, 250);
+        doc.setDrawColor(220);
+        doc.setLineWidth(0.3);
+        doc.rect(margin, y, pageWidth - (margin * 2), 45, 'FD');
+
+        y += 6;
+        doc.setFontSize(10);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(60);
+        doc.text('Conversion Details:', margin + 4, y);
+        y += 6;
+
+        doc.setFont('helvetica', 'bold');
+        doc.text('Formula Used:', margin + 4, y);
+        doc.setFont('helvetica', 'normal');
+        doc.text(formulaText, margin + 32, y);
+        y += 8;
+
+        doc.setFont('helvetica', 'bold');
+        doc.text('Steps:', margin + 4, y);
+        y += 5;
+        doc.setFont('courier', 'normal');
+        doc.setFontSize(9);
+        const stepsLines = doc.splitTextToSize(stepsText, pageWidth - (margin * 2) - 12);
+        doc.text(stepsLines, margin + 6, y);
+        y += stepsLines.length * 4 + 8;
       }
 
       // ── Footer ──
@@ -1767,7 +1911,10 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
       y += 5;
       doc.text(`Generated on ${dateVal} by CGPAHelper.com`, margin, y);
 
-      const filename = activeTab === 'sgpa' ? 'SGPA-Report.pdf' : 'CGPA-Report.pdf';
+      let filename = 'GPA-Report.pdf';
+      if (activeTab === 'sgpa') filename = 'SGPA-Report.pdf';
+      else if (activeTab === 'cgpa') filename = 'CGPA-Report.pdf';
+      else if (activeTab === 'percentage') filename = 'CGPA-Percentage-Conversion.pdf';
       doc.save(filename);
     } catch (err) {
       console.error('PDF generation failed:', err);
@@ -1784,6 +1931,10 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
 
   cgpaPrintBtn.addEventListener('click', () => {
     downloadPDF('cgpa', cgpaPrintBtn);
+  });
+
+  pctPrintBtn.addEventListener('click', () => {
+    downloadPDF('percentage', pctPrintBtn);
   });
 
 

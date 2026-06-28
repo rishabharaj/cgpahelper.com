@@ -1,11 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const title = 'Free Terms & Conditions — CGPA Helper';
+const title = 'Terms & Conditions — Terms of Service';
 const description = 'Read the terms of service and conditions for using the CGPA Helper calculators and conversion tools.';
 ---
 
-<Layout title={title} description={description}>
+<Layout
+  title={title}
+  description={description}
+  canonicalPath="/terms"
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Terms & Conditions', url: '/terms' }
+  ]}
+>
   <div class="container-page py-16 md:py-24 max-w-3xl">
     <h1 class="text-4xl font-bold tracking-tight mb-6">Terms &amp; Conditions</h1>
     

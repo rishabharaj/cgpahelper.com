@@ -28,7 +28,17 @@ const faqs = [
 ];
 ---
 
-<Layout title={title} description={description} faqs={faqs}>
+<Layout
+  title={title}
+  description={description}
+  canonicalPath="/icse-percentage-calculator"
+  keywords="cbse cgpa calculator, icse percentage calculator, board cgpa calculator, convert cbse cgpa to percentage, board exam percentage calculator, best of 5 rule"
+  faqs={faqs}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Board CGPA Calculator', url: '/icse-percentage-calculator' }
+  ]}
+>
   <!-- ── Breadcrumb ── -->
   <nav aria-label="Breadcrumb" class="container-page pt-6 pb-2">
     <ol class="flex items-center gap-1.5 text-xs text-neutral-400 dark:text-neutral-500">
@@ -268,7 +278,7 @@ const faqs = [
         CBSE CGPA to Percentage: The Official 9.5 Multiplier
       </h3>
       <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
-        Converting <strong>CBSE CGPA to percentage</strong> is straightforward — multiply your CGPA by 9.5. This conversion factor is officially recommended by CBSE and recognized by the University Grants Commission (UGC). For a student with a CGPA of 8.8, the equivalent percentage is 8.8 × 9.5 = <strong>83.6%</strong>. Use our dedicated <a href="/cgpa-to-percentage" class="text-indigo-600 dark:text-indigo-400 hover:underline">CGPA to Percentage converter</a> for more grading scale options.
+        Converting <strong>CBSE CGPA to percentage</strong> is straightforward — multiply your CGPA by 9.5. This conversion factor is officially recommended by CBSE and recognized by the University Grants Commission (UGC). For a student with a CGPA of 8.8, the equivalent percentage is 8.8 × 9.5 = <strong>83.6%</strong>. Use our dedicated <a href="/cgpa-calculator?tab=percentage&mode=to-percentage" class="text-indigo-600 dark:text-indigo-400 hover:underline">CGPA to Percentage converter</a> for more grading scale options.
       </p>
       <div class="p-5 my-4 bg-indigo-50/50 dark:bg-indigo-950/20 rounded-xl border border-indigo-100 dark:border-indigo-900/30 text-center font-mono text-base sm:text-lg text-indigo-700 dark:text-indigo-400">
         Percentage = CGPA × 9.5

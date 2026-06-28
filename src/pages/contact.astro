@@ -1,11 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const title = 'Free Contact Us — CGPA Helper';
+const title = 'Contact Us — Suggestions & Feedback';
 const description = 'Get in touch with CGPA Helper. Suggest a university grading scale, report an issue, or send us feedback.';
 ---
 
-<Layout title={title} description={description}>
+<Layout
+  title={title}
+  description={description}
+  canonicalPath="/contact"
+  keywords="contact cgpa helper, suggest university scale, support cgpa helper"
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Contact Us', url: '/contact' }
+  ]}
+>
   <div class="container-page py-16 md:py-24 max-w-2xl">
     <h1 class="text-4xl font-bold tracking-tight mb-4">Contact Us</h1>
     <p class="text-neutral-600 dark:text-neutral-400 mb-8 leading-relaxed">

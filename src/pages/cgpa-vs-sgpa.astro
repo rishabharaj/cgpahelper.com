@@ -45,7 +45,17 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
 });
 ---
 
-<Layout title={title} description={description} canonicalPath="/cgpa-vs-sgpa" faqs={faqs}>
+<Layout
+  title={title}
+  description={description}
+  canonicalPath="/cgpa-vs-sgpa"
+  keywords="cgpa vs sgpa, difference between cgpa and sgpa, what is cgpa, sgpa to cgpa formula, cgpa meaning, sgpa meaning, cumulative gpa vs semester gpa"
+  faqs={faqs}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'CGPA vs SGPA Guide', url: '/cgpa-vs-sgpa' }
+  ]}
+>
   <div class="container-page py-10 md:py-16">
 
     <!-- ── Breadcrumb ── -->

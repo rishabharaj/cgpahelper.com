@@ -62,7 +62,18 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
 });
 ---
 
-<Layout title={title} description={description} faqs={faqs}>
+<Layout
+  title={title}
+  description={description}
+  canonicalPath={`/university/${uni.slug}`}
+  keywords={`${uni.name} gpa calculator, ${uni.abbreviation} cgpa calculator, ${uni.name} grading system, ${uni.abbreviation} sgpa calculator`}
+  faqs={faqs}
+  breadcrumbs={[
+    { name: 'Home', url: '/' },
+    { name: 'Universities', url: '/universities' },
+    { name: uni.name, url: `/university/${uni.slug}` }
+  ]}
+>
   <!-- ── Breadcrumb ── -->
   <nav aria-label="Breadcrumb" class="container-page pt-6 pb-2">
     <ol class="flex items-center gap-1.5 text-xs text-neutral-400 dark:text-neutral-500">

@@ -10,12 +10,22 @@ interface Props {
   ogImage?: string;
   keywords?: string;
   faqs?: Array<{ question: string; answer: string }>;
+  breadcrumbs?: Array<{ name: string; url?: string }>;
+  ogType?: string;
 }
 
-const { title, description, canonicalPath, ogImage, keywords, faqs } = Astro.props;
+const { title, description, canonicalPath, ogImage, keywords, faqs, breadcrumbs, ogType = 'website' } = Astro.props;
 const ogImageURL = ogImage ? new URL(ogImage, Astro.site).toString() : new URL('/og-default.png', Astro.site).toString();
 const canonicalURL = new URL(canonicalPath || Astro.url.pathname, Astro.site);
-const fullTitle = title === 'CGPA Helper' ? 'CGPA Calculator — Free CGPA to Percentage Converter & GPA Calculator | CGPA Helper' : `${title} | CGPA Helper`;
+
+// Clean title to prevent double branding (e.g. "Page | CGPA Helper | CGPA Helper")
+const cleanTitle = title
+  .replace(/\s*[|—–-]\s*CGPA\s*Helper\s*$/i, '')
+  .replace(/\s*[|—–-]\s*CGPAHelper\s*$/i, '')
+  .trim();
+const fullTitle = cleanTitle === 'CGPA Helper' || cleanTitle === 'CGPAHelper'
+  ? 'CGPA Calculator — Free CGPA to Percentage Converter & GPA Calculator | CGPA Helper'
+  : `${cleanTitle} | CGPA Helper`;
 ---
 
 <!doctype html>
@@ -81,7 +91,7 @@ const fullTitle = title === 'CGPA Helper' ? 'CGPA Calculator — Free CGPA to Pe
     <meta name="theme-color" content="#4f46e5" />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalURL.toString()} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
@@ -141,6 +151,36 @@ const fullTitle = title === 'CGPA Helper' ? 'CGPA Calculator — Free CGPA to Pe
         description: 'Free CGPA, SGPA, and percentage calculators for college students worldwide.',
       })}
     />
+
+    <!-- Schema.org: Organization -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'CGPA Helper',
+        url: 'https://cgpahelper.com',
+        logo: new URL('/icon.png', Astro.site).toString(),
+        description: 'Free academic calculators pre-loaded with official university grading scales.'
+      })}
+    />
+
+    {/* Breadcrumb Schema if provided */}
+    {breadcrumbs && breadcrumbs.length > 0 && (
+      <script
+        type="application/ld+json"
+        set:html={JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: breadcrumbs.map((b, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            name: b.name,
+            item: b.url ? new URL(b.url, Astro.site).toString() : undefined
+          }))
+        })}
+      />
+    )}
 
     {/* FAQ Schema if provided */}
     {faqs && faqs.length > 0 && (
