@@ -17,12 +17,12 @@ if (uni.isBoard) {
   if (uni.slug.includes('icse')) boardKey = 'icse';
   else if (uni.slug.includes('state-board')) boardKey = 'state-board';
   else if (uni.slug.includes('igcse')) boardKey = 'igcse';
-  return Astro.redirect(`/board-cgpa-calculator?board=${boardKey}`);
+  return Astro.redirect(`/icse-percentage-calculator?board=${boardKey}`);
 }
 
 const systemInfo = gradingSystems[uni.system];
 
-const title = `${uni.abbreviation} CGPA & SGPA Calculator — Online Grade Tool`;
+const title = `Free ${uni.abbreviation} CGPA & SGPA Calculator — Online Grade Tool`;
 const description = `Free online GPA, SGPA, and CGPA calculators for ${uni.name} in ${uni.country}. Pre-loaded with the official ${systemInfo.name} grading system.`;
 
 const faqs = [

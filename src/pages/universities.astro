@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { universities } from '../data/universities.js';
 
-const title = 'Browse Universities — CGPA & GPA Calculators';
+const title = 'Free Browse Universities — CGPA & GPA Calculators';
 const description = 'Find your university-specific GPA and CGPA calculator pre-loaded with the official grading system for colleges in India, Bangladesh, Pakistan, and worldwide.';
 ---
 
@@ -116,7 +116,7 @@ const description = 'Find your university-specific GPA and CGPA calculator pre-l
               )}
             </div>
             <a
-              href={uni.isBoard ? `/board-cgpa-calculator?board=${uni.slug.includes('cbse') ? 'cbse' : uni.slug.includes('icse') ? 'icse' : uni.slug.includes('state-board') ? 'state-board' : 'igcse'}` : `/university/${uni.slug}`}
+              href={uni.isBoard ? `/icse-percentage-calculator?board=${uni.slug.includes('cbse') ? 'cbse' : uni.slug.includes('icse') ? 'icse' : uni.slug.includes('state-board') ? 'state-board' : 'igcse'}` : `/university/${uni.slug}`}
               class="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors group-hover:translate-x-0.5"
             >
               Open Calculator
