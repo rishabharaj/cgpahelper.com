@@ -830,6 +830,7 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
 </style>
 
 <script>
+  import { jsPDF } from 'jspdf';
   import { 
     gradingSystems, 
     conversionRules, 
@@ -1651,7 +1652,6 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
     `;
 
     try {
-      const { jsPDF } = await import('jspdf');
       const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
       const pageWidth = doc.internal.pageSize.getWidth();
       const margin = 20;
@@ -1748,10 +1748,16 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
         doc.setTextColor(50);
         doc.setFontSize(10);
         rows.forEach(row => {
-          const name = (row.querySelector('.course-name') as HTMLInputElement).value || '—';
-          const credits = (row.querySelector('.course-credits') as HTMLInputElement).value || '0';
-          const gradeSelect = row.querySelector('.course-grade') as HTMLSelectElement;
-          const gradeText = gradeSelect.options[gradeSelect.selectedIndex]?.text || '—';
+          const nameInput = row.querySelector('.course-name') as HTMLInputElement | null;
+          const name = nameInput ? (nameInput.value || '—') : '—';
+          
+          const creditsInput = row.querySelector('.course-credits') as HTMLInputElement | null;
+          const credits = creditsInput ? (creditsInput.value || '0') : '0';
+          
+          const gradeSelect = row.querySelector('.course-grade') as HTMLSelectElement | null;
+          const gradeText = (gradeSelect && gradeSelect.options && gradeSelect.selectedIndex >= 0)
+            ? (gradeSelect.options[gradeSelect.selectedIndex]?.text || '—')
+            : '—';
 
           x = startX + 3;
           doc.text(name.substring(0, 35), x, y);
@@ -1814,9 +1820,14 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
         doc.setTextColor(50);
         doc.setFontSize(10);
         rows.forEach(row => {
-          const name = (row.querySelector('.semester-name') as HTMLInputElement).value || '—';
-          const gpa = (row.querySelector('.semester-gpa') as HTMLInputElement).value || '0.00';
-          const credits = (row.querySelector('.semester-credits') as HTMLInputElement).value || '0';
+          const nameInput = row.querySelector('.semester-name') as HTMLInputElement | null;
+          const name = nameInput ? (nameInput.value || '—') : '—';
+          
+          const gpaInput = row.querySelector('.semester-gpa') as HTMLInputElement | null;
+          const gpa = gpaInput ? (gpaInput.value || '0.00') : '0.00';
+          
+          const creditsInput = row.querySelector('.semester-credits') as HTMLInputElement | null;
+          const credits = creditsInput ? (creditsInput.value || '0') : '0';
 
           x = startX + 3;
           doc.text(name.substring(0, 35), x, y);
@@ -1845,7 +1856,7 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
         }
 
         const formulaText = pctFormulaDisplay.textContent || '';
-        const stepsText = Array.from(pctStepsContent.children).map(el => el.textContent).join('\n');
+        const stepsText = (pctStepsContent.innerText || pctStepsContent.textContent || '').trim();
 
         doc.setFontSize(14);
         doc.setFont('helvetica', 'bold');
@@ -1925,17 +1936,23 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
     }
   }
 
-  sgpaPrintBtn.addEventListener('click', () => {
-    downloadPDF('sgpa', sgpaPrintBtn);
-  });
+  if (sgpaPrintBtn) {
+    sgpaPrintBtn.addEventListener('click', () => {
+      downloadPDF('sgpa', sgpaPrintBtn);
+    });
+  }
+  
+  if (cgpaPrintBtn) {
+    cgpaPrintBtn.addEventListener('click', () => {
+      downloadPDF('cgpa', cgpaPrintBtn);
+    });
+  }
 
-  cgpaPrintBtn.addEventListener('click', () => {
-    downloadPDF('cgpa', cgpaPrintBtn);
-  });
-
-  pctPrintBtn.addEventListener('click', () => {
-    downloadPDF('percentage', pctPrintBtn);
-  });
+  if (pctPrintBtn) {
+    pctPrintBtn.addEventListener('click', () => {
+      downloadPDF('percentage', pctPrintBtn);
+    });
+  }
 
 
   // ── APP INITIALIZATION ──
@@ -1954,6 +1971,22 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
     if (!cgpaLoaded) {
       cgpaContainer.appendChild(createCgpaSemesterRow('Semester 1'));
       cgpaContainer.appendChild(createCgpaSemesterRow('Semester 2'));
+      
+      const firstRow = cgpaContainer.children[0] as HTMLElement;
+      const secondRow = cgpaContainer.children[1] as HTMLElement;
+      if (firstRow && secondRow) {
+        const gpaInput1 = firstRow.querySelector('.semester-gpa') as HTMLInputElement;
+        const credsInput1 = firstRow.querySelector('.semester-credits') as HTMLInputElement;
+        const gpaInput2 = secondRow.querySelector('.semester-gpa') as HTMLInputElement;
+        const credsInput2 = secondRow.querySelector('.semester-credits') as HTMLInputElement;
+        
+        if (gpaInput1 && credsInput1 && gpaInput2 && credsInput2) {
+          gpaInput1.value = '8.50';
+          credsInput1.value = '20';
+          gpaInput2.value = '9.00';
+          credsInput2.value = '20';
+        }
+      }
     }
     calculateCgpa();
 
@@ -1961,6 +1994,10 @@ const systemEntries = Object.entries(gradingSystems).filter(([key]) => {
     pctSystemSelect.value = 'cbse-ugc-india';
     pctSystemSelect.dispatchEvent(new Event('change'));
     setPercentageMode('gpa-to-pct');
+    if (!cgpaInputField.value) {
+      cgpaInputField.value = '8.50';
+    }
+    calculatePercentage();
 
     // 4. Shared elements default load
     updateSharedGradingTable();

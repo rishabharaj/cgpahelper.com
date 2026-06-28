@@ -189,6 +189,20 @@ const faqs = [
           </div>
           <p id="result-note" class="mt-2 text-xs text-neutral-400 dark:text-neutral-500 italic max-w-lg"></p>
         </div>
+
+        <!-- Download PDF Button -->
+        <div class="sm:ml-auto w-full sm:w-auto flex justify-center print:hidden">
+          <button
+            id="print-pdf-btn-board"
+            type="button"
+            class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-5 py-2.5 border border-neutral-200 dark:border-neutral-800 rounded-xl text-sm font-semibold hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors cursor-pointer text-neutral-700 dark:text-neutral-300"
+          >
+            <svg class="w-4 h-4 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+            </svg>
+            Download PDF
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -297,6 +311,72 @@ const faqs = [
       </div>
 
       <h3 class="text-xl font-semibold text-neutral-900 dark:text-white mt-8 mb-3">
+        IGCSE Grading Scale: How IGCSE Grades Convert to CGPA and Percentage
+      </h3>
+      <p class="text-neutral-600 dark:text-neutral-450 leading-relaxed mb-4">
+        The International General Certificate of Secondary Education (<strong>IGCSE</strong>) uses a letter-grading system (traditionally A* to G, or increasingly the 9-to-1 scale in schools following Cambridge or Edexcel guidelines). Because the IGCSE does not provide a cumulative <strong>board exam percentage calculator</strong> score or GPA on the official transcript, students applying to Indian, US, or Canadian universities often need to map their grades to a numeric equivalency.
+      </p>
+      <p class="text-neutral-600 dark:text-neutral-450 leading-relaxed mb-4">
+        In our calculator, we use the standard international credit mapping system where IGCSE letter grades are converted to a <strong>10-point GPA scale</strong>. Under this mapping:
+      </p>
+      <div class="overflow-x-auto my-4 border border-neutral-200 dark:border-neutral-800 rounded-xl">
+        <table class="w-full text-left border-collapse text-sm">
+          <thead>
+            <tr class="border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950 font-semibold text-neutral-700 dark:text-neutral-300">
+              <th class="py-2.5 px-4">IGCSE Grade</th>
+              <th class="py-2.5 px-4">Equivalent Grade Points (GP)</th>
+              <th class="py-2.5 px-4">Description</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-neutral-100 dark:divide-neutral-800/60 text-neutral-600 dark:text-neutral-400">
+            <tr>
+              <td class="py-2 px-4 font-mono font-semibold text-indigo-600 dark:text-indigo-400">A*</td>
+              <td class="py-2 px-4">10.00</td>
+              <td class="py-2 px-4">Outstanding</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-4 font-mono font-semibold text-indigo-600 dark:text-indigo-400">A</td>
+              <td class="py-2 px-4">9.00</td>
+              <td class="py-2 px-4">Excellent</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-4 font-mono font-semibold text-indigo-600 dark:text-indigo-400">B</td>
+              <td class="py-2 px-4">8.00</td>
+              <td class="py-2 px-4">Very Good</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-4 font-mono font-semibold text-indigo-600 dark:text-indigo-400">C</td>
+              <td class="py-2 px-4">7.00</td>
+              <td class="py-2 px-4">Good / Pass</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-4 font-mono font-semibold text-indigo-600 dark:text-indigo-400">D</td>
+              <td class="py-2 px-4">6.00</td>
+              <td class="py-2 px-4">Satisfactory</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-4 font-mono font-semibold text-indigo-600 dark:text-indigo-400">E</td>
+              <td class="py-2 px-4">5.00</td>
+              <td class="py-2 px-4">Acceptable</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-4 font-mono font-semibold text-indigo-600 dark:text-indigo-400">F / G</td>
+              <td class="py-2 px-4">4.00 / 3.00</td>
+              <td class="py-2 px-4">Minimum Pass</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-4 font-mono font-semibold text-indigo-600 dark:text-indigo-400">U</td>
+              <td class="py-2 px-4">0.00</td>
+              <td class="py-2 px-4">Ungraded / Fail</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-neutral-600 dark:text-neutral-450 leading-relaxed mb-4">
+        To calculate your <strong>IGCSE GPA</strong>, take the average of these equivalent grade points across all your selected subjects. If you need to translate your overall IGCSE performance to an approximate percentage, you can map the resulting GPA back using a standard linear multiplier (e.g. GPA × 9.5) or refer to specific university-wise credential evaluation guidelines (like WES).
+      </p>
+
+      <h3 class="text-xl font-semibold text-neutral-900 dark:text-white mt-8 mb-3">
         Board CGPA for College Admissions
       </h3>
       <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
@@ -333,6 +413,7 @@ const faqs = [
 </Layout>
 
 <script>
+  import { jsPDF } from 'jspdf';
   // ── Types & Structures ──
   interface BoardConfig {
     name: string;
@@ -583,6 +664,7 @@ const faqs = [
   const resultLabel = document.getElementById('result-label')!;
   const resultPercentage = document.getElementById('result-percentage')!;
   const resultNote = document.getElementById('result-note')!;
+  const boardPrintBtn = document.getElementById('print-pdf-btn-board') as HTMLButtonElement;
   
   const gaugeRing = document.getElementById('gauge-ring') as HTMLElement;
   const gaugePercentText = document.getElementById('gauge-percent-text')!;
@@ -829,8 +911,174 @@ const faqs = [
     gaugePercentText.textContent = `${Math.round(res.percentage)}%`;
   }
 
+  async function downloadPDF(btnElement: HTMLButtonElement) {
+    const originalText = btnElement.innerHTML;
+    btnElement.disabled = true;
+    btnElement.innerHTML = `
+      <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-neutral-500 inline-block" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+      Generating PDF...
+    `;
+
+    try {
+      const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const margin = 20;
+      let y = 25;
+
+      const boardKey = getSelectedBoardKey() || 'icse';
+      const boardConfig = boardConfigs[boardKey] || boardConfigs['icse'];
+
+      // ── Header ──
+      doc.setFontSize(20);
+      doc.setFont('helvetica', 'bold');
+      const headerText = `${boardConfig ? boardConfig.name : 'Board'} Calculation Report`;
+      doc.text(headerText, pageWidth / 2, y, { align: 'center' });
+      y += 8;
+
+      doc.setFontSize(10);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(120);
+      doc.text('Generated by CGPAHelper.com', pageWidth / 2, y, { align: 'center' });
+      y += 4;
+
+      // Divider line
+      doc.setDrawColor(200);
+      doc.setLineWidth(0.5);
+      doc.line(margin, y, pageWidth - margin, y);
+      y += 10;
+
+      // ── Meta info ──
+      doc.setTextColor(60);
+      doc.setFontSize(11);
+      const dateVal = new Date().toLocaleDateString(undefined, { dateStyle: 'long' });
+
+      doc.setFont('helvetica', 'bold');
+      doc.text('Date:', margin, y);
+      doc.setFont('helvetica', 'normal');
+      doc.text(dateVal, margin + 18, y);
+      y += 7;
+
+      doc.setFont('helvetica', 'bold');
+      doc.text('Board / System:', margin, y);
+      doc.setFont('helvetica', 'normal');
+      doc.text(boardConfig ? boardConfig.name : 'Indian Boards', margin + 35, y);
+      y += 12;
+
+      // ── Result Summary ──
+      const cgpaVal = resultGpa ? (resultGpa.textContent || '0.00') : '0.00';
+      const scaleVal = resultScale ? (resultScale.textContent || 'CGPA') : 'CGPA';
+      const pctVal = resultPercentage ? (resultPercentage.textContent || '') : '';
+      const classificationVal = resultLabel ? (resultLabel.textContent || '') : '';
+
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(30);
+      doc.text(`${scaleVal}: ${cgpaVal}`, margin, y);
+      y += 7;
+
+      doc.setFontSize(11);
+      doc.setFont('helvetica', 'bold');
+      doc.text(pctVal, margin, y);
+      y += 6;
+
+      doc.setFontSize(10);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(100);
+      doc.text(`Academic Standing: ${classificationVal}`, margin, y);
+      y += 14;
+
+      // ── Subjects Table ──
+      const colWidths = [90, 35, 45];
+      const scoreTypeLabel = boardConfig ? (boardConfig.scoreType === 'grades' ? 'Grade' : 'Marks') : 'Marks';
+      const headers = ['Subject Name', scoreTypeLabel, 'Equivalent GP / Details'];
+      const startX = margin;
+
+      // Table header
+      doc.setFillColor(245, 245, 245);
+      doc.rect(startX, y - 5, colWidths[0] + colWidths[1] + colWidths[2], 8, 'F');
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(80);
+      let x = startX + 3;
+      headers.forEach((h, i) => {
+        doc.text(h, x, y);
+        x += colWidths[i];
+      });
+      y += 6;
+
+      // Divider
+      doc.setDrawColor(220);
+      doc.setLineWidth(0.3);
+      doc.line(startX, y, startX + colWidths[0] + colWidths[1] + colWidths[2], y);
+      y += 5;
+
+      // Table rows
+      const rows = rowsContainer.querySelectorAll('[role="listitem"]');
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(50);
+      doc.setFontSize(10);
+      rows.forEach(row => {
+        const nameInput = row.querySelector('.subject-name') as HTMLInputElement | null;
+        const name = nameInput ? (nameInput.value || '—') : '—';
+        
+        const scoreInput = row.querySelector('.subject-score') as HTMLInputElement | HTMLSelectElement | null;
+        const score = scoreInput ? (scoreInput.value || '0') : '0';
+        
+        const gpEl = row.querySelector('.preview-grade-text') as HTMLElement | null;
+        const gpText = gpEl ? (gpEl.textContent || '—') : '—';
+
+        x = startX + 3;
+        doc.text(name.substring(0, 35), x, y);
+        x += colWidths[0];
+        doc.text(score, x, y);
+        x += colWidths[1];
+        doc.text(gpText, x, y);
+        y += 7;
+
+        if (y > 270) {
+          doc.addPage();
+          y = 25;
+        }
+      });
+
+      // ── Footer ──
+      y += 10;
+      if (y > 260) {
+        doc.addPage();
+        y = 25;
+      }
+      doc.setDrawColor(200);
+      doc.setLineWidth(0.3);
+      doc.line(margin, y, pageWidth - margin, y);
+      y += 6;
+      doc.setFontSize(8);
+      doc.setTextColor(150);
+      doc.text('Disclaimer: This report represents a mathematical calculation based on school board rules. Verify with your official marksheet.', margin, y);
+      y += 5;
+      doc.text(`Generated on ${dateVal} by CGPAHelper.com`, margin, y);
+
+      doc.save(`${boardKey.toUpperCase()}-Board-Report.pdf`);
+    } catch (err) {
+      console.error('PDF generation failed:', err);
+      alert('Failed to generate PDF. Please try again.');
+    } finally {
+      btnElement.disabled = false;
+      btnElement.innerHTML = originalText;
+    }
+  }
+
   // ── Setup Listeners ──
-  boardSelect.addEventListener('change', initBoard);
+  if (boardSelect) {
+    boardSelect.addEventListener('change', initBoard);
+  }
+  if (boardPrintBtn) {
+    boardPrintBtn.addEventListener('click', () => {
+      downloadPDF(boardPrintBtn);
+    });
+  }
 
   // Bind board tab button clicks
   boardTabButtons.forEach(btn => {

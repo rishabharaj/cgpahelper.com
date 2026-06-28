@@ -512,6 +512,7 @@ const systemEntries = Object.entries(gradingSystems);
 </Layout>
 
 <script>
+  import { jsPDF } from 'jspdf';
   import { gradingSystems, convertGrade } from '../data/grading-systems.js';
   import { universities } from '../data/universities.js';
 
@@ -1161,7 +1162,6 @@ const systemEntries = Object.entries(gradingSystems);
     `;
 
     try {
-      const { jsPDF } = await import('jspdf');
       const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
       const pageWidth = doc.internal.pageSize.getWidth();
       const margin = 20;
