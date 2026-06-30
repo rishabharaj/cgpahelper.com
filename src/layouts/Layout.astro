@@ -113,21 +113,11 @@ const fullTitle = cleanTitle === 'CGPA Helper' || cleanTitle === 'CGPAHelper'
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      rel="preload"
-      as="style"
+      rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      media="print"
+      onload="this.media='all'"
     />
-    <script is:inline>
-      (function() {
-        var l = document.createElement('link');
-        l.rel = 'stylesheet';
-        l.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap';
-        document.head.appendChild(l);
-      })();
-    </script>
-    <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-    </noscript>
 
     <!-- Prevent dark-mode FOUC -->
     <script is:inline>
@@ -243,8 +233,14 @@ const fullTitle = cleanTitle === 'CGPA Helper' || cleanTitle === 'CGPAHelper'
     <slot name="head" />
   </head>
   <body class="bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 min-h-screen flex flex-col font-sans antialiased">
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    </noscript>
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-indigo-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg font-medium">
+      Skip to main content
+    </a>
     <Navbar />
-    <main class="flex-1">
+    <main id="main-content" class="flex-1">
       <slot />
     </main>
     <Footer />

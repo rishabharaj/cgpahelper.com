@@ -1,0 +1,15 @@
+# CGPA Helper
+
+> Free academic calculators for CGPA, SGPA, GPA conversion, and percentage calculation.
+
+## Tools
+
+- [CGPA Calculator](https://cgpahelper.com/cgpa-calculator): Calculate CGPA and SGPA with official university grading scales
+- [CGPA to GPA Converter](https://cgpahelper.com/cgpa-to-gpa-calculator): Convert between different GPA scales
+- [Universal GPA Converter](https://cgpahelper.com/universal-gpa-converter): Course-by-course transcript conversion across global scales
+- [CGPA vs SGPA](https://cgpahelper.com/cgpa-vs-sgpa): Understand the difference between CGPA and SGPA
+- [ICSE Calculator](https://cgpahelper.com/icse-percentage-calculator): ICSE board percentage calculator
+
+## About
+
+CGPA Helper provides privacy-first academic calculators. All calculations run entirely in the browser — no data is collected or stored.
